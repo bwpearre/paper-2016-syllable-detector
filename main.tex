@@ -435,14 +435,16 @@ time with a standard deviation of 2 ms serves well.
 
 \noprint{
   % I screwed up: the results are without cage noise.  Rather than
-  repeat all measurements, let's just not mention it.  With inputs
-  well outside the space on which a neural network has been trained,
-  its outputs will be essentially random. In order to reduce the false
-  positive rate it is useful to provide negative training examples
-  that include silence, cage noise, non-song vocalisations, and
-  perhaps songs from other birds.  We have found that training with as
-  low as a 1:1 ratio of non-song to song yields excellent results,
-  although this will depend on the makeup of the non-song data.  }
+  repeat all measurements, let's just not mention it.  }
+
+With inputs well outside the space on which a neural network has been
+trained, its outputs will be essentially random. In order to reduce
+the false positive rate it is useful to provide negative training
+examples that include silence, cage noise, non-song vocalisations, and
+perhaps songs from other birds.  Although it will depend on the makeup
+of the non-song data, we have found that training with as low as a 1:1
+ratio of non-song to song yields excellent results.
+
 
 \subsubsection{Normalisation}
 
