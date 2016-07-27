@@ -306,10 +306,13 @@ This method makes the following contributions:
 
 \subsection{Learning a detector}
 
-We begin with a few hundred recordings of a given bird's song, in this
-case made inside a sound-isolating chamber in which was mounted a
-recording microphone (Audio-Technica AT803).  The songs are
-time-aligned as described in \cite{Poole2012}.
+We begin with a few hundred recordings of a given bird's song.  Male
+zebra finch song is most highly stereotyped when a female is present
+(``directed song'') and slightly more variable otherwise
+(``undirected''); we train and test on undirected song since this is
+more challenging.  The songs are recorded inside a sound-isolating
+chamber in which was mounted a recording microphone (Audio-Technica
+AT803).  The songs are time-aligned as described in \cite{Poole2012}.
 
 We rely on two circular buffers:
 \begin{description}
@@ -433,17 +436,14 @@ the target moment it is 1, and at neighbouring moments it is
 nonzero. We found that a Gaussian smoothing kernel around the target
 time with a standard deviation of 2 ms serves well.
 
-\noprint{
-  % I screwed up: the results are without cage noise.  Rather than
-  repeat all measurements, let's just not mention it.  }
-
 With inputs well outside the space on which a neural network has been
 trained, its outputs will be essentially random. In order to reduce
-the false positive rate it is useful to provide negative training
-examples that include silence, cage noise, non-song vocalisations, and
-perhaps songs from other birds.  Although it will depend on the makeup
-of the non-song data, we have found that training with as low as a 1:1
-ratio of non-song to song yields excellent results.
+the false positive rate it is necessary to provide negative training
+examples that include silence, cage noise, wing flapping, non-song
+vocalisations, and perhaps songs from other birds.  Although it will
+depend on the makeup of the non-song data, we have found that training
+with as low as a 1:1 ratio of non-song to song yields excellent
+results on most birds.
 
 
 \subsubsection{Normalisation}
@@ -519,7 +519,7 @@ speed. For more variable songs, deep structure-preserving networks may
 be more appropriate, but they are slow to train and unnecessary for
 zebra finch song.
 
-We used the Levenburg-Marquardt algorithm, which is the MATLAB
+We used the Levenberg-Marquardt algorithm, which is the MATLAB
 toolbox's default.  It is a fast algorithm, but is memory-intensive,
 so many target syllables or high FFT frame rates require a large
 amount of RAM and increase training time to hours. Other training
@@ -829,73 +829,18 @@ songs, and the canonical signal is given with respect to that
 alignment.  These timing measurements reflect not only detector
 performance, but also the variability of the bird's song.
 
-\subsection{Fibre Photometry}
-\label{sec:fp-methods}
-
-In addition to synthetic tests of detector accuracy and 
-latency, we piloted the syllable detector in an experiment
-providing altered auditory feedback (AAF) to zebra finches. AAF, or 
-playback of a perturbing white noise stimulus, is known to disrupt 
-the highly-stereotyped zebra finch song. By probabilistically 
-targeting the AAF to a specific syllable, it is possible 
-to selectively destabilize parts of the song. During this 
-feedback, signal from genetically-encoded calcium indicators was 
-recorded via fibre photometry to identify a neural representation of 
-an error signals associated with the feedback.
-
-The initial experiment design used a DSP with hand-designed filter-banks to
-detect syllables, but these required tuning and were only conducive
-to detecting harmonic stacks. This experiment provided an ideal design
-to pilot our neural-network-based syllable detector.
-
-\subsubsection{Surgery}
-
-GCaMP6s and GCaMP6f were expressed using a lentivirus under the RSV 
-promoter \cite{Markowitz:2015ko}. Injections were targeted under HVC 
-using stimulation of Area X with a bipolar stimulation electrode. 
-After injecting the virus, we implanted a fibre-optic cannula above 
-HVC ($400 \mu m$ diameter, Doric Lenses). The location of the injection 
-was verified histologically after each experiment.
-
-\subsubsection{Photometry}
-
-Fibre photometry \cite{Adelsberger:2005dy,Schulz:2012fv,Cui:2013dq,Adelsberger:2014jd,Gunaydin:2014dh} 
-was performed in N=3 birds at least 2 weeks post-injection using a 
-completely fibre-coupled light path. A 470 nm fibre-coupled LED (Mightex) 
-was sinusoidally driven at 5 kHz by a TDT RX8. The output of the LED 
-was filtered with a GFP excitation filter (Doric Lenses Fluorescence Cube) 
-and coupled to an optical rotary joint (Doric Lenses). The rotary joint 
-was connected via a multimode fibre optic patch cord (400 $\mu$m, .48 NA, 
-Doric Lenses) to the implanted cannula using a brass sleeve (Doric Lenses). 
-LED power was calibrated such that optical power at the tip was 
-20--300 $\mu$W (LED was turned on only during vocalizations, detected using 
-a TDT RX8). Fluorescence was collected through the same patch cord, 
-filtered with a GFP emission filter, and sent to a silicon photomultiplier 
-(SensL MiniSM 30000). The output of the photomultiplier was demodulated 
-using a dual-phase lock-in amplifier (10-ms time-scale, SR830, Stanford 
-Research Systems) and digitized along with the bird's song at 24.414 kHz 
-using a National Instruments data acquisition board (PCIE-6323).
-
-\subsubsection{Syllable detection}
-
-User-selected syllables were detected using the Swift implementation of the
-syllable detector, and the TTL output triggered altered auditory feedback 
-via the TDT RX8.
-
-\subsubsection{Data analysis}
-
-$\Delta F / F0$ was estimated at each point by subtracting and dividing by 
-F0, defined as the 11th percentile computed in a 300-ms sliding window. 
-Data were then smoothed with a 50-ms exponential window. Fluorescence traces
-during singing were normalized by subtracting the trial-average signal, in 
-order to remove song-based modulation.
-
 \subsection{Ethics}
 
 All procedures were approved by the Institutional Animal Care and Use Committee of Boston University (protocol number 14-029).
 
 \section{Results}
 \label{sec:results}
+
+We have used this detector for song alignment and feedback experiments
+in 5 behaving birds, and for offline analysis on various others.  For
+simplicity we present performance on 6 randomly chosen points in one
+bird's song, but the results presented here are representative of
+real-world performance.\marginpar{Ok?}
 
 \fig{fig:song} shows the song for which we present accuracy and timing results.  Six
 example target trigger points are shown, at 150, 200, 250, 300, 350,
@@ -1265,21 +1210,79 @@ their improvements to the draft.  This work was funded by NIH grants
     {\tt https://github.com/jmarkow/zftftb}
 \end{description}
 
- \noindent Our implementation of the syllable
-    detector is available under an open-source license {\em (we are still evaluating which open source license is the most suitable for this software):}
-    \begin{description}
-    \item[Training the neural network:]\hfill
-      \begin{trivlist}
-      \item {\tt https://github.com/bwpearre/birds/align}
-      \end{trivlist}
-      
-    \item[Runtime:]\hfill
-      \begin{description}
-      \item[MATLAB:] {\tt https://github.com/gardner-lab/syllable-detector-matlab}
-      \item[Swift:] {\tt https://github.com/gardner-lab/syllable-detector-swift}
-      \item[LabVIEW:] {\tt https://github.com/bwpearre/birds/align}
-      \end{description}
+\noindent Our implementation of the syllable
+detector is available under an open-source license {\em (we are still evaluating which open source license is the most suitable for this software):}
+\begin{description}
+\item[Training the neural network:]\hfill
+  \begin{trivlist}
+  \item {\tt https://github.com/bwpearre/birds/align}
+  \end{trivlist}
 
+  \begin{description}
+  \item[Installation:]\hfill
+    \begin{trivlist}
+    \item Clone the Github repository onto your computer.
+    \end{trivlist}
+  \item[Usage:]\hfill
+    \begin{itemize}
+      \item The main programme is {\tt learn\_detector.m}.
+    \item The top section of {\tt learn\_detector.m} contains global configuration variables.  The important ones are the data directory and the bird name: as supplied, the software looks for {\tt \textless data directory\textgreater/\textless bird name\textgreater/song.mat}.  Modify as necessary.
+    \item The format for the data file {\tt \textless data directory\textgreater/\textless bird name\textgreater/song.mat} is specified in {\tt birds/align/README.md}: a MATLAB file containing aligned song, nonsong (calls, cage noise, etc), and the sampling frequency.
+    \item The configuration file {\tt \textless data directory\textgreater/\textless bird name\textgreater/params.m} is also described in {\tt README.md}.  If the file is empty, the programme will display an image showing the average of the song spectrograms (frequency vs.~time), tell the user how to define syllables of interest, and exit.  If {\tt times\_of\_interest} is defined, the programme will train the neural network.  {\tt params.m} can also override any of the configuration parameters at the top of {\tt learn\_detector.m}.
+    \item The software will produce a neural network file, {\tt detector\_bird\_times\_\dots.mat} (the ellipses signify other information encoded in the filename).  It will also produce the audio test file described in Methods.
+    \end{itemize}
+  \end{description}
+  
+\item[Runtime:]\hfill
+  \begin{description}
+  \item[MATLAB:] {\tt https://github.com/gardner-lab/syllable-detector-matlab}
+    \marginpar{Jeff: Can you flesh this out?}
+    \begin{description}
+    \item[Installation:]\hfill
+      \begin{trivlist}
+      \item Clone the Github repository onto your computer.
+      \end{trivlist}
+    \item[Connection:]\hfill
+    \item[Usage:]\hfill
+    \end{description}
+  \item[Swift:] {\tt https://github.com/gardner-lab/syllable-detector-swift}
+    \marginpar{Nathan: Can you flesh this out?}
+    \begin{description}
+    \item[Installation:]\hfill
+      \begin{trivlist}
+      \item Clone the Github repository onto your computer.
+      \end{trivlist}
+    \item[Connection:]\hfill
+      \begin{itemize}
+      \item Connect the microphone through a preamp to {\em FIXME the left channel of the stereo audio input jack on the Mac Mini?}.
+      \item {\em FIXME} How to connect the Arduino?  Add the Arduino programme to your GitHub?
+      \item {\em FIXME} How to connect if not using Arduino?
+      \end{itemize}
+    \item[Usage:]\hfill
+      \begin{itemize}
+      \item Use {\tt convert\_to\_text.m} to convert the Matlab output file to a format easily readable by Swift.
+      \item {\em FIXME} How to start Swift?  Parameters?
+      \end{itemize}
+    \end{description}
+  \item[LabVIEW:] {\tt https://github.com/bwpearre/birds/align}
+    \begin{description}
+    \item[Installation:]\hfill
+      \begin{trivlist}
+      \item Clone the Github repository onto your computer.
+      \end{trivlist}
+    \item[Connection:]\hfill
+      \begin{itemize}
+      \item The microphone should be connected through a preamplifier to the data acquisition card, by default on Analog Input 0 (AI0).
+      \item Outputs are on the Digital I/O (DIO) channels.  See the block diagram of {\tt nnfft.vi} for documentation, or just connect to DIO0.
+      \end{itemize}
+    \item[Usage:]\hfill
+      Use LabVIEW to open {\tt nnfft.vi}.  A file
+      chooser is provided in the front panel.  Use it to point to the network file
+      produced by {\tt learn\_detector.m}, and use LabView's ``Run''
+      button to begin detection.
+    \end{description}
+  \end{description}
+  
 \end{description}
 
     %\bibliography{birds}
