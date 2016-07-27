@@ -443,7 +443,7 @@ examples that include silence, cage noise, wing flapping, non-song
 vocalisations, and perhaps songs from other birds.  Although it will
 depend on the makeup of the non-song data, we have found that training
 with as low as a 1:1 ratio of non-song to song yields excellent
-results on most birds.
+results on most birds.  These data are also included in our accuracy tests.
 
 
 \subsubsection{Normalisation}
@@ -542,10 +542,9 @@ is the number that minimises $\textrm{[false positives]}
 +C_n\cdot\textrm{[false negatives]}$ over the training set, using the
 definitions of false positives and negatives given in
 Section~\ref{sec:accuracy}. Since large portions of the cost function
-are flat, hillclimbing is ineffective.  Random-restart hillclimbing
-would work, but a brute-force search requires fractions of a
-second. For the results presented here, we have used $C_n=1$ and
-$\Delta t=10$ ms.
+are flat, we use a brute-force linear search, which requires fractions of a
+second. For the results presented here, we have used
+$\Delta t=10$ ms, and arbitrarily set $C_n=1$.
 
 \subsubsection{De-bouncing}
 
@@ -718,7 +717,8 @@ optimal output thresholds on a per-frame basis resulted in higher
 thresholds and thus a lower false-positive rate, with minimal
 consequences to the false-negative rate, while also providing a valid
 definition of false-positive rate for data streams that had not been
-segmented into songs.
+segmented into song-sized chunks and thus allowing easy interpretation
+of false-positive rates from calls, cage noise, etc.
 
 
 %% We define accuracy on a per-song basis, as follows:
@@ -760,12 +760,14 @@ training songs, and while live.
 \subsubsection{Timing}
 
 
-We evaluate the time taken from the presentation of the target
-syllable to the firing of the detector's TTL pulse. While playing the
-audio test file from any audio playback device, the TTL output from
-the ground-truth channel of the audio output may be used as the
-trigger pulse for an oscilloscope, and compared to the TTL pulse
-produced by the detector implementation, which sees only the birdsong
+We evaluate the time taken from the presentation of each instance of the target
+syllable to the firing of the detector's TTL pulse---for example, if the target trigger point with respect to the aligned songs is at 200 ms, and for a given presentation of the song the detector fires at 203 ms, we take the latency on that trial to be 3 ms.
+
+While playing the
+audio test file from any audio playback device, we used the TTL output from
+the ground-truth channel of the audio output as the
+trigger pulse for an oscilloscope, and compared it to the TTL pulse
+produced by the detector, which sees only the birdsong
 channel of the audio file. For this purpose we used a pulse generator
 (Philips PM 5715, with a listed latency of 50 ns, jitter of $\leq
 0.1\%$ or 50 ps, whichever is greater) to widen the detector's output
@@ -779,22 +781,12 @@ low-to-high transition with form approximating the cumulative
 probability distribution function (CDF) of the detector's output in
 response to the chosen song event, with individual detection events visible as steps in this curve.
 
-% Use to say: "Mean latency is then given as the halfway point of that detection 
-% sigmoid."
-%
-% I don't think this description matches the calculation, this description
-% seems to better match a "median" latency. The mean latency is calculated
-% as an average latency of all detection events, which is the same as 
-% fitting a normal distribution to the detection events and taking the mean
-% of the normal distribution (the MLE estimator is the same as the sample mean).
-
 Mean latency is then given as the average time between the 
 canonical signal and the corresponding detection event. 
-It is a helpful number, but not a critical one, since a
+It is a helpful number, but not a critical one, since in zebra finch a
 detector with high but constant latency can often be trained to
-trigger at a point somewhat before the true moment of interest,
-especially given the stereotypy of zebra finch song.  Often more
-important is latency jitter: how much variability is there in the
+trigger at a point somewhat before the true moment of interest (for example, if triggering should occur at the very beginning of a syllable, the detector's time window may include previous syllable).  Often more
+important is the variability in the
 latency?  We define jitter as the standard deviation of the latency.
 
 When measuring timing, it is useful to compare against a theoretical
@@ -840,7 +832,7 @@ We have used this detector for song alignment and feedback experiments
 in 5 behaving birds, and for offline analysis on various others.  For
 simplicity we present performance on 6 randomly chosen points in one
 bird's song, but the results presented here are representative of
-real-world performance.\marginpar{Ok?}
+real-world performance in our lab.\marginpar{Ok?}
 
 \fig{fig:song} shows the song for which we present accuracy and timing results.  Six
 example target trigger points are shown, at 150, 200, 250, 300, 350,
@@ -1085,56 +1077,13 @@ look like for the five implementations of our detector on $t^*_4$.
   \label{fig:timing}
 \end{figure}
 
-\subsection{Fibre Photometry}
-\label{sec:fp-results}
-
-\fig{fig:fp-audio} shows 1,123 song performances from a single bird. 
-At trial 858, the altered auditory feedback (AAF) was introduced, 
-triggered by the first syllable in the song.
-
-Measurements of the fluorescence from genetically encoded calcium indicators
-in the HVC shelf reveal an AAF-sensitive response as compared with catch trials
-(\fig{fig:fp-results}). This suggests a population of cells in the HVC
-shelf that respond to AAF and may be involved in error signaling, given projections
-from the shelf to AIV, an area area known to be critical for processing of 
-sensory errors during singing \cite{MandelblatCerf:2014eu}.
-
-The neural-network-based syllable detector enabled this experiment
-by allowing low-latency AAF triggered off user-selected syllables, 
-without hand-tuning and without relying on harmonic stacks needed 
-for filter-bank-based syllable detection. The detector will allow
-continued research into the neural encoding of these error signals.
-
-\begin{figure}
-  \begin{center}
-    \includegraphics[width=7cm]{Fig8}
-  \end{center}
-  \caption{Audio amplitude stack plot of the experiment as aligned by
-    the bird's song.  The top panel shows a spectrogram of the song
-    with the triggered white-noise stimulus.  In the bottom panel,
-    each row is average amplitude for a single performance of the song
-    (1123 songs total).  The white-noise stimulus is visible as a
-    bright yellow region after the first syllable in the final quarter
-    of the trials.}
-  \label{fig:fp-audio}
-\end{figure}
-
-\begin{figure}
-  \begin{center}
-    \includegraphics[width=7cm]{Fig9}
-  \end{center}
-  \caption{Fibre photometry during AAF reveals an AAF-sensitive response
-  (lines indicate mean, shading indicates 95\% confidence interval, bootstrap).
-  Blue are catch trials, red are AAF trials.}
-  \label{fig:fp-results}
-\end{figure}
 
 \section{Discussion}
 \label{sec:conclusion}
 
 This syllable detector is appropriate for zebra finch song, and
 although our tests were carried out on songs from that species, it is
-also likely to work well for Bengalese finches.  It offers the
+also likely to work well for Bengalese finches due to their similarly stereotyped syllables.  It offers the
 following benefits:
 \begin{itemize}
 \item The detector is accurate. False negative and false positive
