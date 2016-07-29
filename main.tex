@@ -508,7 +508,7 @@ vector additions and the application of the squashing function.
 
 \subsubsection{Training the network}
 
-The network is trained using MATLAB's neural network toolbox. We tried
+The network is trained using MATLAB's neural network toolbox, with Scaled Conjugate Gradient ({\tt trainscg}). We tried
 a variety of feedforward neural network geometries, from simple
 1-layer perceptrons to geometries with many hidden nodes, as well as
 autoencoders. Perhaps surprisingly, even the former yields excellent
@@ -518,14 +518,6 @@ syllables---was a good compromise between accuracy and training
 speed. For more variable songs, deep structure-preserving networks may
 be more appropriate, but they are slow to train and unnecessary for
 zebra finch song.
-
-We used the Levenberg-Marquardt algorithm, which is the MATLAB
-toolbox's default.  It is a fast algorithm, but is memory-intensive,
-so many target syllables or high FFT frame rates require a large
-amount of RAM and increase training time to hours. Other training
-algorithms that use less RAM are much slower, and by default they will
-often terminate prematurely due to their performance gradient going to
-0.
 
 \subsubsection{Computing optimal output thresholds}
 \label{sec:optimalthresholds}
@@ -683,25 +675,28 @@ interface, reducing latency by half.
 
 We divided the data into training and test sets.  For the results
 reported in the following section, the training set consisted of 1000
-instances of the song of one bird.
-Our test set consisted of an additional 1818 iterations of the bird's
-song.
+instances of the song of one bird, and 2000 song-length samples of
+non-song (cage noise, calls, other birds' song).  Our test set
+consisted of an additional 1818 iterations of the bird's song and 3636
+song-length samples of non-song.
 
 The MATLAB neural network toolbox further divides our ``training'' set
-into internal training, validation, and test sets.  We did not stray
-from the toolbox's default values, and do not discuss MATLAB's
-internal subdivision of our training set.  Because the dataset
-consists of temporally aligned songs, ground truth is available for
-each song (albeit with minor variations due to the alignment process
-used \cite{Poole2012}), and thus the detector can be checked by
-presenting the recorded training songs as well as the canonical
-detection events. To this end, besides the trained network object, our
-learning code produces an audio file consisting of all of the training
-data on the left audio channel and a delta function at each aligned
-moment of target syllable presentation on the right channel. Thus,
-when played on any audio player, the left channel may be provided as
-input to the detector, and the the detector's output pulses may be
-compared against the right channel.
+into internal training, validation, and test sets.  Because we do our
+own testing on a distinct and much larger data set, we instructed the
+toolbox to use 80\% of its training set for training, and the
+remaining 20\% for validation, with no hold-out test data.
+
+Because the data set consists of temporally aligned songs, ground
+truth is available for each song (albeit with minor variations due to
+the alignment process used \cite{Poole2012}), and thus the detector
+can be checked by presenting the recorded training songs as well as
+the canonical detection events. To this end, besides the trained
+network object, our learning code produces an audio file consisting of
+all of the training data on the left audio channel and a delta
+function at each aligned moment of target syllable presentation on the
+right channel. Thus, when played on any audio player, the left channel
+may be provided as input to the detector, and the the detector's
+output pulses may be compared against the right channel.
 
 
 \subsubsection{Accuracy}
@@ -760,34 +755,39 @@ training songs, and while live.
 \subsubsection{Timing}
 
 
-We evaluate the time taken from the presentation of each instance of the target
-syllable to the firing of the detector's TTL pulse---for example, if the target trigger point with respect to the aligned songs is at 200 ms, and for a given presentation of the song the detector fires at 203 ms, we take the latency on that trial to be 3 ms.
+We evaluate the time taken from the presentation of each instance of
+the target syllable to the firing of the detector's TTL pulse---for
+example, if the target trigger point with respect to the aligned songs
+is at 200 ms, and for a given presentation of the song the detector
+fires at 203 ms, we take the latency on that trial to be 3 ms.
 
-While playing the
-audio test file from any audio playback device, we used the TTL output from
-the ground-truth channel of the audio output as the
-trigger pulse for an oscilloscope, and compared it to the TTL pulse
-produced by the detector, which sees only the birdsong
-channel of the audio file. For this purpose we used a pulse generator
-(Philips PM 5715, with a listed latency of 50 ns, jitter of $\leq
-0.1\%$ or 50 ps, whichever is greater) to widen the detector's output
-spike to a number much larger than the jitter ($\sim 100$ ms).  This
-obviates pulse length variability in the output device by essentially
+While playing the audio test file from any audio playback device, we
+used the TTL output from the ground-truth channel of the audio output
+as the trigger pulse for an oscilloscope, and compared it to the TTL
+pulse produced by the detector, which sees only the birdsong channel
+of the audio file. For this purpose we used a pulse generator (Philips
+PM 5715, with a listed latency of 50 ns, jitter of $\leq 0.1\%$ or 50
+ps, whichever is greater) to widen the detector's output spike to a
+number much larger than the jitter ($\sim 100$ ms).  This obviates
+pulse length variability in the output device by essentially
 discarding the falling edge of the output pulse.  The oscilloscope is
 then set to averaging mode (128-trigger average) in order to collect
 timing data. The canonical signal is the trigger at $t=0$, and the
 average of the detector's detection events will be seen as a
 low-to-high transition with form approximating the cumulative
 probability distribution function (CDF) of the detector's output in
-response to the chosen song event, with individual detection events visible as steps in this curve.
+response to the chosen song event, with individual detection events
+visible as steps in this curve.
 
-Mean latency is then given as the average time between the 
-canonical signal and the corresponding detection event. 
-It is a helpful number, but not a critical one, since in zebra finch a
-detector with high but constant latency can often be trained to
-trigger at a point somewhat before the true moment of interest (for example, if triggering should occur at the very beginning of a syllable, the detector's time window may include previous syllable).  Often more
-important is the variability in the
-latency?  We define jitter as the standard deviation of the latency.
+Mean latency is then given as the average time between the canonical
+signal and the corresponding detection event.  It is a helpful number,
+but not a critical one, since in zebra finch a detector with high but
+constant latency can often be trained to trigger at a point somewhat
+before the true moment of interest (for example, if triggering should
+occur at the very beginning of a syllable, the detector's time window
+may include previous syllable).  Often more important is the
+variability in the latency?  We define jitter as the standard
+deviation of the latency.
 
 When measuring timing, it is useful to compare against a theoretical
 optimal, in order to control for any imprecision in the song
@@ -823,41 +823,43 @@ performance, but also the variability of the bird's song.
 
 \subsection{Ethics}
 
-All procedures were approved by the Institutional Animal Care and Use Committee of Boston University (protocol number 14-029).
+All procedures were approved by the Institutional Animal Care and Use
+Committee of Boston University (protocol number 14-029).
 
 \section{Results}
 \label{sec:results}
 
 We have used this detector for song alignment and feedback experiments
-in 5 behaving birds, and for offline analysis on various others.  For
+in 5 behaving birds, and for offline analysis on a few others.  For
 simplicity we present performance on 6 randomly chosen points in one
 bird's song, but the results presented here are representative of
 real-world performance in our lab.\marginpar{Ok?}
 
-\fig{fig:song} shows the song for which we present accuracy and timing results.  Six
-example target trigger points are shown, at 150, 200, 250, 300, 350,
-and 400 milliseconds after the beginning of the aligned samples, as
-indicated by the red lines, and referred to henceforth as $t^*_1\ldots
-t^*_6$ respectively.  The rectangles show the recognition window (30
-ms, 1--8 kHz) for each instant in the song.
+\fig{fig:song} shows the song for which we present accuracy and timing
+results.  Six example target trigger points are shown, at 150, 200,
+250, 300, 350, and 400 milliseconds after the beginning of the aligned
+samples, as indicated by the red lines, and referred to henceforth as
+$t^*_1\ldots t^*_6$ respectively.  The rectangles show the recognition
+window (30 ms, 1--8 kHz) for each instant in the song.
 
 The first two triggers, $t^*_1$ at 150 ms and $t^*_2$ at 200 ms, are
 far from pure tones, but are closer to coloured noise.  They would be
-difficult for a harmonic-stack filter bank to detect, and especially to
-pinpoint in time.  $t^*_3$ (250 ms) and $t^*_6$ (400 ms) are rich in
-overtones and contain downward slides with changing timbres.  $t^*_4$
-(300 ms) occurs near the beginning of a more typical harmonic stack amenable to a variety of
-recognition techniques, although consistently detecting a point
-partway through the syllable demands a detector that can use multiple
-time steps.  $t^*_5$ (350 ms) shows a steady pitch followed by a
-complex changing tone structure.
+difficult for a harmonic-stack filter bank to detect, and especially
+to pinpoint in time.  $t^*_3$ (250 ms) and $t^*_6$ (400 ms) are rich
+in overtones and contain downward slides with changing timbres.
+$t^*_4$ (300 ms) occurs near the beginning of a more typical harmonic
+stack amenable to a variety of recognition techniques, although
+consistently detecting a point partway through the syllable demands a
+detector that can use multiple time steps.  $t^*_5$ (350 ms) shows a
+steady pitch followed by a complex changing tone structure.
 
 An example of the detector's output for three of these syllables is
-shown in \fig{fig:detection_raster}.  The total audio energy of each song is shown as a single grayscale row.  By sorting according to time of
-each syllable's detection, the rest of the song is shown in the
+shown in \fig{fig:detection_raster}.  The total audio energy of each
+song is shown as a single grayscale row.  By sorting according to time
+of each syllable's detection, the rest of the song is shown in the
 context of the timing for that moment.  This gives an intuition of the
-timing variability within each song and across songs (which may be responsible
-for some of our measured jitter).
+timing variability within each song and across songs (which may be
+responsible for some of our measured jitter).
 
 \begin{figure}
   \includegraphics[width=\textwidth]{Fig2}
