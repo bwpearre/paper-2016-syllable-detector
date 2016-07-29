@@ -1197,22 +1197,43 @@ detector is available under an open-source license {\em (we are still evaluating
     \item[Usage:]\hfill
     \end{description}
   \item[Swift:] {\tt https://github.com/gardner-lab/syllable-detector-swift}
-    \marginpar{Nathan: Can you flesh this out?}
     \begin{description}
     \item[Installation:]\hfill
       \begin{trivlist}
-      \item Clone the Github repository onto your computer.
+      \item Download the most recent release from the Github repository onto your computer.
       \end{trivlist}
     \item[Connection:]\hfill
       \begin{itemize}
-      \item Connect the microphone through a preamp to {\em FIXME the left channel of the stereo audio input jack on the Mac Mini?}.
-      \item {\em FIXME} How to connect the Arduino?  Add the Arduino programme to your GitHub?
-      \item {\em FIXME} How to connect if not using Arduino?
+      \item Either connect the microphone directly into the microphone jack or through a 
+      preamp into the audio input jack. If the input jack supports multiple channels (e.g., 
+      audio input jacks are usually stereo), you can connect multiple audio sources and run 
+      different detectors on each channel simultaneously.
+      \item To generate TTL signals via the audio output, use the headphone jack. The 
+      audio output must have at least the same number of channels as the input.
+      \item To generate TTL signals via an Arduino, load the MATLAB arduino IO sketch 
+      onto the Arduino (the sketch is available in the Github repository, and provides a 
+      simple serial protocol for controlling pins). Connect the Arduino 
+      to the computer via USB. The TTL signal for the first input will be available on 
+      pin 7, the second input on pin 8, etc.
       \end{itemize}
     \item[Usage:]\hfill
       \begin{itemize}
-      \item Use {\tt convert\_to\_text.m} to convert the Matlab output file to a format easily readable by Swift.
-      \item {\em FIXME} How to start Swift?  Parameters?
+      \item Use {\tt convert\_to\_text.m} to convert the Matlab output file to a format 
+      easily readable by Swift. This will generate a text version of the neural network.
+      \item Launch the application downloaded above. It will provide an 
+      menu to select an audio input and either an audio output or an Arduino output (if 
+      detected). Once you select an input and an output, a new window will show all audio 
+      channels associated with the input. For each channel, select a the text-encoded version of 
+      the detector created in the previous step. Once configured, press run to begin 
+      monitoring the inputs.
+      \end{itemize}
+    \item[Customization:]\hfill
+      \begin{itemize}
+      \item You can clone the Github repository and use Xcode to edit the project, if you 
+      are interested in extending or modifying the functionality. To hook into either 
+      the raw input or output, look at the ``ViewControllerProcessor.swift'' file. The 
+      {\tt Processor} class acts as a coordinator, receiving income audio, passing that
+      to the detector and generating appropriate output TTL signals.
       \end{itemize}
     \end{description}
   \item[LabVIEW:] {\tt https://github.com/bwpearre/birds/align}
