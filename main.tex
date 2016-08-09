@@ -177,7 +177,7 @@ Author \textsuperscript{a}~contributed the original MATLAB and LabVIEW implement
   syllable detector that can control hardware at precisely timed
   moments during zebra finch song.  Many moments during song can be
   isolated and detected with false negative and false positive rates
-  well under 0.5\% and 0.01\% respectively. The detector can run on a
+  well under 1\% and 0.001\% respectively. The detector can run on a
   stock Mac Mini with triggering delay of less than a millisecond and
   a jitter of $\sigma\approx 2$ milliseconds.
 \end{abstract}
@@ -292,7 +292,7 @@ three steps:
 This method makes the following contributions:
 \begin{itemize}
 \item Fast: sub-millisecond latencies, with jitter around 2 ms.
-\item Accurate: false positive rates under 0.02\% and false negative rates under 0.5\% for a variety of syllables.  Balancing these rates depends on a single relative-cost parameter.
+\item Accurate: false positive rates under 0.001\% and false negative rates under 1\% for a variety of syllables.  Balancing these rates depends on a single relative-cost parameter.
 \item State-of-the-art performance with default parameters.
 \item Runs on inexpensive hardware.
 \item Described in detail here, with reference implementations provided and benchmarked.
@@ -873,7 +873,7 @@ responsible for some of our measured jitter).
   \caption{Each plot shows one network output unit's responses to all
     2818 presentations of the song shown in \fig{fig:song}.  For
     simplicity, we show only the syllables $t^*_1$, $t^*_4$, and
-    $t^*_6$. The horizontal axis is time relative to the beginning of
+    $t^*_6$, and we do not show the non-response to presentation of non-song. The horizontal axis is time relative to the beginning of
     the aligned song, and the vertical axis is an index for the 2818
     individual song presentations. The grey shading shows the audio
     amplitude of song Y at time T. Detection events on training songs
@@ -897,15 +897,16 @@ directly on the digitised recording.  When training and runtime data
 are gathered on the same hardware setup, this is the digital signal
 that the detector will see---only the non-song data may be different.
 %Accuracy \marginpar{Should be! Verify! And/or explain that there is a bug in the LabVIEW implementation, if there in fact is. ALSO need to present a picture of the test syllable or etc\dots} is identical across the three detectors.
+
 \noprint{
-  Typical confusion matrices for these syllables are:
+  The means of the false positive and
 
   \vspace{8pt}\par\noindent
   \begin{tabular}{r|cc}
     $t^*_1$
     & \multicolumn{2}{c}{True} \\ 
     & pos & neg \\ 
-    \hline  Detected pos & 99.96451\% & 0.000298\%\\ 
+    \hline  Detected pos & 99.34\% & 0.0015\%\\ 
     neg & 0.0355\% & 99.99970\%\\ 
   \end{tabular}
   \vspace{8pt}\par\noindent
@@ -954,9 +955,9 @@ songs were always 100\%).  For each test syllable we trained
 networks, which differ from each other in the random initialisation of
 network weights and on which random subset of our songs was used for
 training.  Each network's accuracy is shown as a single point in each
-chart in \fig{fig:accuracies}.  Some syllables are easier to identify
-reliably than others, allowing detection point choice to impact the
-detector's accuracy.  For difficult syllables, the training process
+chart in \fig{fig:accuracies}, and the means are shown in Table~\ref{table:accuracies}.  Some syllables are easier to identify
+reliably than others, showing that detection point choice can impact the
+detector's accuracy.  As can be seen from \fig{fig:accuracies}, for difficult syllables, the training process
 occasionally yields a network that performs unusually poorly, but it
 is easy to spot these networks by their performance either as measured
 as part of the training process or on the test audio file, and
@@ -967,13 +968,29 @@ re-train when necessary.
   \includegraphics[width=\textwidth]{Fig3}
   %\includegraphics[width=\textwidth]{accuracies-2hidden}
   
-  \caption{Accuracy variability over 100 different training runs for each
-    of the six test syllables.  Each dot shows the test-set accuracy
-    for an independently trained detector.  Because the horizontal
-    positions have been randomised slightly so as not to occlude same-valued
-    measurements, test syllable is also indicated by colour.}
+  \caption{Accuracy variability over 100 different training runs for
+    each of the six test syllables.  Each dot shows the test-set
+    accuracy for an independently trained detector.  Because the
+    horizontal positions have been randomised slightly so as not to
+    occlude same-valued measurements, test syllable is also indicated
+    by colour.  The means are given in Table~\ref{table:accuracies}.}
   \label{fig:accuracies}
 \end{figure}
+
+\begin{table}
+  \begin{tabular}{c|rr}
+    Target time & \% True positives & \% False positives \\ \hline
+    $t^*_1$ & 99.34 &  0.0015 \\
+    $t^*_2$ & 99.65 &  0.00040 \\
+    $t^*_3$ & 98.98 &  0.0015 \\
+    $t^*_4$ & 99.30 &  0.00093 \\
+    $t^*_5$ & 99.73 &  0.000094 \\
+    $t^*_6$ & 98.31 &  0.0026
+  \end{tabular}
+  \caption{Mean values for the detection accuracies shown in \fig{fig:accuracies}.}
+  \label{table:accuracies}
+\end{table}
+  
 
 We repeated the above experiment using only 2 hidden units per syllable.  Training under this condition is much faster, but the mean true positive rate per syllable decreases by an average of 18\% across our test syllables, and the mean false positive rate increases by roughly 23\%.
 
@@ -1094,7 +1111,7 @@ also likely to work well for Bengalese finches due to their similarly stereotype
 following benefits:
 \begin{itemize}
 \item The detector is accurate. False negative and false positive
-  rates can be well under 0.5\% and 0.01\% respectively, and trading
+  rates can be well under 1\% and 0.001\% respectively, and trading
   these two numbers off against each other is through a single
   relative-cost parameter.
 \item Latency is generally under a millisecond, with jitter around 2
