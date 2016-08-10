@@ -343,6 +343,7 @@ the FFT buffer.  Over time, the successive spectra will look something
 like \fig{fig:song}.
 
 \begin{figure}
+  % Width: 8, Height: 3, Fonts scale: 120%
   \includegraphics[width=\textwidth]{Fig1}
   \caption{This image was made by superposing the spectra of our 2818
     aligned songs.  Our example detection points, $t^*_1\ldots t^*_6$,
@@ -677,6 +678,12 @@ interface, reducing latency by half.
 \subsection{Quantification}
 \label{sec:quantify}
 
+We have used this detector for song alignment and feedback experiments
+in 5 behaving birds, and for offline analysis on a few others.  For
+simplicity, and to test robustness to imperfect choice of ``syllable'', we present performance on 6 randomly chosen points in one
+bird's song.  However, the results presented here are representative of
+real-world performance over many birds in our lab.
+
 We divided the data into training and test sets.  For the results
 reported in the following section, the training set consisted of 1000
 instances of the song of one bird, and 2000 song-length samples of
@@ -686,8 +693,8 @@ song-length samples of non-song.
 
 The MATLAB neural network toolbox further divides our ``training'' set
 into internal training, validation, and test sets.  Because we do our
-own testing on a distinct and much larger data set, we instructed the
-toolbox to use 80\% of its training set for training, and the
+own testing on a distinct data set, we instructed the
+toolbox to use 80\% of its input set for training, and the
 remaining 20\% for validation, with no hold-out test data.
 
 Because the data set consists of temporally aligned songs, ground
@@ -711,10 +718,9 @@ We define the accuracy of the network based on its classification
 performance per frame. In order to avoid the apparent problem of every
 non-detected non-syllable counting as a true negative, we also tried
 defining accuracy on a per-song basis, such that a song without the
-target syllable counted as a single true negative.  Computing the
-optimal output thresholds on a per-frame basis resulted in higher
-thresholds and thus a lower false-positive rate, with minimal
-consequences to the false-negative rate, while also providing a valid
+target syllable counted as a single true negave.  Computing the
+optimal output thresholds on a per-frame rather than a per-song basis resulted in higher
+thresholds and thus a slight reduction in both the false-positive and true-positive rates (reversible by increasing $C_n$), while also providing a valid
 definition of false-positive rate for data streams that had not been
 segmented into song-sized chunks and thus allowing easy interpretation
 of false-positive rates from calls, cage noise, etc.
@@ -833,12 +839,6 @@ Committee of Boston University (protocol number 14-029).
 
 \section{Results}
 \label{sec:results}
-
-We have used this detector for song alignment and feedback experiments
-in 5 behaving birds, and for offline analysis on a few others.  For
-simplicity we present performance on 6 randomly chosen points in one
-bird's song, but the results presented here are representative of
-real-world performance in our lab.\marginpar{Ok?}
 
 \fig{fig:song} shows the song for which we present accuracy and timing
 results.  Six example target trigger points are shown, at 150, 200,
