@@ -955,10 +955,9 @@ songs were always 100\%).  For each test syllable we trained
 networks, which differ from each other in the random initialisation of
 network weights and on which random subset of our songs was used for
 training.  Each network's accuracy is shown as a single point in each
-chart in \fig{fig:accuracies}, and the means are shown in Table~\ref{table:accuracies}.  Some syllables are easier to identify
-reliably than others, showing that detection point choice can impact the
-detector's accuracy.  As can be seen from \fig{fig:accuracies}, for difficult syllables, the training process
-occasionally yields a network that performs unusually poorly, but it
+chart in \fig{fig:accuracies}, and the means are shown in Table~\ref{table:accuracies}.  Evidently some syllables are easier to identify
+reliably than others; thus, if the experimental design permits, it can be worthwhile to choose an easily identifiable syllable.  Furthermore, as can be seen from \fig{fig:accuracies}, for difficult syllables the training process
+occasionally yields a network that performs unusually poorly.  It
 is easy to spot these networks by their performance either as measured
 as part of the training process or on the test audio file, and
 re-train when necessary.
