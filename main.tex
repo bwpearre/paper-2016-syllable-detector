@@ -1174,7 +1174,7 @@ their improvements to the draft.  This work was funded by NIH grants
 \section{Resources}
 \label{sec:resources}
 
-{\em If accepted, before final submission, all code will be moved to the Gardner Lab github repository, final release versions generated, and DOIs created as described in https://guides.github.com/activities/citable-code/ so that our results may be reproduced and the software deployed.  For now, in lieu of final release DOIs, we provide these links to our development repositories.  If you would like final versions and test datasets for review, please contact the corresponding author (bwpearre@bu.edu).}
+{\em If accepted, before final submission, DOIs for the latest code will be created as described in https://guides.github.com/activities/citable-code/ so that our results may be reproduced and the software deployed.  For now, in lieu of final release DOIs, we provide these links to our development repositories.  If you would like final versions and test datasets for review, please contact the corresponding author (bwpearre@bu.edu).}
 %\marginpar{PLOS doesn't really say where such things should go.}
 %\marginpar{Cleanup: mostly done.  But it would be nice to move all this to the lab's GitHub group.}
 \begin{description}
@@ -1183,25 +1183,49 @@ their improvements to the draft.  This work was funded by NIH grants
 \end{description}
 
 \noindent Our implementation of the syllable
-detector is available under an open-source license {\em (we are still evaluating which open source license is the most suitable for this software):}
+detector is available under an open-source license {\em (Tentatively GPL, but we are still evaluating which open source license is the most suitable for this software):}
 \begin{description}
 \item[Training the neural network:]\hfill
   \begin{trivlist}
-  \item {\tt https://github.com/bwpearre/birds/align}
+  \item {\tt https://github.com/gardner-lab/syllable-detector-learn}
   \end{trivlist}
 
   \begin{description}
   \item[Installation:]\hfill
-    \begin{trivlist}
+    \begin{itemize}
     \item Clone the Github repository onto your computer.
-    \end{trivlist}
+    \item You also need the following packages from MATLAB File Exchange:
+      \begin{description}
+      \item[Significant Figures] by Teck Por Lam.  File ID \#10669.
+      \item[Generate maximally perceptually-distinct colors] by Tim Holy.  File ID \#29702.
+      \end{description}
+    \end{itemize}
   \item[Usage:]\hfill
     \begin{itemize}
       \item The main programme is {\tt learn\_detector.m}.
-    \item The top section of {\tt learn\_detector.m} contains global configuration variables.  The important ones are the data directory and the bird name: as supplied, the software looks for {\tt \textless data directory\textgreater/\textless bird name\textgreater/song.mat}.  Modify as necessary.
-    \item The format for the data file {\tt \textless data directory\textgreater/\textless bird name\textgreater/song.mat} is specified in {\tt birds/align/README.md}: a MATLAB file containing aligned song, nonsong (calls, cage noise, etc), and the sampling frequency.
-    \item The configuration file {\tt \textless data directory\textgreater/\textless bird name\textgreater/params.m} is also described in {\tt README.md}.  If the file is empty, the programme will display an image showing the average of the song spectrograms (frequency vs.~time), tell the user how to define syllables of interest, and exit.  If {\tt times\_of\_interest} is defined, the programme will train the neural network.  {\tt params.m} can also override any of the configuration parameters at the top of {\tt learn\_detector.m}.
-    \item The software will produce a neural network file, {\tt detector\_bird\_times\_\dots.mat} (the ellipses signify other information encoded in the filename).  It will also produce the audio test file described in Methods.
+    \item The top section of {\tt learn\_detector.m} contains global
+      configuration variables.  The important ones are the data
+      directory and the bird name: as supplied, the software looks for
+      {\tt \textless data directory\textgreater/\textless bird
+        name\textgreater/song.mat}.  Modify as necessary.
+    \item The format for the data file {\tt \textless data
+      directory\textgreater/\textless bird name\textgreater/song.mat}
+      is specified in {\tt syllable-detector-learn/README.md}: a
+      MATLAB file containing aligned song, nonsong (calls, cage noise,
+      etc), and the sampling frequency.
+    \item The configuration file {\tt \textless data
+      directory\textgreater/\textless bird name\textgreater/params.m}
+      is also described in {\tt README.md}.  If the file is empty, the
+      programme will display an image showing the average of the song
+      spectrograms (frequency vs.~time), tell the user how to define
+      syllables of interest, and exit.  If {\tt times\_of\_interest}
+      is defined, the programme will train the neural network.
+      Optionally, {\tt params.m} can also override any of the
+      configuration parameters at the top of {\tt learn\_detector.m}.
+    \item The software will produce a neural network file, {\tt
+      detector\_bird\_times\_\dots.mat} (the ellipses signify other
+      information encoded in the filename).  It will also produce the
+      audio test file described in Methods.
     \end{itemize}
   \end{description}
   
@@ -1248,7 +1272,7 @@ detector is available under an open-source license {\em (we are still evaluating
       the detector created in the previous step. Once configured, press run to begin 
       monitoring the inputs.
       \end{itemize}
-    \item[Customization:]\hfill
+    \item[Customisation:]\hfill
       \begin{itemize}
       \item You can clone the Github repository and use Xcode to edit the project, if you 
       are interested in extending or modifying the functionality. To hook into either 
@@ -1257,7 +1281,7 @@ detector is available under an open-source license {\em (we are still evaluating
       to the detector and generating appropriate output TTL signals.
       \end{itemize}
     \end{description}
-  \item[LabVIEW:] {\tt https://github.com/bwpearre/birds/align}
+  \item[LabVIEW:] {\tt https://github.com/gardner-lab/\dots\ syllable-detector-runtime-labview}
     \begin{description}
     \item[Installation:]\hfill
       \begin{trivlist}
@@ -1265,7 +1289,7 @@ detector is available under an open-source license {\em (we are still evaluating
       \end{trivlist}
     \item[Connection:]\hfill
       \begin{itemize}
-      \item The microphone should be connected through a preamplifier to the data acquisition card, by default on Analog Input 0 (AI0).
+      \item The microphone should be connected, optionally through a preamplifier, to the data acquisition card, by default on Analog Input 0 (AI0).
       \item Outputs are on the Digital I/O (DIO) channels.  See the block diagram of {\tt nnfft.vi} for documentation, or just connect to DIO0.
       \end{itemize}
     \item[Usage:]\hfill
