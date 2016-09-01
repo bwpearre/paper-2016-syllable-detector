@@ -199,7 +199,7 @@ song can reliably be detected quickly enough to trigger other
 apparatus during singing.  A common area of study with this
 song-triggering technique is the anterior forebrain pathway (AFP), a
 homologue of mammalian basal ganglia consisting of a few distinct
-brain areas concerned with the acquisition and learning of song.  For
+brain areas concerned with the production and learning of song.  For
 example, \cite{Kao2005} stimulated the lateral magnocellular nucleus
 of the anterior nidopallium (LMAN)---the output nucleus of the
 AFP---at precisely timed moments during song and showed that this area
@@ -232,7 +232,8 @@ neither auditory processing nor directed motor learning.
 % THEIR WORDS: (NCM, a high auditory area) impaired recovery of the original pitch even several weeks after withdrawal of the reinforcing stimuli. Because NCM lesions spared both successful noise-avoidance behavior and birds' auditory discrimination ability, our results show that NCM is not needed for directed motor changes or for auditory discriminative processing, but is implied in memorizing or recalling the memory of the recent song target.
 
 
-Despite the power and versatility of such experiments, there is no standard syllable detector.  Considerations include:
+Despite the power and versatility of vocal feedback experiments, there
+is no standard syllable detector.  Desiderata include:
 \begin{description}
 \item[Accuracy:] How often does the system produce false positives or false negatives?
 \item[Latency:] The average delay between the target syllable being sung and the detection.
@@ -246,10 +247,10 @@ A variety of syllable-triggering systems have been used, but few have
 been documented or characterised in detail.  In 1999,
 \cite{Leonardo1999} used groups of IIR filters with hand-tuned logical
 operators.  Their system had a latency of 50 or 100 ms,
-and they do not report on jitter or accuracy.  As access to
+and they did not report on jitter or accuracy.  As access to
 computational resources has improved, approaches have changed: in
 2009, \cite{Andalman2009} still used hand-tuned filters, but ran them
-on a Tucker-Davis Technologies digital signal processor.  They report
+on a Tucker-Davis Technologies digital signal processor.  They reported
 a latency of around 4 ms, but as with other filter-bank techniques, it
 is not strictly a syllable detector but rather a pitch and timbre
 detector---it cannot identify a frequency sweep, or distinguish a
@@ -257,10 +258,10 @@ short chirp from a long one---and thus requires careful selection of
 target syllables.  Furthermore, the method is neither inexpensive nor,
 based on our experience with a similar technique, accurate.
 \cite{Keller2009} applied a neural network to a spectral image of
-song.  They report a jitter of 4.3 ms, but further implementation and
+song.  They reported a jitter of 4.3 ms, but further implementation and
 performance details are not available.  In 2011, \cite{Warren2011}
 matched spectral templates to stable portions of syllables in 8-ms
-segments.  They report a jitter of 4.5 ms, and false-negative and
+segments.  They reported a jitter of 4.5 ms, and false-negative and
 false-positive rates of up to 2\% and 4\%, respectively.  Hardware
 requirements and ease of use were not reported.  In 2013,
 \cite{Skocik2013} described in detail a system that matches spectral
@@ -269,8 +270,7 @@ fast desktop (Intel i7 six-core) running Linux and equipped with a
 National Instruments data acquisition card, it boasts a hardware-only
 (not accounting for the time taken to compute a match with a syllable)
 latency and jitter of just a few microseconds, and the detection
-computation they use should not much increase that.  Drawbacks are
-that some hand-tuning may still be required, and that they report
+computation they use should not much increase that.  They reported
 false-negative rates around 4\% and 7\% for zebra finches and
 Bengalese finches respectively, measured on a small dataset.  In much
 other work, an allusion is made to a syllable detector, but no further
@@ -278,8 +278,8 @@ information is provided.
 
 We developed a standalone detector that learns to match moments in the
 song using a neural network applied to the song spectrogram, and
-outputs a TTL pulse (a brief 5-volt pulse) at the chosen moment. The approach consists of
-three steps:
+outputs a TTL pulse (a brief 5-volt pulse) at the chosen moment. The
+approach consists of three steps:
 
 \begin{enumerate}
 \item Record and align a corpus of training songs.  The technique has been published in \cite{Poole2012}.
@@ -314,7 +314,7 @@ We begin with a few hundred recordings of a given bird's song, as well as calls,
 zebra finch song is most highly stereotyped when a female is present
 (``directed song'') and slightly more variable otherwise
 (``undirected''); we train and test on undirected song since this is
-more challenging.  Recordings were made inside a sound-isolating
+more commonly studied, as well as more challenging.  Recordings were made inside a sound-isolating
 chamber in which was mounted a recording microphone (Audio-Technica
 AT803).  The songs were time-aligned as described in \cite{Poole2012}.
 
@@ -446,8 +446,9 @@ the false positive rate it is necessary to provide negative training
 examples that include silence, cage noise, wing flapping, non-song
 vocalisations, and perhaps songs from other birds.  Although it will
 depend on the makeup of the non-song data, we have found that training
-with as low as a 1:1 ratio of non-song to song yields excellent
-results on most birds.  These data are also included in our accuracy tests.
+with as low as a 1:1 ratio of non-song to song---or roughly 10-20
+minutes of non-song audio---yields excellent results on most birds.
+These data are also included in our accuracy tests.
 
 
 \subsubsection{Normalisation}
@@ -621,7 +622,6 @@ buffer sizes.
 We ran the Swift detector on a Late 2014 Mac Mini with a Intel Core i5
 processor at 2.6GHz  with 16 gigabytes of RAM, running Mac OS X 10.11.
 
-% technically, it is LabVIEW
 \subsubsection{LabVIEW}
 
 This implementation requires special software and hardware: LabVIEW
@@ -662,13 +662,13 @@ computational overhead of the interpreted programming language.
 The most versatile implementation, MATLAB runs on a variety of
 hardware and operating systems, and is perhaps the easiest to modify.
 While it did not perform as well on our test system as the other
-implementations, the convenience may outweigh the slight timing
+implementations, the convenience may outweigh the timing
 performance penalty for some experiments.  Key to minimising jitter is
 the size of the audio buffer: on a 2014 Mac Mini running MATLAB 2015b
 the smallest buffer size that did not result in read overruns was
 about 4 ms.
 
-Similar to the Swift implementation, it is also possible to modify the
+As with the Swift detector, it is also possible to modify the
 MATLAB implementation to generate the TTL pulse from a microcontroller
 (Arduino) controlled via a serial over USB interface. This eliminates
 the double buffer required when sending triggers via the audio
@@ -710,11 +710,10 @@ output pulses may be compared against the right channel.
 We define the accuracy of the network based on its classification
 performance per frame. In order to avoid the apparent problem of every
 non-detected non-syllable counting as a true negative, we also tried
-defining accuracy on a per-song basis, such that a song without the
+defining accuracy on a per-song basis, such that a song-length sample without the
 target syllable counted as a single true negative.  Computing the
 optimal output thresholds on a per-frame basis resulted in higher
-thresholds and thus a lower false-positive rate, with minimal
-consequences to the false-negative rate, while also providing a valid
+thresholds and thus a lower false-positive rate, while also providing a valid
 definition of false-positive rate for data streams that had not been
 segmented into song-sized chunks and thus allowing easy interpretation
 of false-positive rates from calls, cage noise, etc.
@@ -791,7 +790,7 @@ constant latency can often be trained to trigger at a point somewhat
 before the true moment of interest (for example, if triggering should
 occur at the very beginning of a syllable, the detector's time window
 may include previous syllable).  Often more important is the
-variability in the latency?  We define jitter as the standard
+variability in the latency.  We define jitter as the standard
 deviation of the latency.
 
 When measuring timing, it is useful to compare against a theoretical
@@ -838,7 +837,7 @@ We have used this detector for song alignment and feedback experiments
 in 5 behaving birds, and for offline analysis on a few others.  For
 simplicity we present performance on 6 randomly chosen points in one
 bird's song, but the results presented here are representative of
-real-world performance in our lab.\marginpar{Ok?}
+real-world performance in our lab.
 
 \fig{fig:song} shows the song for which we present accuracy and timing
 results.  Six example target trigger points are shown, at 150, 200,
@@ -863,8 +862,8 @@ shown in \fig{fig:detection_raster}.  The total audio energy of each
 song is shown as a single grayscale row.  By sorting according to time
 of each syllable's detection, the rest of the song is shown in the
 context of the timing for that moment.  This gives an intuition of the
-timing variability within each song and across songs (which may be
-responsible for some of our measured jitter).
+timing variability within each song and across songs (which is
+responsible for a small amount of our measured jitter, but note that few of the songs are significantly timeshifted).
 
 \begin{figure}
   \includegraphics[width=\textwidth]{Fig2}
@@ -896,55 +895,6 @@ playback and re-digitising, we evaluated the neural network's accuracy
 directly on the digitised recording.  When training and runtime data
 are gathered on the same hardware setup, this is the digital signal
 that the detector will see---only the non-song data may be different.
-%Accuracy \marginpar{Should be! Verify! And/or explain that there is a bug in the LabVIEW implementation, if there in fact is. ALSO need to present a picture of the test syllable or etc\dots} is identical across the three detectors.
-\noprint{
-  Typical confusion matrices for these syllables are:
-
-  \vspace{8pt}\par\noindent
-  \begin{tabular}{r|cc}
-    $t^*_1$
-    & \multicolumn{2}{c}{True} \\ 
-    & pos & neg \\ 
-    \hline  Detected pos & 99.96451\% & 0.000298\%\\ 
-    neg & 0.0355\% & 99.99970\%\\ 
-  \end{tabular}
-  \vspace{8pt}\par\noindent
-  \begin{tabular}{r|cc}
-    $t^*_2$ & \multicolumn{2}{c}{True} \\ 
-    & pos & neg \\ 
-    \hline  Detected pos & 99.92903\% & 0.000596\%\\ 
-    neg & 0.0710\% & 99.99940\%\\ 
-  \end{tabular}
-  \vspace{8pt}\par\noindent
-  \begin{tabular}{r|cc}
-    $t^*_3$ & \multicolumn{2}{c}{True} \\ 
-    & pos & neg \\ 
-    \hline  Detected pos & 99.68062\% & 0.00194\%\\ 
-    neg & 0.319\% & 99.99806\%\\ 
-  \end{tabular}
-  \vspace{8pt}\par\noindent
-  \begin{tabular}{r|cc}
-    $t^*_4$ & \multicolumn{2}{c}{True} \\ 
-    & pos & neg \\ 
-    \hline  Detected pos & 99.82257\% & 0.00239\%\\ 
-    neg & 0.177\% & 99.99761\%\\ 
-  \end{tabular}
-  \vspace{8pt}\par\noindent
-  \begin{tabular}{r|cc}
-    $t^*_5$ & \multicolumn{2}{c}{True} \\ 
-    & pos & neg \\ 
-    \hline  Detected pos & 99.78708\% & 0\\ 
-    neg & 0.213\% & 100\%\\ 
-  \end{tabular}
-  \vspace{8pt}\par\noindent
-  \begin{tabular}{r|cc}
-    $t^*_6$ & \multicolumn{2}{c}{True} \\ 
-    & pos & neg \\ 
-    \hline  Detected pos & 99.71611\% & 0.00552\%\\ 
-    neg & 0.284\% & 99.99448\%\\ 
-  \end{tabular}
-  \vspace{8pt}\par\noindent
-}
 
 
 Accuracies for our six test syllables are shown in
