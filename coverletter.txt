@@ -1,23 +1,31 @@
-Dear Dr. Lengauer,
+Dear editors,
 
-Thank you for reviewing our presubmission inquiry (PCOMPBIOL-D-16-00635).
+I'd submitted this paper to PLOS CompBio.  They rejected it on the
+grounds that we had failed to sufficiently demonstrate robustness, and
+that it would be of interest to too few readers, but advised that I
+resubmit to PLOS ONE.  We believe we've addressed the reviewers'
+concerns, and would like to offer the revised manuscript for your
+consideration.
 
-As you've seen, we have developed a piece of software that may be of
-general interest to neuroscientists working in the zebra finch and
-possibly other bird species: it allows precisely timed triggering of
-other experimental apparatus in response to syllables during bird
-song.  We've gone to some lengths to describe and characterise the
-software's performance in detail, and to make the code useful to the
-community, and everything will be made available under an open source
-license.  Although a relevant experimental result is included, the
-focus is on the technique, but the paper is too long for a Software
-paper.  Therefore, we ask that it be considered as a Methods paper.
+The paper describes a piece of software that is of general interest to
+neuroscientists working in the zebra finch and possibly other bird
+species: it allows precisely timed triggering of other experimental
+apparatus in response to syllables during bird song.  Since such a
+method facilitates a wide variety of experiments in this model, many
+labs have developed functionally similar software, but few have
+released details on how they did it, and those few who reported on
+accuracy have not done so very thoroughly.
 
-If accepted, before final submission, all code will be moved to the
-Gardner Lab github repository and placed under an appropriate open
-source license, final release versions generated, and DOIs created as
-described in https://guides.github.com/activities/citable-code/ .  The
-relevant datasets will be uploaded to one of your approved
+We've gone to some lengths to describe and characterise the software's
+performance in detail.  It appears that our software outperforms that
+used in other labs in terms of accuracy, precision, speed, ease of
+use, cost, and availability.
+
+If accepted, before final submission, all code will be placed under an
+appropriate open source license, final release versions generated, and
+DOIs created as described in
+https://guides.github.com/activities/citable-code/ .  The relevant
+example/testing datasets will be uploaded to one of your approved
 repositories.  For now, in lieu of final release DOIs, we provide
 links to our development repositories.  If you would like anything
 else, such as access to the datasets for review, please contact me.

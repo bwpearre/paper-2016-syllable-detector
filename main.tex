@@ -765,12 +765,14 @@ training songs, and while live.
 \subsubsection{Timing}
 
 
-We evaluate the time taken from the presentation of each instance of
-the target syllable to the firing of the detector's TTL pulse---for
-example, if the target trigger point is at 200 ms with respect to the
-corpus of aligned songs, and for a given presentation of the song the
-detector fires at 203 ms, we take the latency on that trial to be 3
-ms.
+We evaluate the time taken from the complete presentation of each
+instance of the target syllable to the firing of the detector's TTL
+pulse.  For example, if the recognition region is 30 ms long and the
+target trigger point is at 200 ms with respect to the corpus of
+aligned songs, then when the detector has seen the region from
+170--200 ms, it should recognise the syllable.  If for a given
+presentation of the song the detector fires at 203 ms, we take the
+latency on that trial to be 3 ms.
 
 While playing the audio test file from any audio playback device, we
 used the TTL output from the ground-truth channel of the audio output
@@ -899,17 +901,22 @@ that the detector will see---only the non-song data may be different.
 
 Accuracies for our six test syllables are shown in
 \fig{fig:accuracies} (accuracies for the synthetic $\delta$-function
-songs were always 100\%).  For each test syllable we trained
-100 different
-networks, which differ from each other in the random initialisation of
-network weights and on which random subset of our songs was used for
-training.  Each network's accuracy is shown as a single point in each
-chart in \fig{fig:accuracies}, and the means are shown in Table~\ref{table:accuracies}.  Evidently some syllables are easier to identify
-reliably than others; thus, if the experimental design permits, it can be worthwhile to choose an easily identifiable syllable.  Furthermore, as can be seen from \fig{fig:accuracies}, for difficult syllables the training process
-occasionally yields a network that performs unusually poorly.  It
-is easy to spot these networks by their performance either as measured
-as part of the training process or on the test audio file, and
-re-train when necessary.
+songs were always 100\%).  For each test syllable we trained 100
+different networks, which differ from each other in the random
+initialisation of network weights and on which random subset of our
+songs was used for training.  Each network's accuracy is shown as a
+single point in each chart in \fig{fig:accuracies}, and the means are
+shown in Table~\ref{table:accuracies}.  Evidently some syllables are
+easier to identify reliably than others (for example, $t^*_3$ and
+$t^*_6$ are occasionally confused due to their similar appearance, as
+could be guessed from \fig{fig:song}); thus, if the experimental
+design permits, it can be worthwhile to choose an easily identifiable
+syllable.  Furthermore, as can be seen from \fig{fig:accuracies}, for
+difficult syllables the training process occasionally yields a network
+that performs unusually poorly.  It is easy to spot these networks by
+their performance either as measured as part of the training process
+or on the test audio file, perhaps taking the best of a few training
+runs.
 
 \begin{figure}
   % Width 8, height 3, font 120%
@@ -1143,7 +1150,7 @@ detector is available under an open-source license {\em (Tentatively GPL, but we
   \item[Installation:]\hfill
     \begin{itemize}
     \item Clone the Github repository onto your computer.
-    \item You also need the following packages from MATLAB File Exchange:
+    \item You also need the following packages from MATLAB File Exchange somewhere in your MATLAB path:
       \begin{description}
       \item[Significant Figures] by Teck Por Lam.  File ID \#10669.
       \item[Generate maximally perceptually-distinct colors] by Tim Holy.  File ID \#29702.
@@ -1161,7 +1168,7 @@ detector is available under an open-source license {\em (Tentatively GPL, but we
       directory\textgreater/\textless bird name\textgreater/song.mat}
       is specified in {\tt syllable-detector-learn/README.md}: a
       MATLAB file containing aligned song, nonsong (calls, cage noise,
-      etc), and the sampling frequency.
+      etc), and the audio sampling frequency.
     \item The configuration file {\tt \textless data
       directory\textgreater/\textless bird name\textgreater/params.m}
       is also described in {\tt README.md}.  If the file is empty, the
@@ -1267,18 +1274,127 @@ detector is available under an open-source license {\em (Tentatively GPL, but we
       \item Outputs are on the Digital I/O (DIO) channels.  See the block diagram of {\tt nnfft.vi} for documentation, or just connect to DIO0.
       \end{itemize}
     \item[Usage:]\hfill
-      Use LabVIEW to open {\tt nnfft.vi}.  A file
-      chooser is provided in the front panel.  Use it to point to the network file
+      \begin{itemize}
+      \item Use LabVIEW to open {\tt nnfft.vi}.
+        \item A file chooser is provided in the front panel of {\tt nnfft.vi}.  Use it to point to the network file
       produced by {\tt learn\_detector.m}, and use LabView's ``Run''
       button to begin detection.
+      \end{itemize}
     \end{description}
   \end{description}
   
 \end{description}
 
-    %\bibliography{birds}
-\bibliography{birds}
+%\bibliography{birds}
+\begin{thebibliography}{10}
+
+\bibitem{Kao2005}
+Kao MH, Doupe AJ, Brainard MS.
+\newblock Contributions of an avian basal ganglia--forebrain circuit to
+  real-time modulation of song.
+\newblock Letters to Nature. 2005 February;433:638--643.
+\newblock Available from:
+  \url{http://www.nature.com/nature/journal/v433/n7026/abs/nature03127.html}.
+
+\bibitem{Wang2008interhemispheric}
+Wang CZH, Herbst JA, Keller GB, Hahnloser RHR.
+\newblock Rapid Interhemispheric Switching during Vocal Production in a
+  Songbird.
+\newblock PLOS Biology. 2008 October;6(10).
+\newblock Available from:
+  \url{http://journals.plos.org/plosbiology/article?id=10.1371/journal.pbio.0060250}.
+
+\bibitem{Keller2009}
+Keller GB, Hahnloser RHR.
+\newblock Neural processing of auditory feedback during vocal practice in a
+  songbird.
+\newblock Nature. 2009 January;457:187--190.
+\newblock Available from:
+  \url{http://www.nature.com/nature/journal/v457/n7226/abs/nature07467.html}.
+
+\bibitem{Tumer2007pitchshift}
+Tumer EC, Brainard MS.
+\newblock Performance variability enables adaptive plasticity of 'crystallized'
+  adult birdsong.
+\newblock Nature. 2007 December;450:1240--1244.
+\newblock Available from:
+  \url{http://www.nature.com/nature/journal/v450/n7173/abs/nature06390.html}.
+
+\bibitem{Andalman2009}
+Andalman AS, Fee MS.
+\newblock A basal ganglia-forebrain circuit in the songbird biases motor output
+  to avoid vocal errors.
+\newblock Proceedings of the National Academy of Sciences of the United States
+  of America. 2009 July;106(30):12518--12523.
+\newblock Available from:
+  \url{http://www.ncbi.nlm.nih.gov/pmc/articles/PMC2709669/}.
+
+\bibitem{Charlesworth2011learning}
+Charlesworth JD, Tumer EC, Warren TL, Brainard MS.
+\newblock Learning the microstructure of successful behavior.
+\newblock Nature Neuroscience. 2011;14(3):373--380.
+\newblock Available from:
+  \url{http://www.ncbi.nlm.nih.gov/pmc/articles/PMC3045469/}.
+
+\bibitem{Warren2011}
+Warren TL, Tumer EC, Charlesworth JD, Brainard MS.
+\newblock Mechanisms and time course of vocal learning and consolidation in the
+  adult songbird.
+\newblock Journal of Neurophysiology. 2011 October;106(4):1806--1821.
+\newblock Available from:
+  \url{http://jn.physiology.org/content/106/4/1806.full}.
+
+\bibitem{Canopoli2014}
+Canopoli A, Herbst JA, Hahnloser RHR.
+\newblock A Higher Sensory Brain Region Is Involved in Reversing
+  Reinforcement-Induced Vocal Changes in a Songbird.
+\newblock The Journal of Neuroscience. 2014;34(20):7018--7026.
+\newblock Available from:
+  \url{http://www.jneurosci.org/content/34/20/7018.full}.
+
+\bibitem{Leonardo1999}
+Leonardo A, Konishi M.
+\newblock Decrystallization of adult birdsong by perturbation of auditory
+  feedback.
+\newblock Nature. 1999 June;399:466--470.
+\newblock Available from:
+  \url{http://www.nature.com/nature/journal/v399/n6735/abs/399466a0.html}.
+
+\bibitem{Skocik2013}
+Skocik M, Kozhevnikov A.
+\newblock Real-time system for studies of the effects of acoustic feedback on
+  animal vocalizations.
+\newblock Frontiers in Neural Circuits. 2013 January;6(111).
+\newblock Available from:
+  \url{http://www.ncbi.nlm.nih.gov/pmc/articles/PMC3539774/}.
+
+\bibitem{Poole2012}
+Poole B, Markowitz JE, Gardner TJ.
+\newblock The Song Must Go On: Resilience of the Songbird Vocal Motor Pathway.
+\newblock PLOS One. 2012 June;7(6).
+\newblock Available from:
+  \url{http://journals.plos.org/plosone/article?id=10.1371/journal.pone.0038173}.
+
+\bibitem{Jacobsen2003SlidingDFT}
+Jacobsen E, Lyons R.
+\newblock The sliding DFT.
+\newblock IEEE Signal Processing Magazine. 2003 Mar;20(2):74--80.
+\newblock Available from:
+  \url{http://www.cmlab.csie.ntu.edu.tw/DSPCourse/reference/Sliding\%20DFT.pdf}.
+
+\bibitem{hkp}
+Hertz JA, Krogh AS, Palmer RG.
+\newblock Introduction to the Theory of Neural Computation.
+\newblock Perseus Books; 1991.
+
+\bibitem{Noll1970pitchdetection}
+Noll AM.
+\newblock Pitch determination of human speech by the harmonic product spectrum,
+  the harmonic sum spectrum, and a maximum likelihood estimate.
+\newblock In: Proceedings of the symposium on computer processing in
+  communications. vol.~19; 1970. p. 779--797.
+
+\end{thebibliography}
+
 
 \end{document}
-
-s

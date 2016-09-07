@@ -1,0 +1,409 @@
+> Reviewer #1: The authors describe a novel technique for real-time
+> identification of individual vocal gestures (syllables) in songbirds
+> and provide a range of performance metrics for their new technique. I
+> think that this method potentially represents an important advance in
+> the execution of a very useful and widely applied method for studying
+> the neural basis of vocal production and plasticity. There are however
+> a few revisions that would be useful.
+> 
+> Also, since my comments will likely give me away anyhow, I’ll just go
+> ahead and identify myself – this is Sam Sober. Nice work guys!
+> 
+> First, I’ll comment that a real-time detection paradigm that is fast,
+> accurate, and easy to implement/modify is sorely lacking in the field,
+> and that the deficiencies of current techniques (in use in my own and
+> other labs) both slow down current research and likely constitute a
+> barrier to entry to other labs that might otherwise make important
+> contributions. So – making this method widely available and, just as
+> importantly, easy to implement, would be a great step forward.
+> 
+> Next, here are my major comments/suggestions:
+> 
+> 1. Whether or not people actually use this technique is going to
+> depend strongly on ease of implementation. My understanding is that
+> users need not be experts in implementing MATLAB’s neural network
+> toolbox (and other computational steps) to use this method, however
+> the level of technical expertise required of a user is not clear in
+> the manuscript, especially with respect to the various
+> MATLAB/Swift/LabView realtime implementations. Specifically, although
+> the computational steps are well described, it is somewhat opaque how
+> much user effort is involved in setting up and running the detection
+> algorithm. I suggest adding a figure/table/supplemental document that
+> clarifies all required user inputs and any additional code writing
+> that a user must perform. This would both constitute a compact users
+> guide, outlining all steps required, and also would distinguish
+> “optional” steps (resetting number of hidden units per syllable, etc.)
+> where users could use default values, from “required” steps (choosing
+> detection points, etc.).
+
+We try to provide a complete description of the method, but since we
+are also distributing our implementation, this makes sense.  Therefore
+we have added installation/configuration instructions in Appendix A.
+
+> 2. The discussion of latency/timing is somewhat confusing, and I
+> believe it omits what I (and other investigators) consider to be the
+> most crucial metric of detection performance – the variation in
+> latency from the onset of the targeted syllable to the firing of the
+> TTL pulse.
+
+We had already characterised the timing from the completion of the
+target recognition region to the firing of the TTL pulse--this is what
+we define as "Jitter" (line 27, Section Quantification.Timing
+(beginning around line 342), and also extensively throughout the
+document).  We have tried to clean up those references and clarify
+our description.
+
+> Charlesworth et al. (“Learning the microstructure of
+> successful behavior”) showed that learning after white noise targeting
+> is temporally localized at less than 10 msec timescale. Furthermore,
+> in my own and other labs, the key predictor of whether online
+> targeting will successfully drive learning is the standard deviation
+> of detections/triggers relative to syllable onset, with syllable onset
+> defined by some measure of sound amplitude for each individual
+> iteration of the syllable. I believe (and please correct me if I’m
+> wrong) that the song alignment technique used here does not provide
+> this statistic on a syllable-by-syllable basis.
+
+((1a)) That is correct, but the alignment does appear to be
+sufficiently accurate:
+
+We refer to this syllable-by-syllable adjustment to the alignment as
+micro-realignment.  Even without that micro-realignment, jitter was
+generally around 2 ms, as can be seen throughout Section 3.2,
+especially Figs. 4-7.  Since this is well within the 10-ms window
+suggested by the literature and indeed barely above the theoretically
+optimal jitter given our detection parameters, we decided that the
+improvement that could be achieved by micro-realigning song was
+unimportant.
+
+> So – please provide this measure where appropriate in Results. I
+> suspect that the jitter measurements for real-time performance will
+> not be much different with this metric than what is currently
+> reported, but it would be very useful nonetheless.
+
+We believe that we have provided a sufficient analysis of jitter, and
+that our results are good enough to obviate the improvement you
+suggest.
+
+> 3. The authors should quantify additional examples of real-time
+> performance. Most analysis focuses on the song of a single bird, and
+> real-time latency performance is only reported for detection point
+> t4 (which, given the strong harmonic content of t4, I suspect is the
+> easiest syllable to target). The authors should provide similar
+> performance metrics for the other detection times.
+
+Actually, we already had done so: see Fig. 5 (and section 3.2.syllable
+choice).
+
+> Also, the authors should provide performance metrics for at least
+> one additional bird;
+
+((1b)) We have achieved similar results on quite a few birds, and
+present only one bird simply for reasons of conciseness.  Since the 6
+target points in that bird's song are essentially random (50-ms
+intervals in a song that includes a range of typical sound types and
+does not have any 50-ms periodicity), we just added a comment that
+these results are indeed representative.
+
+> although the three syllables shown in Figure 1 look like fairly
+> typical ZF syllables, a method such as this one should be shown to
+> work on multiple syllables/animals. This additional bird could be the
+> zebra finch shown in Fig 8-9. Alternately, given that many researchers
+> use Bengalese finches in real-time detection experiments,
+> demonstrating the efficacy of the method in a Bengalese would be
+> useful.
+
+It would.  But we don't have a convenient data set, and we feel that
+it is more important to get the technique out there quickly than to
+continue to characterise it in yet more detail.
+
+> 4. I am ambivalent about the use of the fiber photometry data in this
+> paper. Although this looks like a great technical achievement, I see
+> two problems with including it here. First is that it is not actually
+> necessary to demonstrate that the targeting software works – this
+> could be accomplished just by quantifying the accuracy of the white
+> noise hits shown in Figure 8, or by showing that white noise targeting
+> using the new method successfully drives learning (indeed, driving
+> learning is what most potential users of this method will likely care
+> about). Second is that for the photometry data to be presented, more
+> analysis is needed. How precisely was the GCaMP6s/f confined to HVC
+> shelf versus HVC or more ventral areas? If there was spillover, how
+> would this affect interpretation of the data shown in Fig. 9? If
+> individual animals were co-infected with GCaMP6s and GCaMP6f, which
+> expressed more robustly and/or contributed more to the signal?
+>
+> In general, it seems odd to use photometry – itself a methodological
+> innovation in songbirds – to test the implementation of another
+> innovative method. I think the authors should either (1) provide a
+> more detailed analysis of the photometry technique, (2) confine
+> analysis to real-time implementation of white noise (WN) targeting,
+> without photometery data, or (3) demonstrate that pitch-contingent WN
+> drives vocal learning with the new software. Among these options I
+> think (3) would be the most useful, but I leave this up to the Editor
+> and the authors.
+
+((1c)) These are very good questions.  We wanted to throw in a
+real-world test case, but you are right that it is not the most
+appropriate one, and our other experimental test cases are far from
+publication as yet.  So we've removed this section.
+
+> Minor comments:
+> 
+> Line 318-319 – As I mentioned above, I find the discussion of
+> timing/latency a bit confusing. For example – “time taken from the
+> presentation of the target syllable to the firing of the TTL pulse” –
+> I can’t tell whether the first time point is the onset time of the
+> target syllable on a trial-by-trial basis or something averaged across
+> songs with variable timing.
+
+See my (1a) above.  I hope we've clarified this.
+
+> Figure 3 – Although the “correct detection” performance is great for
+> all syllables, I notice that it’s a bit worse for t3 and t6. Is this
+> because these two syllables, which are acoustically very similar, are
+> mistaken for each other? I’m guessing that the LabView code that my
+> lab currently uses would never be able to distinguish between these,
+> so the fact that performance sinks to “only” ~99% for these is a major
+> strength of the technique, and you might want to point this out.
+
+Yes, the software sometimes confuses between these two.  Noted.
+
+> Please clarify what data/parameters are saved by the current version
+> of the software. Most users will want the software to save detailed
+> records of acoustic input, trigger/detection times, time-dependent
+> evaluation of similarity, etc. for each song trial. If no such data
+> are saved, it would be useful to indicate (either in the manuscript,
+> in the code, or both) how this could be added.
+
+None--we use other software for that.  But the new user's guide
+(Appendix A) now includes a pointer for where to go to make such
+modifications for the Swift implementation.
+
+> Reviewer #2: The authors have performed a useful study to examine the
+> suitability of diverse hardware platforms for real time vocal syllable
+> detection. Many solutions to this problem exist already but the
+> current study seemingly outperforms these. Making the software open
+> access will be particularly useful for researchers in the field.
+> 
+> The strength of the study is that their solution achieves low latency
+> and low jitter. For detecting target points and delivering TTL Pulses
+> during song they implemented a neural network detector on 3 platforms:
+> LabView (hard to debug), MATLAB (slowest), and Swift+Serial (fast, MAC
+> based).  Their approach for syllable detection is a neural network
+> (with 2 layers) that requires relatively little computation
+> time. Overall the work would be outstanding if the authors had also
+> evaluated an FPGA solution, but presumably such an approach is highly
+> demanding on the programming side.
+> 
+> The main concern with the presentation of the work is that the
+> classification could be better evaluated. First of all, they only
+> train and test on six target points of only one song.
+
+Yes.  See (1b) above.
+
+> Most
+> importantly, they do not do a life bird test.
+
+I'm not sure what this means.  The fibre photometry test is a live
+bird test (and ongoing research in our lab uses the detector with
+great success), but of course all quantitative tests must be done on
+recordings in order to systematically analyse accuracies of various
+detectors.
+
+> In fact, they haven't included calls, wing flaps, and other noises
+> in their training or testing sets.  Thus, it seems there is no
+> realistic evaluation of their system.
+
+That is an excellent point!  We have remedied this.  See the paragraph
+around line 160.  Also, the new Results/Accuracy graph (Fig. 3) shows
+accuracy figures including lots of cage noise samples (about half an
+hour's worth).  It is slightly different from the previous version of
+Fig. 3, since the introduction of cage noise decreases the ratio of
+positive/negative examples and we have not adjusted the false positive
+vs. false negative cost parameter (which was arbitrarily set at 1).
+Consequently correct detections and incorrect detections have both
+somewhat decreased from our earlier results.
+
+> Minor:
+> 
+> Their method requires to find an "optimal threshold" for the output of
+> the network but they don't say how they choose it. Perhaps cross
+> validation could help (their network does regression, but of course
+> the purpose is to output a binary signal, so the evaluation needs to
+> be binary).
+
+We do say how we choose it: see Sec. 2.1, "Computing optimal output
+thresholds".
+
+> The paper has quite a few sections on fiber photometry, but I find
+> these section quite irrelevant to the main point of the paper, which
+> is to detect syllables in an audio recording. Perhaps the photometry
+> could be left out?
+
+See (1c) above.
+
+> How robust is the method to errors in the training set?
+
+There is an infinite space of possible errors in the training set, so
+this question is impossible to answer.  However, no effort was made to
+compensate for errors in the alignment tool, and the results aren't
+bad, so I guess it depends on what kinds of errors you're worried
+about.
+
+> the writing and presentation could be improved.
+
+Always, but that is too vague to address.
+
+> e.g. fig 1 increase font size of labels
+
+Thanks.  Done.
+
+> Line 189: It takes so long to train a network with just 2 to 4 hidden
+> neurons?
+
+Big data sets!  But we changed the training algorithm and now things
+are about 10 times faster.
+
+> maybe reducing the training data would help (reduce the
+> negative targets only).
+
+This directly contradicts your request that we add cage noise,
+flapping, etc.  Luckily, training time shouldn't matter--it's online
+performance that counts, right?  However, the change to scaled
+conjugate gradient training has sped things up considerably.
+
+> Line 203: How was Cn chosen?
+
+Arbitrarily, as noted in the text.
+
+> Line 201: gradient descent, not hillclimbing (on cost). cross
+> validation.
+
+My comment applied to either one, but that text (it just described
+something we didn't do) was unnecessary, so I removed it.
+
+> Line 292: needs real data including all kinds of sounds present in the
+> cage
+
+Done.
+
+> Line 428: robustness to these variables needs to be documented.
+
+We documented robustness to many choices.  There are always more, but
+this was supposed to be a 5-page paper.  We have to stop somewhere.
+
+> Line 238: what is no user loads?
+
+No loads from users (i.e. operating system processes only).
+
+> Fig. 8, what are the dark lines intermingled between the yellow lines
+> at the bottom quarter of the figure? false negatives?
+
+Removed as per (1c).
+
+> Reviewer #3: This paper describes a program to detect syllable in ZF
+> songs directed at the ZF brain and learning community. The main method
+> relies on neural network learning on the zscored spectrogram and
+> optimization techniques to diminish latency and detection time
+> variations.
+> 
+> I cannot recommend the paper for publication for the following reasons:
+> 
+> - there does not seem to be any real and documented innovation here to
+>   justify a publication - it seems more like several enhancements
+>   designed for a specific use in a neuroscience lab
+
+Agreed.  But we feel it is useful to the community (as do the other
+two reviewers, as well as several of our colleagues), and various
+researchers have requested that we publish it.
+
+> - which lead to my second reason: the tool and the data required is
+>   too narrowly focused on one particular study on ZF. My contention is
+>   that this would be usable for a very limited number of teams.
+
+We agree with you, although several have noted that this model is
+extremely powerful and the absence of tools such as this one is a
+barrier to entry into the field.
+
+> Several points:
+> 
+> a) From a machine learning community point of view the article is
+> extremely frustrating ; nothing is done in the statistics of syllables
+> to justify the architecture and its hyper parameters.
+
+Agreed.  However, it is not a machine learning paper, but rather a
+paper that happens to use a simple machine learning tool to build
+something useful.
+
+> b) also the dataset is super standardized and it should have been
+> tested on others labs data and why not different 'strains' of ZF
+> (American, European and Wild type).
+
+Yes, more birds/species would always be better, but see (1b).
+
+> In other word I highly doubt that the authors' system can be
+> generalised (even though they claim it can be extended to another
+> species - without providing any insights on why this would be true).
+
+Some insight added, but we agree that it's a tool for a specific
+community.  As is any tool.
+
+> c) the training is done on around 3k song annotated and aligned and
+> never provide the readers and potential user how to obtain such
+> dataset.
+
+((3a)) This is incorrect.  We cited the article in which alignment
+software is described, and we linked to the alignment software.  The
+only step that we have not described is using a recording device,
+which is outside the scope of the paper.
+
+> With my own experience on working with birds in social context, such
+> dataset is extremely difficult to obtain without very invasive and
+> constrained method.
+
+Yup.
+
+> In the present manuscript, it has been obtained, presumably, by
+> letting a bird to its own device in a small cage for hours to
+> extract songs. Many experiments do not want such harsh treatment.
+
+Without isolating a bird, isolating a song requires an entirely
+different set of techniques, which would also make for interesting
+research.  It sounds like we proposed a solution to Problem A, but you
+wish we'd solved Problem B instead.
+
+> d) Also here to digress a bit, it is not specified if these are
+> directed and undirected songs (or both). The distinction can be of
+> import because they have different syllable statistics and of course
+> this should import on the training and/or the prediction.
+
+Good point.  Now specified.
+
+> e) It is also assume that the user has means to extract / align song
+> automatically event though this is never mentioned in the manuscript.
+
+Wrong.  See (3a).
+
+> f) the experiment with Fibre Photometry is really nice but is a
+> distraction from the main paper and brings nothing to the story
+
+Right.  See (1c).
+
+> g) very minor: its Levenberg (not Levenburg) and it is a very unusual
+> choice here (usually some kind of enhanced backpropagation are used)
+> probably related to the black-boxy nature of the matlab toolbox
+
+Thanks!  It's a good point.  Levenberg-Marquardt is the default for
+MATLAB's toolbox, and we wanted to use as many defaults as we could
+(preserving the black-boxy nature of third-party tools as much as
+possible in order to emphasise that the specific choice probably
+doesn't really matter very much--hopefully any regression tool would
+work similarly).  But it did turn out in the end that Scaled Conjugate
+Gradient produced similar results faster.
+
+> in short, all these criticisms in fact converge to the main weakness:
+> this paper/software is directed to a very specific community both in
+> scope and type of data needed for it to work and the authors should
+> aim to a journal directed at this community.
+
+Yes.
