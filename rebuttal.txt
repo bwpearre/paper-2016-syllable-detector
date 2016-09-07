@@ -53,12 +53,12 @@ we define as "Jitter" (line 27, Section Quantification.Timing
 document).  We have tried to clean up those references and clarify
 our description.
 
-> Charlesworth et al. (“Learning the microstructure of
-> successful behavior”) showed that learning after white noise targeting
-> is temporally localized at less than 10 msec timescale. Furthermore,
-> in my own and other labs, the key predictor of whether online
-> targeting will successfully drive learning is the standard deviation
-> of detections/triggers relative to syllable onset, with syllable onset
+> Charlesworth et al. (“Learning the microstructure of successful
+> behavior”) showed that learning after white noise targeting is
+> temporally localized at less than 10 msec timescale. Furthermore, in
+> my own and other labs, the key predictor of whether online targeting
+> will successfully drive learning is the standard deviation of
+> detections/triggers relative to syllable onset, with syllable onset
 > defined by some measure of sound amplitude for each individual
 > iteration of the syllable. I believe (and please correct me if I’m
 > wrong) that the song alignment technique used here does not provide
@@ -217,11 +217,7 @@ detectors.
 That is an excellent point!  We have remedied this.  See the paragraph
 around line 160.  Also, the new Results/Accuracy graph (Fig. 3) shows
 accuracy figures including lots of cage noise samples (about half an
-hour's worth).  It is slightly different from the previous version of
-Fig. 3, since the introduction of cage noise decreases the ratio of
-positive/negative examples and we have not adjusted the false positive
-vs. false negative cost parameter (which was arbitrarily set at 1).
-Consequently correct detections and incorrect detections have both
+hour's worth).  Correct detections and incorrect detections have both
 somewhat decreased from our earlier results.
 
 > Minor:
@@ -261,8 +257,9 @@ Thanks.  Done.
 > Line 189: It takes so long to train a network with just 2 to 4 hidden
 > neurons?
 
-Big data sets!  But we changed the training algorithm and now things
-are about 10 times faster.
+Big data sets, and we made little effort to optimise offline
+(training) speed!  But we changed the training algorithm and now
+things are about 10 times faster.
 
 > maybe reducing the training data would help (reduce the
 > negative targets only).
@@ -274,7 +271,7 @@ conjugate gradient training has sped things up considerably.
 
 > Line 203: How was Cn chosen?
 
-Arbitrarily, as noted in the text.
+Arbitrarily.  Now noted in the text.
 
 > Line 201: gradient descent, not hillclimbing (on cost). cross
 > validation.
