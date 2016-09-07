@@ -1,7 +1,7 @@
 \documentclass[10pt,letterpaper]{article}
 %DIF LATEXDIFF DIFFERENCE FILE
-%DIF DEL main.tex                                   Wed Sep  7 17:01:00 2016
-%DIF ADD ../paper-2016-syllable-detector/main.tex   Wed Sep  7 17:28:18 2016
+%DIF DEL ../sbpcb/main.tex   Wed Sep  7 17:01:00 2016
+%DIF ADD main.tex            Wed Sep  7 17:42:57 2016
 \usepackage[top=0.85in,left=2.75in,footskip=0.75in]{geometry}
 
 % Use adjustwidth environment to exceed column width (see example table in text)
@@ -161,7 +161,7 @@ Timothy J.~Gardner\textsuperscript{1,d}
 %\Yinyang These authors contributed equally to this work.
 Author \textsuperscript{a}~contributed the original MATLAB and LabVIEW implementations and most of the manuscript.
 \textsuperscript{b}~contributed the Swift implementation and its description herein, helped debug the training code, and measured the timing for most of the detectors.
-\textsuperscript{c}~performed the fibre photometry experiment, wrote several types of filter-bank software against which we compared, made suggestions for the neural network detector, and reformatted the MATLAB code for distribution.
+\textsuperscript{c}~\DIFdelbegin \DIFdel{performed the fibre photometry experiment, }\DIFdelend wrote several types of filter-bank software against which we compared, made suggestions for the neural network detector, and reformatted the MATLAB code for distribution.
 \textsuperscript{d}~provided a stream of suggested techniques, metrics, and goals.
 
 % Additional Equal Contribution Note
@@ -1071,6 +1071,57 @@ playback and re-digitising, we evaluated the neural network's accuracy
 directly on the digitised recording.  When training and runtime data
 are gathered on the same hardware setup, this is the digital signal
 that the detector will see---only the non-song data may be different.
+%DIF < Accuracy \marginpar{Should be! Verify! And/or explain that there is a bug in the LabVIEW implementation, if there in fact is. ALSO need to present a picture of the test syllable or etc\dots} is identical across the three detectors.
+%DIF > Accuracy \marginpar{Should be! Verify! And/or explain that there is a bug in the LabVIEW implementation, if there in fact is. ALSO need to present a picture of the test syllable or etc \dots} is identical across the three detectors.
+\noprint{
+  Typical confusion matrices for these syllables are:
+
+  \vspace{8pt}\par\noindent
+  \begin{tabular}{r|cc}
+    $t^*_1$
+    & \multicolumn{2}{c}{True} \\ 
+    & pos & neg \\ 
+    \hline  Detected pos & 99.96451\% & 0.000298\%\\ 
+    neg & 0.0355\% & 99.99970\%\\ 
+  \end{tabular}
+  \vspace{8pt}\par\noindent
+  \begin{tabular}{r|cc}
+    $t^*_2$ & \multicolumn{2}{c}{True} \\ 
+    & pos & neg \\ 
+    \hline  Detected pos & 99.92903\% & 0.000596\%\\ 
+    neg & 0.0710\% & 99.99940\%\\ 
+  \end{tabular}
+  \vspace{8pt}\par\noindent
+  \begin{tabular}{r|cc}
+    $t^*_3$ & \multicolumn{2}{c}{True} \\ 
+    & pos & neg \\ 
+    \hline  Detected pos & 99.68062\% & 0.00194\%\\ 
+    neg & 0.319\% & 99.99806\%\\ 
+  \end{tabular}
+  \vspace{8pt}\par\noindent
+  \begin{tabular}{r|cc}
+    $t^*_4$ & \multicolumn{2}{c}{True} \\ 
+    & pos & neg \\ 
+    \hline  Detected pos & 99.82257\% & 0.00239\%\\ 
+    neg & 0.177\% & 99.99761\%\\ 
+  \end{tabular}
+  \vspace{8pt}\par\noindent
+  \begin{tabular}{r|cc}
+    $t^*_5$ & \multicolumn{2}{c}{True} \\ 
+    & pos & neg \\ 
+    \hline  Detected pos & 99.78708\% & 0\\ 
+    neg & 0.213\% & 100\%\\ 
+  \end{tabular}
+  \vspace{8pt}\par\noindent
+  \begin{tabular}{r|cc}
+    $t^*_6$ & \multicolumn{2}{c}{True} \\ 
+    & pos & neg \\ 
+    \hline  Detected pos & 99.71611\% & 0.00552\%\\ 
+    neg & 0.284\% & 99.99448\%\\ 
+  \end{tabular}
+  \vspace{8pt}\par\noindent
+}
+
 
 Accuracies for our six test syllables are shown in
 \fig{fig:accuracies} (accuracies for the synthetic $\delta$-function
