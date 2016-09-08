@@ -1,7 +1,7 @@
 \documentclass[10pt,letterpaper]{article}
 %DIF LATEXDIFF DIFFERENCE FILE
-%DIF DEL ../sbpcb/main.tex   Wed Sep  7 17:01:00 2016
-%DIF ADD main.tex            Wed Sep  7 17:42:57 2016
+%DIF DEL ../pcb/main.tex   Wed Sep  7 17:01:00 2016
+%DIF ADD main.tex          Thu Sep  8 11:02:44 2016
 \usepackage[top=0.85in,left=2.75in,footskip=0.75in]{geometry}
 
 % Use adjustwidth environment to exceed column width (see example table in text)
@@ -1542,7 +1542,7 @@ detector is available under an open-source license {\em (\DIFaddbegin \DIFadd{Te
       }\item \DIFadd{Launch the application downloaded above. It will provide an 
       menu to select an audio input and either an audio output or an Arduino output (if 
       detected). Once you select an input and an output, a new window will show all audio 
-      channels associated with the input. For each channel, select a the text-encoded version of 
+      channels associated with the input. For each channel, select the text-encoded version of 
       the detector created in the previous step. Once configured, press run to begin 
       monitoring the inputs.
       } \end{itemize} 
@@ -1551,7 +1551,7 @@ detector is available under an open-source license {\em (\DIFaddbegin \DIFadd{Te
       \item \DIFadd{You can clone the Github repository and use Xcode to edit the project, if you 
       are interested in extending or modifying the functionality. To hook into either 
       the raw input or output, look at the ``Processor.swift'' file. The 
-      }{\tt \DIFadd{Processor}} \DIFadd{class acts as a coordinator, receiving income audio, passing that
+      }{\tt \DIFadd{Processor}} \DIFadd{class acts as a coordinator, receiving incoming audio, passing that
       to the detector and generating appropriate output TTL signals.
       } \end{itemize} 
      \end{description} 
@@ -1580,5 +1580,6 @@ detector is available under an open-source license {\em (\DIFaddbegin \DIFadd{Te
  \end{description} 
 
 \bibliography{birds}
+
 
 \end{document}
