@@ -3,18 +3,19 @@ Dear editors,
 I'd submitted this paper to PLOS CompBio.  They rejected it on the
 grounds that we had failed to sufficiently demonstrate robustness, and
 that it would be of interest to too few readers, but advised that I
-resubmit to PLOS ONE.  We believe we've addressed the reviewers'
-concerns, and would like to offer the revised manuscript for your
-consideration.
+should resubmit to PLOS ONE.  We believe we've addressed the
+reviewers' concerns, and would like to offer the revised manuscript
+for your consideration.
 
-The paper describes a piece of software that is of general interest to
-neuroscientists working in the zebra finch and possibly other bird
-species: it allows precisely timed triggering of other experimental
-apparatus in response to syllables during bird song.  Since such a
-method facilitates a wide variety of experiments in this model, many
-labs have developed functionally similar software, but few have
-released details on how they did it, and those few who reported on
-accuracy have not done so very thoroughly.
+The paper introduces and evaluates a piece of software that is of
+general interest to a small but growing audience: neuroscientists
+working in the zebra finch and possibly other bird species.  It allows
+precisely timed triggering of other experimental apparatus in response
+to syllables during bird song.  Since such a method facilitates a wide
+variety of experiments in this model, many labs have developed
+functionally similar software, but few have released details on how
+they did it, and those few who reported on accuracy have not done so
+very thoroughly.
 
 We've gone to some lengths to describe and characterise the software's
 performance in detail.  It appears that our software outperforms that
@@ -30,5 +31,16 @@ repositories.  For now, in lieu of final release DOIs, we provide
 links to our development repositories.  If you would like anything
 else, such as access to the datasets for review, please contact me.
 
+The first two reviewers in round one, especially Sam Sober (who was
+kind enough to identify himself), wrote exceptionally helpful reviews.
+If they would like to take another look, that would be great, but it
+appears that they don't review for PLOS ONE?  Here are a few people from your Academic Editors list who might be interested:
+
+Yael Abreu-Osama
+Patrizia Campolongo
+Marcello Costantini
+Cheryl M McCormick
+
 Thank you!
 -Ben Pearre <bwpearre@gmail.com>
+

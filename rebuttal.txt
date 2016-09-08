@@ -37,8 +37,9 @@
 > detection points, etc.).
 
 We try to provide a complete description of the method, but since we
-are also distributing our implementation, this makes sense.  Therefore
-we have added installation/configuration instructions in Appendix A.
+are also distributing our implementation, it seems like a great idea
+to do as you suggest.  Therefore we have added
+installation/configuration instructions in Appendix A.
 
 > 2. The discussion of latency/timing is somewhat confusing, and I
 > believe it omits what I (and other investigators) consider to be the
@@ -46,12 +47,12 @@ we have added installation/configuration instructions in Appendix A.
 > latency from the onset of the targeted syllable to the firing of the
 > TTL pulse.
 
-We had already characterised the timing from the completion of the
-target recognition region to the firing of the TTL pulse--this is what
-we define as "Jitter" (line 27, Section Quantification.Timing
-(beginning around line 342), and also extensively throughout the
-document).  We have tried to clean up those references and clarify
-our description.
+We had extensively characterised the timing from the completion of the
+target recognition region to the firing of the TTL pulse.  We have
+tried to clean up those references and clarify our description: if the
+detection point is at the onset of a syllable, then our results apply
+(see the paragraph at line 361 in the manuscript, or the paragraph at
+line 375 in the diff document).
 
 > Charlesworth et al. (“Learning the microstructure of successful
 > behavior”) showed that learning after white noise targeting is
@@ -82,8 +83,9 @@ unimportant.
 > reported, but it would be very useful nonetheless.
 
 We believe that we have provided a sufficient analysis of jitter, and
-that our results are good enough to obviate the improvement you
-suggest.
+that, while the improvement you suggest could only decrease our jitter
+measurement somewhat, the performance without that enhancement is
+almost as good as it can be.
 
 > 3. The authors should quantify additional examples of real-time
 > performance. Most analysis focuses on the song of a single bird, and
@@ -92,7 +94,7 @@ suggest.
 > easiest syllable to target). The authors should provide similar
 > performance metrics for the other detection times.
 
-Actually, we already had done so: see Fig. 5 (and section 3.2.syllable
+Actually, we had already done so: see Fig. 5 (and section 3.2.syllable
 choice).
 
 > Also, the authors should provide performance metrics for at least
@@ -247,9 +249,6 @@ bad, so I guess it depends on what kinds of errors you're worried
 about.
 
 > the writing and presentation could be improved.
-
-Always, but that is too vague to address.
-
 > e.g. fig 1 increase font size of labels
 
 Thanks.  Done.
@@ -264,20 +263,21 @@ things are about 10 times faster.
 > maybe reducing the training data would help (reduce the
 > negative targets only).
 
-This directly contradicts your request that we add cage noise,
-flapping, etc.  Luckily, training time shouldn't matter--it's online
-performance that counts, right?  However, the change to scaled
-conjugate gradient training has sped things up considerably.
+To a first approximation, this contradicts your request that we add
+cage noise, flapping, etc.  Luckily, training time shouldn't
+matter--it's online performance that counts, right?  However, the
+change to scaled conjugate gradient training has sped things up
+considerably.
 
 > Line 203: How was Cn chosen?
 
-Arbitrarily.  Now noted in the text.
+Arbitrarily.  Now noted in the text.  Thanks.
 
 > Line 201: gradient descent, not hillclimbing (on cost). cross
 > validation.
 
-My comment applied to either one, but that text (it just described
-something we didn't do) was unnecessary, so I removed it.
+My comment applied to either one, but that text, which just described
+something we didn't do, was unnecessary, so I removed it.
 
 > Line 292: needs real data including all kinds of sounds present in the
 > cage
@@ -291,7 +291,8 @@ this was supposed to be a 5-page paper.  We have to stop somewhere.
 
 > Line 238: what is no user loads?
 
-No loads from users (i.e. operating system processes only).
+No loads from users (i.e. operating system processes only).  Clarified
+in the text.
 
 > Fig. 8, what are the dark lines intermingled between the yellow lines
 > at the bottom quarter of the figure? false negatives?
@@ -357,9 +358,7 @@ which is outside the scope of the paper.
 > With my own experience on working with birds in social context, such
 > dataset is extremely difficult to obtain without very invasive and
 > constrained method.
-
-Yup.
-
+>
 > In the present manuscript, it has been obtained, presumably, by
 > letting a bird to its own device in a small cage for hours to
 > extract songs. Many experiments do not want such harsh treatment.
@@ -395,8 +394,8 @@ MATLAB's toolbox, and we wanted to use as many defaults as we could
 (preserving the black-boxy nature of third-party tools as much as
 possible in order to emphasise that the specific choice probably
 doesn't really matter very much--hopefully any regression tool would
-work similarly).  But it did turn out in the end that Scaled Conjugate
-Gradient produced similar results faster.
+work roughly similarly!).  But it did turn out in the end that Scaled
+Conjugate Gradient produced similar results faster.
 
 > in short, all these criticisms in fact converge to the main weakness:
 > this paper/software is directed to a very specific community both in

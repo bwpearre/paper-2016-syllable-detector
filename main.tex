@@ -199,7 +199,7 @@ song can reliably be detected quickly enough to trigger other
 apparatus during singing.  A common area of study with this
 song-triggering technique is the anterior forebrain pathway (AFP), a
 homologue of mammalian basal ganglia consisting of a few distinct
-brain areas concerned with the production and learning of song.  For
+brain areas concerned with the learning and production of song.  For
 example, \cite{Kao2005} stimulated the lateral magnocellular nucleus
 of the anterior nidopallium (LMAN)---the output nucleus of the
 AFP---at precisely timed moments during song and showed that this area
@@ -292,7 +292,7 @@ approach consists of three steps:
 This method makes the following contributions:
 \begin{itemize}
 \item Fast: sub-millisecond latencies, with jitter around 2 ms.
-\item Accurate: false positive rates under 0.001\% and false negative rates under 1\% for a variety of syllables.  Balancing these rates depends on a single relative-cost parameter.
+\item Accurate: false negative rates under 1\% and false positive rates under 0.001\% for a variety of syllables.  Balancing these rates depends on a single relative-cost parameter.
 \item State-of-the-art performance with default parameters.
 \item Runs on inexpensive hardware.
 \item Described in detail here, with reference implementations provided and benchmarked.
@@ -583,8 +583,8 @@ static implementation of the previously trained neural network.
 We tested three implementations of the realtime detector.  For all of
 these tests, we ran the detector processes under the operating
 systems' default schedulers and process priorities, running typical
-operating system daemon processes but no user loads.  The computers
-had ample memory resources.
+operating system daemon processes but no loads from user processes.
+The computers had ample memory resources.
 
 \subsubsection{Swift}
 

@@ -1,7 +1,7 @@
 \documentclass[10pt,letterpaper]{article}
 %DIF LATEXDIFF DIFFERENCE FILE
 %DIF DEL ../pcb/main.tex   Wed Sep  7 17:01:00 2016
-%DIF ADD main.tex          Thu Sep  8 11:02:44 2016
+%DIF ADD main.tex          Thu Sep  8 17:02:04 2016
 \usepackage[top=0.85in,left=2.75in,footskip=0.75in]{geometry}
 
 % Use adjustwidth environment to exceed column width (see example table in text)
@@ -225,7 +225,7 @@ song can reliably be detected quickly enough to trigger other
 apparatus during singing.  A common area of study with this
 song-triggering technique is the anterior forebrain pathway (AFP), a
 homologue of mammalian basal ganglia consisting of a few distinct
-brain areas concerned with the \DIFdelbegin \DIFdel{acquisition }\DIFdelend \DIFaddbegin \DIFadd{production }\DIFaddend and learning of song.  For
+brain areas concerned with the \DIFdelbegin \DIFdel{acquisition and learning }\DIFdelend \DIFaddbegin \DIFadd{learning and production }\DIFaddend of song.  For
 example, \cite{Kao2005} stimulated the lateral magnocellular nucleus
 of the anterior nidopallium (LMAN)---the output nucleus of the
 AFP---at precisely timed moments during song and showed that this area
@@ -323,7 +323,7 @@ approach consists of three steps:
 This method makes the following contributions:
  \begin{itemize} 
 \item Fast: sub-millisecond latencies, with jitter around 2 ms.
-\item Accurate: false positive rates under \DIFdelbegin \DIFdel{0.02}\DIFdelend \DIFaddbegin \DIFadd{0.001}\DIFaddend \% and false negative rates under \DIFdelbegin \DIFdel{0.5}\DIFdelend \DIFaddbegin \DIFadd{1}\DIFaddend \% for a variety of syllables.  Balancing these rates depends on a single relative-cost parameter.
+\item Accurate: false \DIFdelbegin \DIFdel{positive rates under 0.02}\DIFdelend \DIFaddbegin \DIFadd{negative rates under 1}\DIFaddend \% and false \DIFdelbegin \DIFdel{negative rates under 0.5}\DIFdelend \DIFaddbegin \DIFadd{positive rates under 0.001}\DIFaddend \% for a variety of syllables.  Balancing these rates depends on a single relative-cost parameter.
 \item State-of-the-art performance with default parameters.
 \item Runs on inexpensive hardware.
 \item Described in detail here, with reference implementations provided and benchmarked.
@@ -638,8 +638,8 @@ static implementation of the previously trained neural network.
 We tested three implementations of the realtime detector.  For all of
 these tests, we ran the detector processes under the operating
 systems' default schedulers and process priorities, running typical
-operating system daemon processes but no user loads.  The computers
-had ample memory resources.
+operating system daemon processes but no \DIFdelbegin \DIFdel{user loads }\DIFdelend \DIFaddbegin \DIFadd{loads from user processes}\DIFaddend .
+The computers had ample memory resources.
 
 \subsubsection{Swift}
 
