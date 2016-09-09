@@ -1,12 +1,5 @@
 Dear editors,
 
-I'd submitted this paper to PLOS CompBio.  They rejected it on the
-grounds that we had failed to sufficiently demonstrate robustness, and
-that it would be of interest to too few readers, but advised that I
-should resubmit to PLOS ONE.  We believe we've addressed the
-reviewers' concerns, and would like to offer the revised manuscript
-for your consideration.
-
 The paper introduces and evaluates a piece of software that is of
 general interest to a small but growing audience: neuroscientists
 working in the zebra finch and possibly other bird species.  It allows
@@ -22,6 +15,11 @@ performance in detail.  It appears that our software outperforms that
 used in other labs in terms of accuracy, precision, speed, ease of
 use, cost, and availability.
 
+I'd submitted this paper to PLOS CompBio.  They suggested that I
+resubmit to PLOS ONE.  We believe we've addressed the reviewers'
+concerns, and would like to offer the revised manuscript for your
+consideration.
+
 If accepted, before final submission, all code will be placed under an
 appropriate open source license, final release versions generated, and
 DOIs created as described in
@@ -36,6 +34,7 @@ kind enough to identify himself), wrote exceptionally helpful reviews.
 If they would like to take another look, that would be great, but it
 appears that they don't review for PLOS ONE?  Here are a few people from your Academic Editors list who might be interested:
 
+Johan J Bolhuis
 Yael Abreu-Osama
 Patrizia Campolongo
 Marcello Costantini
@@ -44,3 +43,4 @@ Cheryl M McCormick
 Thank you!
 -Ben Pearre <bwpearre@gmail.com>
 
+Reviewer Gabriel Beckers?

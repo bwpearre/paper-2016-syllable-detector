@@ -72,10 +72,11 @@ We refer to this syllable-by-syllable adjustment to the alignment as
 micro-realignment.  Even without that micro-realignment, jitter was
 generally around 2 ms, as can be seen throughout Section 3.2,
 especially Figs. 4-7.  Since this is well within the 10-ms window
-suggested by the literature and indeed barely above the theoretically
-optimal jitter given our detection parameters, we decided that the
-improvement that could be achieved by micro-realigning song was
-unimportant.
+suggested by the literature, we decided that the improvement that
+could be achieved by micro-realigning song was unimportant.  Indeed,
+our measured jitter is barely above the theoretically optimal jitter
+given our detection parameters, so the average micro-realignment error
+cannot be significant.
 
 > So – please provide this measure where appropriate in Results. I
 > suspect that the jitter measurements for real-time performance will
@@ -84,8 +85,8 @@ unimportant.
 
 We believe that we have provided a sufficient analysis of jitter, and
 that, while the improvement you suggest could only decrease our jitter
-measurement somewhat, the performance without that enhancement is
-almost as good as it can be.
+measurement, the performance without that enhancement is good enough
+that the improvement we might see is not very important.
 
 > 3. The authors should quantify additional examples of real-time
 > performance. Most analysis focuses on the song of a single bird, and
@@ -94,8 +95,8 @@ almost as good as it can be.
 > easiest syllable to target). The authors should provide similar
 > performance metrics for the other detection times.
 
-Actually, we had already done so: see Fig. 5 (and section 3.2.syllable
-choice).
+Actually, we had already done so: see Fig. 5 (and section 3.2,
+"syllable choice").
 
 > Also, the authors should provide performance metrics for at least
 > one additional bird;
@@ -105,7 +106,8 @@ present only one bird simply for reasons of conciseness.  Since the 6
 target points in that bird's song are essentially random (50-ms
 intervals in a song that includes a range of typical sound types and
 does not have any 50-ms periodicity), we just added a comment that
-these results are indeed representative.
+these results are indeed representative (e.g. the beginning of Section
+2.3).
 
 > although the three syllables shown in Figure 1 look like fairly
 > typical ZF syllables, a method such as this one should be shown to
@@ -115,9 +117,9 @@ these results are indeed representative.
 > demonstrating the efficacy of the method in a Bengalese would be
 > useful.
 
-It would.  But we don't have a convenient data set, and we feel that
-it is more important to get the technique out there quickly than to
-continue to characterise it in yet more detail.
+It would.  But we don't currently have data sets for other species,
+and we feel that it is more important to get the technique out there
+quickly than to continue to characterise it in more detail.
 
 > 4. I am ambivalent about the use of the fiber photometry data in this
 > paper. Although this looks like a great technical achievement, I see
@@ -201,26 +203,27 @@ modifications for the Swift implementation.
 > classification could be better evaluated. First of all, they only
 > train and test on six target points of only one song.
 
-Yes.  See (1b) above.
+We discuss one song in the paper, mostly for convenience, but we've
+added results are representative of what we see on many birds.  See
+(1b) above.
 
-> Most
-> importantly, they do not do a life bird test.
+> Most importantly, they do not do a life bird test.
 
 I'm not sure what this means.  The fibre photometry test is a live
 bird test (and ongoing research in our lab uses the detector with
-great success), but of course all quantitative tests must be done on
-recordings in order to systematically analyse accuracies of various
-detectors.
+great success), but all quantitative tests must be done on recordings
+in order to systematically analyse accuracies of various detectors.
 
 > In fact, they haven't included calls, wing flaps, and other noises
 > in their training or testing sets.  Thus, it seems there is no
 > realistic evaluation of their system.
 
-That is an excellent point!  We have remedied this.  See the paragraph
-around line 160.  Also, the new Results/Accuracy graph (Fig. 3) shows
-accuracy figures including lots of cage noise samples (about half an
-hour's worth).  Correct detections and incorrect detections have both
-somewhat decreased from our earlier results.
+That is an excellent point!  We have remedied this.  See lines 94, 163
+and 322 in the diff document.  Also, the new Results/Accuracy graph
+(Fig. 3) shows accuracy figures including lots of cage noise samples
+(about half an hour's worth, as now described).  Correct detections
+and incorrect detections have both somewhat decreased from our earlier
+results.
 
 > Minor:
 > 
@@ -238,36 +241,35 @@ thresholds".
 > is to detect syllables in an audio recording. Perhaps the photometry
 > could be left out?
 
-See (1c) above.
+We've removed it.  See (1c) above.
 
 > How robust is the method to errors in the training set?
 
 There is an infinite space of possible errors in the training set, so
-this question is impossible to answer.  However, no effort was made to
-compensate for errors in the alignment tool, and the results aren't
-bad, so I guess it depends on what kinds of errors you're worried
-about.
+this question is impossible to answer well.  However, no effort was
+made to compensate for errors in the alignment tool, and the results
+aren't bad, so I guess it depends on what kinds of errors you're
+worried about.
 
 > the writing and presentation could be improved.
 > e.g. fig 1 increase font size of labels
 
-Thanks.  Done.
+Thanks.  We've increased the font size and improved the writing.
 
 > Line 189: It takes so long to train a network with just 2 to 4 hidden
 > neurons?
 
 Big data sets, and we made little effort to optimise offline
-(training) speed!  But we changed the training algorithm and now
+(training) speed.  But we changed the training algorithm and now
 things are about 10 times faster.
 
 > maybe reducing the training data would help (reduce the
 > negative targets only).
 
-To a first approximation, this contradicts your request that we add
-cage noise, flapping, etc.  Luckily, training time shouldn't
-matter--it's online performance that counts, right?  However, the
-change to scaled conjugate gradient training has sped things up
-considerably.
+We preferred your other suggestion--that we increase the negative
+targets (adding cage noise, etc).  Training speed shouldn't matter
+much compared to online performance, but the change to scaled
+conjugate gradient training has sped things up considerably.
 
 > Line 203: How was Cn chosen?
 
@@ -286,7 +288,7 @@ Done.
 
 > Line 428: robustness to these variables needs to be documented.
 
-We documented robustness to many choices.  There are always more, but
+We documented robustness to some choices.  There are always more, but
 this was supposed to be a 5-page paper.  We have to stop somewhere.
 
 > Line 238: what is no user loads?
@@ -311,17 +313,19 @@ Removed as per (1c).
 >   justify a publication - it seems more like several enhancements
 >   designed for a specific use in a neuroscience lab
 
-Agreed.  But we feel it is useful to the community (as do the other
-two reviewers, as well as several of our colleagues), and various
-researchers have requested that we publish it.
+Although there is no machine learning innovation, we believe that the
+combination of making available a useful tool and fairly thoroughly
+documenting its performance constitute a significant contribution to
+the field.
 
 > - which lead to my second reason: the tool and the data required is
 >   too narrowly focused on one particular study on ZF. My contention is
 >   that this would be usable for a very limited number of teams.
 
 We agree with you, although several have noted that this model is
-extremely powerful and the absence of tools such as this one is a
-barrier to entry into the field.
+extremely powerful and the absence of readily available tools such as
+this one is a barrier to entry into precisely timed zebra finch
+experiments.
 
 > Several points:
 > 
@@ -337,7 +341,12 @@ something useful.
 > tested on others labs data and why not different 'strains' of ZF
 > (American, European and Wild type).
 
-Yes, more birds/species would always be better, but see (1b).
+Yes, more birds/species would always be better, but see (1b).  The
+characteristic variation in song between different 'strains' appears
+to be much less than the variation in song between different birds
+within the one strain that we have tested on, or even within the
+different moments in the song of one bird that we have used as our
+example.
 
 > In other word I highly doubt that the authors' system can be
 > generalised (even though they claim it can be extended to another
@@ -350,40 +359,43 @@ community.  As is any tool.
 > never provide the readers and potential user how to obtain such
 > dataset.
 
-((3a)) This is incorrect.  We cited the article in which alignment
-software is described, and we linked to the alignment software.  The
-only step that we have not described is using a recording device,
-which is outside the scope of the paper.
+This is incorrect.  We cited the article in which alignment software
+is described, and we linked to the alignment software.  The only step
+that we have not described is using a recording device, which is
+outside the scope of the paper.  However, if you are curious, there is
+a nice tutorial at
+http://soundanalysispro.com/manual-1/chapter-2-installation-of-sap2/hardware-installation-building-training-boxes
 
 > With my own experience on working with birds in social context, such
 > dataset is extremely difficult to obtain without very invasive and
-> constrained method.
->
-> In the present manuscript, it has been obtained, presumably, by
-> letting a bird to its own device in a small cage for hours to
-> extract songs. Many experiments do not want such harsh treatment.
+> constrained method.  In the present manuscript, it has been
+> obtained, presumably, by letting a bird to its own device in a small
+> cage for hours to extract songs. Many experiments do not want such
+> harsh treatment.
 
-Without isolating a bird, isolating a song requires an entirely
-different set of techniques, which would also make for interesting
-research.  It sounds like we proposed a solution to Problem A, but you
-wish we'd solved Problem B instead.
+While learning to detect syllables of specific birds using samples
+obtained in the wild would be an interesting research problem, it is
+outside the scope of the current paper.  Instead, we only claim to
+address a need encountered in a great deal of zebra finch research,
+using common protocols.
 
 > d) Also here to digress a bit, it is not specified if these are
 > directed and undirected songs (or both). The distinction can be of
 > import because they have different syllable statistics and of course
 > this should import on the training and/or the prediction.
 
-Good point.  Now specified.
+Good point.  Now specified (undirected) in Section 2.1.
 
 > e) It is also assume that the user has means to extract / align song
-> automatically event though this is never mentioned in the manuscript.
+> automatically event though this is never mentioned in the
+> manuscript.
 
-Wrong.  See (3a).
+Is this the same point as your (c)?
 
 > f) the experiment with Fibre Photometry is really nice but is a
 > distraction from the main paper and brings nothing to the story
 
-Right.  See (1c).
+We've removed it (see (1c)).
 
 > g) very minor: its Levenberg (not Levenburg) and it is a very unusual
 > choice here (usually some kind of enhanced backpropagation are used)
@@ -397,9 +409,13 @@ doesn't really matter very much--hopefully any regression tool would
 work roughly similarly!).  But it did turn out in the end that Scaled
 Conjugate Gradient produced similar results faster.
 
-> in short, all these criticisms in fact converge to the main weakness:
-> this paper/software is directed to a very specific community both in
-> scope and type of data needed for it to work and the authors should
-> aim to a journal directed at this community.
+> in short, all these criticisms in fact converge to the main
+> weakness: this paper/software is directed to a very specific
+> community both in scope and type of data needed for it to work and
+> the authors should aim to a journal directed at this community.
 
-Yes.
+We believe that the paper presents a valuable technique and a far more
+thorough characterisation of finch syllable detection accuracy and
+timing than has previously been available.  It is our hope that the
+performance, ease of use, simplicity, and low hardware cost of this
+method will speed the development of a small but growing field.
