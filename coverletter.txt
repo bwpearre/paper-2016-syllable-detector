@@ -2,18 +2,18 @@ Dear editors,
 
 The paper introduces and evaluates a piece of software that is of
 general interest to a small but growing audience: neuroscientists
-working in the zebra finch and possibly other bird species.  It allows
-precisely timed triggering of other experimental apparatus in response
-to syllables during bird song.  Since such a method facilitates a wide
-variety of experiments in this model, many labs have developed
-functionally similar software, but few have released details on how
-they did it, and those few who reported on accuracy have not done so
-very thoroughly.
+working in the zebra finch (and possibly other bird species).  It
+allows precisely timed triggering of other experimental apparatus in
+response to syllables during bird song.  Since such a method
+facilitates a wide variety of experiments in this species, many labs
+have developed functionally similar software, but few have released
+details on how they did it, and those few who reported on accuracy
+have not done so very thoroughly.
 
-We've gone to some lengths to describe and characterise the software's
-performance in detail.  It appears that our software outperforms that
-used in other labs in terms of accuracy, precision, speed, ease of
-use, cost, and availability.
+We've gone to some lengths to describe the software and characterise
+its performance in detail.  Based on the descriptions available from
+other labs, our software advances the state of the art in terms of
+accuracy, precision, speed, ease of use, availability, and cost.
 
 I'd submitted this paper to PLOS CompBio.  They suggested that I
 resubmit to PLOS ONE.  We believe we've addressed the reviewers'
