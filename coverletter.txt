@@ -2,7 +2,7 @@ Dear editors,
 
 The paper introduces and evaluates a piece of software that is of
 general interest to a small but growing audience: neuroscientists
-working in the zebra finch (and possibly other bird species).  It
+working in the zebra finch, and possibly other bird species.  It
 allows precisely timed triggering of other experimental apparatus in
 response to syllables during bird song.  Since such a method
 facilitates a wide variety of experiments in this species, many labs
@@ -15,10 +15,10 @@ its performance in detail.  Based on the descriptions available from
 other labs, our software advances the state of the art in terms of
 accuracy, precision, speed, ease of use, availability, and cost.
 
-I'd submitted this paper to PLOS CompBio.  They suggested that I
-resubmit to PLOS ONE.  We believe we've addressed the reviewers'
-concerns, and would like to offer the revised manuscript for your
-consideration.
+I'd submitted this paper to PLOS CompBio, and asked to have it treated
+as a Software or Methods paper.  They suggested that I resubmit to
+PLOS ONE.  We believe we've addressed the reviewers' concerns, and
+would like to offer the revised manuscript for your consideration.
 
 If accepted, before final submission, all code will be placed under an
 appropriate open source license, final release versions generated, and
@@ -29,18 +29,8 @@ repositories.  For now, in lieu of final release DOIs, we provide
 links to our development repositories.  If you would like anything
 else, such as access to the datasets for review, please contact me.
 
-The first two reviewers in round one, especially Sam Sober (who was
-kind enough to identify himself), wrote exceptionally helpful reviews.
-If they would like to take another look, that would be great, but it
-appears that they don't review for PLOS ONE?  Here are a few people from your Academic Editors list who might be interested:
-
-Johan J Bolhuis
-Yael Abreu-Osama
-Patrizia Campolongo
-Marcello Costantini
-Cheryl M McCormick
+The Academic Editor on your staff who would probably find this paper
+most interesting is Johan J Bolhuis.
 
 Thank you!
 -Ben Pearre <bwpearre@gmail.com>
-
-Reviewer Gabriel Beckers?

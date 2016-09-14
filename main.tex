@@ -310,13 +310,15 @@ This method makes the following contributions:
 
 \subsection{Learning a detector}
 
-We begin with a few hundred recordings of a given bird's song, as well as calls, cage noise, and other non-song audio data.  Male
-zebra finch song is most highly stereotyped when a female is present
-(``directed song'') and slightly more variable otherwise
-(``undirected''); we train and test on undirected song since this is
-more commonly studied, as well as more challenging.  Recordings were made inside a sound-isolating
-chamber in which was mounted a recording microphone (Audio-Technica
-AT803).  The songs were time-aligned as described in \cite{Poole2012}.
+We begin with a few hundred recordings of a given bird's song, as well
+as calls, cage noise, and other non-song audio data.  Male zebra finch
+song is most highly stereotyped when a female is present (``directed
+song'') and slightly more variable otherwise (``undirected''); we
+train and test on undirected song since this is more commonly studied,
+as well as more challenging.  Recordings were made inside a
+sound-isolating chamber in which was mounted a recording microphone
+(Audio-Technica AT803), using methods similar to those described in \cite{Tchernichovski2011SAP}, Chapter 2.  The songs were
+time-aligned as described in \cite{Poole2012}.
 
 We rely on two circular buffers:
 \begin{description}
@@ -1272,7 +1274,7 @@ detector is available under an open-source license {\em (Tentatively GPL, but we
       \item Information about the detector is logged to a file called ``detector\_status.log''.
       \end{itemize}
     \end{description}
-  \item[Swift:] {\tt https://github.com/gardner-lab/syllable-detector-swift}
+  \item[Swift:] {\tt https://github.com/gardner-lab/\dots\ syllable-detector-swift/releases/tag/0.3.1}
     \begin{description}
     \item[Installation:]\hfill
       \begin{trivlist}
@@ -1424,6 +1426,10 @@ Poole B, Markowitz JE, Gardner TJ.
 \newblock PLOS One. 2012 June;7(6).
 \newblock Available from:
   \url{http://journals.plos.org/plosone/article?id=10.1371/journal.pone.0038173}.
+
+\bibitem{Tchernichovski2011SAP}
+Tchernichovski O. Sound Analysis Pro User Manual; 2011.
+\newblock Available from: \url{http://soundanalysispro.com/manual-1}.
 
 \bibitem{Jacobsen2003SlidingDFT}
 Jacobsen E, Lyons R.

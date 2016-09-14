@@ -246,10 +246,10 @@ We've removed it.  See (1c) above.
 > How robust is the method to errors in the training set?
 
 There is an infinite space of possible errors in the training set, so
-this question is impossible to answer well.  However, no effort was
-made to compensate for errors in the alignment tool, and the results
-aren't bad, so I guess it depends on what kinds of errors you're
-worried about.
+this question is impossible to answer thoroughly.  However, no effort
+was made to compensate for errors in the alignment tool, and the
+results aren't bad, so I guess it depends on what kinds of errors
+you're worried about.
 
 > the writing and presentation could be improved.
 > e.g. fig 1 increase font size of labels
@@ -342,29 +342,28 @@ something useful.
 > (American, European and Wild type).
 
 Yes, more birds/species would always be better, but see (1b).  The
-characteristic variation in song between different 'strains' appears
-to be much less than the variation in song between different birds
-within the one strain that we have tested on, or even within the
-different moments in the song of one bird that we have used as our
-example.
+characteristic variation in song between different 'strains' is much
+less than the variation in song between different birds within the one
+strain that we have tested on, or even within the different moments in
+the song of one bird that we have used as our example.
 
 > In other word I highly doubt that the authors' system can be
 > generalised (even though they claim it can be extended to another
 > species - without providing any insights on why this would be true).
 
 Some insight added, but we agree that it's a tool for a specific
-community.  As is any tool.
+community.  (As is any tool.)
 
 > c) the training is done on around 3k song annotated and aligned and
 > never provide the readers and potential user how to obtain such
 > dataset.
 
-This is incorrect.  We cited the article in which alignment software
-is described, and we linked to the alignment software.  The only step
-that we have not described is using a recording device, which is
-outside the scope of the paper.  However, if you are curious, there is
-a nice tutorial at
-http://soundanalysispro.com/manual-1/chapter-2-installation-of-sap2/hardware-installation-building-training-boxes
+We cited the article in which alignment software is described, and we
+linked to the alignment software.  The only step that we had not
+described is using a recording device, which is outside the scope of
+the paper.  However, I've added a reference to a description of a
+common technique
+(http://soundanalysispro.com/manual-1/chapter-2-installation-of-sap2/hardware-installation-building-training-boxes).
 
 > With my own experience on working with birds in social context, such
 > dataset is extremely difficult to obtain without very invasive and
@@ -376,8 +375,8 @@ http://soundanalysispro.com/manual-1/chapter-2-installation-of-sap2/hardware-ins
 While learning to detect syllables of specific birds using samples
 obtained in the wild would be an interesting research problem, it is
 outside the scope of the current paper.  Instead, we only claim to
-address a need encountered in a great deal of zebra finch research,
-using common protocols.
+address a need often encountered in zebra finch research using common
+protocols.
 
 > d) Also here to digress a bit, it is not specified if these are
 > directed and undirected songs (or both). The distinction can be of
@@ -406,7 +405,7 @@ MATLAB's toolbox, and we wanted to use as many defaults as we could
 (preserving the black-boxy nature of third-party tools as much as
 possible in order to emphasise that the specific choice probably
 doesn't really matter very much--hopefully any regression tool would
-work roughly similarly!).  But it did turn out in the end that Scaled
+work roughly similarly).  But it did turn out in the end that Scaled
 Conjugate Gradient produced similar results faster.
 
 > in short, all these criticisms in fact converge to the main
@@ -418,4 +417,5 @@ We believe that the paper presents a valuable technique and a far more
 thorough characterisation of finch syllable detection accuracy and
 timing than has previously been available.  It is our hope that the
 performance, ease of use, simplicity, and low hardware cost of this
-method will speed the development of a small but growing field.
+method will significantly lower the barrier to entry to a small but
+growing field.
