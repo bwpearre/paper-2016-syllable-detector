@@ -1,7 +1,7 @@
 \documentclass[10pt,letterpaper]{article}
 %DIF LATEXDIFF DIFFERENCE FILE
 %DIF DEL ../pcb/main.tex   Wed Sep  7 17:01:00 2016
-%DIF ADD main.tex          Wed Sep 14 16:12:45 2016
+%DIF ADD main.tex          Thu Sep 15 12:34:06 2016
 \usepackage[top=0.85in,left=2.75in,footskip=0.75in]{geometry}
 
 % Use adjustwidth environment to exceed column width (see example table in text)
@@ -381,10 +381,11 @@ like \fig{fig:song}.
 \begin{figure}
   %DIF >  Width: 8, Height: 3, Fonts scale: 120%
   \includegraphics[width=\textwidth]{Fig1}
-  \caption{This image was made by superposing the spectra of our 2818
-    aligned songs.  Our example detection points, $t^*_1\ldots t^*_6$,
-    are shown as red lines, with the recognition regions (30 ms
-    $\times$ 1--8 kHz) marked as rectangles.}
+  \caption{\DIFaddbeginFL \DIFaddFL{The spectrogram of a typical song, used as the example
+    throughout this paper.  }\DIFaddendFL This image was made by superposing the
+    spectra of our 2818 aligned songs.  Our example detection points,
+    $t^*_1\ldots t^*_6$, are shown as red lines, with the recognition
+    regions (30 ms $\times$ 1--8 kHz) marked as rectangles.}
   \label{fig:song}
 \end{figure}
 
