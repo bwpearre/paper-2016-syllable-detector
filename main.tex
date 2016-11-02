@@ -188,9 +188,9 @@ Author \textsuperscript{a}~contributed the original MATLAB and LabVIEW implement
 
 The adult zebra finch ({\em Taeniopygia guttata}) sings a song made up
 of 2--6 syllables, with longer songs taking on the order of a
-second. The song may be repeated hundreds of times per day, is almost
-identical each time, and several brain areas reflect this consistency
-in highly stereotyped neural firing patterns. This consistency makes
+second. The song may be repeated hundreds of times per day, and is almost
+identical each time.  Several brain areas reflect this consistency
+in highly stereotyped neural firing patterns, which makes
 the zebra finch one of the most popular models for the study of the
 neural basis of learning, audition, and control.
 
@@ -700,11 +700,10 @@ own testing on a distinct data set, we instructed the
 toolbox to use 80\% of its input set for training, and the
 remaining 20\% for validation, with no hold-out test data.
 
-Because the data set consists of temporally aligned songs, ground
-truth is available for each song (albeit with minor variations due to
-the alignment process used \cite{Poole2012}), and thus the detector
-can be checked by presenting the recorded training songs as well as
-the canonical detection events. To this end, besides the trained
+Because the data set consists of temporally aligned songs, the moment at which detection should occur during each song sample is available (albeit with minor variations due to
+the alignment process used \cite{Poole2012}).  The detector
+can be checked by comparing its response to the recorded training song samples against
+these ``canonical'' detection events.  To this end, besides the trained
 network object, our learning code produces an audio file consisting of
 all of the training data on the left audio channel and a delta
 function at each aligned moment of target syllable presentation on the
@@ -795,15 +794,12 @@ probability distribution function (CDF) of the detector's output in
 response to the chosen song event, with individual detection events
 visible as steps in this curve.
 
-Mean latency is then given as the average time between the canonical
-signal and the corresponding detection event.  It is a helpful number,
+We define latency as the time between the training target (during our tests, this is indicated by the canonical
+signal in the test file) and the corresponding detection event.  It is a helpful number,
 but not a critical one, since in zebra finch a detector with high but
 constant latency can often be trained to trigger at a point somewhat
 before the true moment of interest (for example, if triggering should
-occur at the very beginning of a syllable, the detector's time window
-may include previous syllable).  Often more important is the
-variability in the latency.  We define jitter as the standard
-deviation of the latency.
+occur at the very beginning of a syllable, the detector may be trained to recognise the previous syllable and the gap thereafter).  Usually the variability in latency is the more important number.  We define jitter as the standard deviation of detection latency over the test songs.
 
 When measuring timing, it is useful to compare against a theoretical
 optimal, in order to control for any imprecision in the song
@@ -853,7 +849,7 @@ $t^*_1\ldots t^*_6$ respectively.  The rectangles show the recognition
 window (30 ms, 1--8 kHz) for each instant in the song.
 
 The first two triggers, $t^*_1$ at 150 ms and $t^*_2$ at 200 ms, are
-far from pure tones, but are closer to coloured noise.  They would be
+far from pure tones, but are closer to bandpass-filtered white noise.  They would be
 difficult for a harmonic-stack filter bank to detect, and especially
 to pinpoint in time.  $t^*_3$ (250 ms) and $t^*_6$ (400 ms) are rich
 in overtones and contain downward slides with changing timbres.
