@@ -681,18 +681,30 @@ interface, reducing latency by half.
 \subsection{Quantification}
 \label{sec:quantify}
 
-We have used this detector for song alignment and feedback experiments
-in 5 behaving birds, and for offline analysis on a few others.  For
-simplicity, and to test robustness to imperfect choice of ``syllable'', we present performance on 6 randomly chosen points in one
-bird's song.  The results presented here are representative of
-real-world performance over many birds in our lab.
+We measure accuracy and characterise timing for 6 randomly chosen
+points in one bird's song (Bird A), and present accuracy results for
+three more birds (B, C, D) (timing does not appreciably vary among
+birds). The results presented here are representative of real-world
+performance in feedback experiments on many birds in our lab.
 
-We divided the data into training and test sets.  For the results
-reported in the following section, the training set consisted of 1000
-instances of the song of one bird, and 2000 song-length samples of
-non-song (cage noise, calls, other birds' song).  Our test set
-consisted of an additional 1818 iterations of the bird's song and 3636
-song-length samples of non-song.
+% A:
+% B: LNY46 0.28s
+% C: LNY42 0.38s
+% D: LNY4RB 0.25s
+
+Data consisted of extracted, aligned songs, and additional song-length samples of non-song (cage noise, calls, other birds' song). These were divided into training and test sets. The sizes of our data sets are given in Table~\ref{table:datasizes}.
+
+\begin{table}
+  \begin{tabular}{c|cccc}
+    Bird & Training songs & Test songs & Training non-song & Test non-song \\ \hline
+    A & 1000 & 1818 & 1000 & 3636 \\
+    B & 1000 & 1533 & 158 & 242 \\
+    C & 1000 & 1245 & 178 & 222 \\
+    D & 1000 & 1614 & 153 & 247
+  \end{tabular}
+  \caption{Sizes of our training and test sets.}
+  \label{table:datasizes}
+\end{table}
 
 The MATLAB neural network toolbox further divides our ``training'' set
 into internal training, validation, and test sets.  Because we do our
@@ -700,10 +712,12 @@ own testing on a distinct data set, we instructed the
 toolbox to use 80\% of its input set for training, and the
 remaining 20\% for validation, with no hold-out test data.
 
-Because the data set consists of temporally aligned songs, the moment at which detection should occur during each song sample is available (albeit with minor variations due to
-the alignment process used \cite{Poole2012}).  The detector
-can be checked by comparing its response to the recorded training song samples against
-these ``canonical'' detection events.  To this end, besides the trained
+Because the data set consists of temporally aligned songs, the moment
+at which detection should occur during each song sample is available
+(albeit with minor variations due to the alignment process used
+\cite{Poole2012}).  The detector can be checked by comparing its
+response to the recorded training song samples against these
+``canonical'' detection events.  To this end, besides the trained
 network object, our learning code produces an audio file consisting of
 all of the training data on the left audio channel and a delta
 function at each aligned moment of target syllable presentation on the
