@@ -194,33 +194,33 @@ in highly stereotyped neural firing patterns, which makes
 the zebra finch one of the most popular models for the study of the
 neural basis of learning, audition, and control.
 
-This consistency allows a variety of experiments if precise moments in
-song can reliably be detected quickly enough to trigger other
-apparatus during singing.  A common area of study with this
-song-triggering technique is the anterior forebrain pathway (AFP), a
-homologue of mammalian basal ganglia consisting of a few distinct
-brain areas concerned with the learning and production of song.  For
-example, \cite{Kao2005} stimulated the lateral magnocellular nucleus
+If precise moments in song can reliably be detected quickly enough to
+trigger other apparatus during singing, then this consistency of
+behaviour allows a variety of experiments.  A common area of study
+with this song-triggering technique is the anterior forebrain pathway
+(AFP), a homologue of mammalian basal ganglia consisting of a few
+distinct brain areas concerned with the learning and production of
+song.  For example, stimulation of the lateral magnocellular nucleus
 of the anterior nidopallium (LMAN)---the output nucleus of the
-AFP---at precisely timed moments during song and showed that this area
-repeatably controls specific variables in song output.
-\cite{Wang2008interhemispheric} stimulated LMAN and the high vocal
-centre (HVC) in one hemisphere or the other, and found that control of
-song rapidly switches between hemispheres.  \cite{Keller2009}
-investigated the response of cells in field L and the caudolateral
-mesopallium during song with and without feedback perturbations as
-well as external sounds, and concluded that these regions may hold a
-representation of song against which auditory signals are compared.
-\cite{Tumer2007pitchshift} played a disruptive sound during renditions
-of a syllable that were slightly above (or below) its average pitch,
-and showed that the presence of this apparently random natural
+AFP---at precisely timed moments during song shows that this area
+controls specific variables in song output \cite{Kao2005}.
+Song-synchronised stimulation of LMAN and the high vocal centre (HVC)
+in one hemisphere or the other showed that control of song rapidly
+switches between hemispheres \cite{Wang2008interhemispheric}.
+Feedback experiments have shown that Field L and the caudolateral
+mesopallium may hold a representation of song against which auditory
+signals are compared \cite{Keller2009}.  Renditions of a syllable that
+were disrupted by white noise when they were slightly above (or below)
+its average pitch showed that the apparently random natural
 variability in songbird motor output is used to drive change in the
-song.  \cite{Andalman2009} extended this experiment and showed that
-AFP produces a corrective signal to bias song away from those
-disruptions.  \cite{Charlesworth2011learning} showed that the song
-change was isolated to within roughly 10 milliseconds (ms) of the
-stimulus, and further proposed an elegant model that predicts the
-shape of the learned response and suggests a simple mechanism.
+song \cite{Tumer2007pitchshift}. Furthermore, AFP produces a
+corrective signal to bias song away from those disruptions
+\cite{Andalman2009}. The
+song change is isolated to within roughly 10 milliseconds (ms) of the
+stimulus , and further proposed an elegant model that predicts the
+shape of the learned response and suggests a simple mechanism \cite{Charlesworth2011learning}.
+
+
 \cite{Warren2011} showed that that AFP transfers the error signal to
 the robust nucleus of the arcopallium (RA) using
 NMDA-receptor--mediated glutamatergic transmission. By looking at song
@@ -233,7 +233,7 @@ neither auditory processing nor directed motor learning.
 
 
 Despite the power and versatility of vocal feedback experiments, there
-is no standard syllable detector.  Desiderata include:
+is no standard syllable detector.  Desiderata for such a detector include:
 \begin{description}
 \item[Accuracy:] How often does the system produce false positives or false negatives?
 \item[Latency:] The average delay between the target syllable being sung and the detection.
@@ -282,18 +282,19 @@ outputs a TTL pulse (a brief 5-volt pulse) at the chosen moment. The
 approach consists of three steps:
 
 \begin{enumerate}
-\item Record and align a corpus of training songs.  The technique has been published in \cite{Poole2012}.
+\item Record and align a corpus of training songs.  The technique has been published in \cite{Poole2012}. 200 songs generally yield acceptable results, but here we standardise on 1000-song training sets.
 \item Choose one or more instants in the song that should create a trigger event, and train a
-  neural network to recognise them. This step is carried out offline.  While any neural network software would produce equivalent results, we used MATLAB 2015b's neural network toolbox.
+  neural network to recognise them. This step is carried out offline.  While any neural network software would produce similar results, we used MATLAB 2015b's neural network toolbox.
 \item Once trained and saved, the neural network is used by a realtime
-  detection program that listens to an audio signal and indicates detection of the target
+  detection programme that listens to an audio signal and indicates detection of the target
   syllables via a TTL pulse.  We present three implementations, in MATLAB, LabVIEW, and Swift, that trade off hardware requirements, ease of maintenance, and performance.
 \end{enumerate}
 This method makes the following contributions:
 \begin{itemize}
 \item Fast: sub-millisecond latencies, with jitter around 2 ms.
-\item Accurate: false negative rates under 1\% and false positive rates under 0.001\% for a variety of syllables.  Balancing these rates depends on a single relative-cost parameter.
+\item Accurate: false negative rates under 1\% and false positive rates under 0.001\% for a variety of syllables.
 \item State-of-the-art performance with default parameters.
+\item Requires almost no programming experience.
 \item Runs on inexpensive hardware.
 \item Described in detail here, with reference implementations provided and benchmarked.
 \end{itemize}
@@ -632,14 +633,13 @@ This implementation requires special software and hardware: LabVIEW
 from National Instruments---we used 2014 service pack 1---and a data acquisition card---we use the
 National Instruments PCI-6251 card on a PC with an Intel Core i5-4590
 processor at 3.7GHz (a relatively low-end machine) with 32 gigabytes
-of RAM, running Microsoft Windows 8.1 Pro.
+of RAM, running Microsoft Windows 8.1 Pro and Windows 10.
 
-This implementation has several drawbacks: it requires Windows and
-expensive hardware and software and due to the programming language it
+This implementation has several drawbacks: it requires expensive hardware and software from National Instruments (a data acquisition card and LabVIEW), Windows (we use hardware features of LabVIEW that are unavailable on MacOS or Linux), and due to the programming language it
 is difficult to modify and debug---indeed, a persistent bug in our
 implementation currently renders it substantially less accurate than
 the other detector implementations on some syllables. However, our
-test configuration usually achieved excellent performance, and further
+test configuration proved itself capable of excellent performance, and further
 gains should be possible if the implementation were retargeted onto
 field-programmable gate array (FPGA) hardware---which would have the additional benefit of providing
 deterministic ``hard realtime'' guarantees---or just run on a faster
@@ -688,7 +688,7 @@ birds). The results presented here are representative of real-world
 performance in feedback experiments on many birds in our lab.
 
 % A:
-% B: LNY46 0.28s
+% B: LNY46 0.28s @ 140ms
 % C: LNY42 0.38s
 % D: LNY4RB 0.25s
 
@@ -698,9 +698,9 @@ Data consisted of extracted, aligned songs, and additional song-length samples o
   \begin{tabular}{c|cccc}
     Bird & Training songs & Test songs & Training non-song & Test non-song \\ \hline
     A & 1000 & 1818 & 1000 & 3636 \\
-    B & 1000 & 1533 & 158 & 242 \\
-    C & 1000 & 1245 & 178 & 222 \\
-    D & 1000 & 1614 & 153 & 247
+    B & 1000 & 1530 & 1428 & 2185 \\
+    C & 1000 & 1245 & 990 & 1233 \\
+    D & 1000 & 1614 &  & 247
   \end{tabular}
   \caption{Sizes of our training and test sets.}
   \label{table:datasizes}
