@@ -287,7 +287,7 @@ approach consists of three steps:
   neural network to recognise them. This step is carried out offline.  While any neural network software would produce similar results, we used MATLAB 2015b's neural network toolbox.
 \item Once trained and saved, the neural network is used by a realtime
   detection programme that listens to an audio signal and indicates detection of the target
-  syllables via a TTL pulse.  We present three implementations, in MATLAB, LabVIEW, and Swift, that trade off hardware requirements, ease of maintenance, and performance.
+  syllables via a TTL pulse.  We present three detection implementations, in MATLAB, LabVIEW, and Swift, that trade off hardware requirements, ease of maintenance, and performance.
 \end{enumerate}
 This method makes the following contributions:
 \begin{itemize}
@@ -716,7 +716,7 @@ Because the data set consists of temporally aligned songs, the moment
 at which detection should occur during each song sample is available
 (albeit with minor variations due to the alignment process used
 \cite{Poole2012}).  The detector can be checked by comparing its
-response to the recorded training song samples against these
+response to the recorded training songs against these
 ``canonical'' detection events.  To this end, besides the trained
 network object, our learning code produces an audio file consisting of
 all of the training data on the left audio channel and a delta
@@ -810,10 +810,13 @@ visible as steps in this curve.
 
 We define latency as the time between the training target (during our tests, this is indicated by the canonical
 signal in the test file) and the corresponding detection event.  It is a helpful number,
-but not a critical one, since in zebra finch a detector with high but
+but not a critical one; due to the stereotyped song of the zebra finch, a detector with high but
 constant latency can often be trained to trigger at a point somewhat
 before the true moment of interest (for example, if triggering should
-occur at the very beginning of a syllable, the detector may be trained to recognise the previous syllable and the gap thereafter).  Usually the variability in latency is the more important number.  We define jitter as the standard deviation of detection latency over the test songs.
+occur at the very beginning of a syllable, the detector may be trained 
+to recognise the previous syllable and the gap thereafter).  Usually the 
+variability in latency is the more important number.  We define jitter as 
+the standard deviation of detection latency, measured over the test songs.
 
 When measuring timing, it is useful to compare against a theoretical
 optimal, in order to control for any imprecision in the song
