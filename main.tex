@@ -211,23 +211,23 @@ Feedback experiments have shown that Field L and the caudolateral
 mesopallium may hold a representation of song against which auditory
 signals are compared \cite{Keller2009}.  Renditions of a syllable that
 were disrupted by white noise when they were slightly above (or below)
-its average pitch showed that the apparently random natural
+the syllable's average pitch showed that the apparently random natural
 variability in songbird motor output is used to drive change in the
 song \cite{Tumer2007pitchshift}. Furthermore, AFP produces a
 corrective signal to bias song away from those disruptions
 \cite{Andalman2009}. The
 song change is isolated to within roughly 10 milliseconds (ms) of the
-stimulus , and further proposed an elegant model that predicts the
-shape of the learned response and suggests a simple mechanism \cite{Charlesworth2011learning}.
+stimulus, and the shape of the learned response can be predicted by
+a simple mechanism \cite{Charlesworth2011learning}.
 
 
-\cite{Warren2011} showed that that AFP transfers the error signal to
+AFP transfers the error signal to
 the robust nucleus of the arcopallium (RA) using
-NMDA-receptor--mediated glutamatergic transmission. By looking at song
+NMDA-receptor--mediated glutamatergic transmission \cite{Warren2011}. By looking at song
 recovery after applying the same pitch-shift paradigm,
-\cite{Canopoli2014} showed that the caudal medial nidopallium is
+the caudal medial nidopallium is
 implicated in memorising or recalling a recent song target, but for
-neither auditory processing nor directed motor learning.
+neither auditory processing nor directed motor learning \cite{Canopoli2014}.
 
 % THEIR WORDS: (NCM, a high auditory area) impaired recovery of the original pitch even several weeks after withdrawal of the reinforcing stimuli. Because NCM lesions spared both successful noise-avoidance behavior and birds' auditory discrimination ability, our results show that NCM is not needed for directed motor changes or for auditory discriminative processing, but is implied in memorizing or recalling the memory of the recent song target.
 
@@ -245,27 +245,27 @@ is no standard syllable detector.  Desiderata for such a detector include:
 
 A variety of syllable-triggering systems have been used, but few have
 been documented or characterised in detail.  In 1999,
-\cite{Leonardo1999} used groups of IIR filters with hand-tuned logical
-operators.  Their system had a latency of 50 or 100 ms,
-and they did not report on jitter or accuracy.  As access to
+detection was achieved by a group of IIR filters with hand-tuned logical
+operators \cite{Leonardo1999}.  The system had a latency of 50 or 100 ms,
+and no reported data on jitter or accuracy.  As access to
 computational resources has improved, approaches have changed: in
-2009, \cite{Andalman2009} still used hand-tuned filters, but ran them
-on a Tucker-Davis Technologies digital signal processor.  They reported
-a latency of around 4 ms, but as with other filter-bank techniques, it
+2009, detection still used hand-tuned filters, but implemented
+on a Tucker-Davis Technologies digital signal processor \cite{Andalman2009}.  This
+achieved a latency of around 4 ms, but as with other filter-bank techniques, it
 is not strictly a syllable detector but rather a pitch and timbre
 detector---it cannot identify a frequency sweep, or distinguish a
 short chirp from a long one---and thus requires careful selection of
 target syllables.  Furthermore, the method is neither inexpensive nor,
 based on our experience with a similar technique, accurate.
-\cite{Keller2009} applied a neural network to a spectral image of
-song.  They reported a jitter of 4.3 ms, but further implementation and
-performance details are not available.  In 2011, \cite{Warren2011}
-matched spectral templates to stable portions of syllables in 8-ms
-segments.  They reported a jitter of 4.5 ms, and false-negative and
-false-positive rates of up to 2\% and 4\%, respectively.  Hardware
+Also in 2009, another group applied a neural network to a spectral image of
+song \cite{Keller2009}.  They reported a jitter of 4.3 ms, but further implementation and
+performance details are not available.  In 2011, a detector was implemented by
+matching spectral templates to stable portions of syllables in 8 ms
+segments \cite{Warren2011}.  This detector achieved a jitter of 4.5 ms, and false-negative and
+false-positive rates of up to 2\% and 4\% respectively.  Hardware
 requirements and ease of use were not reported.  In 2013,
-\cite{Skocik2013} described in detail a system that matches spectral
-images of template syllables using a correlation coefficient.  With a
+a group described in detail a system that matches spectral
+images of template syllables using a correlation coefficient \cite{Skocik2013}.  With a
 fast desktop (Intel i7 six-core) running Linux and equipped with a
 National Instruments data acquisition card, it boasts a hardware-only
 (not accounting for the time taken to compute a match with a syllable)
