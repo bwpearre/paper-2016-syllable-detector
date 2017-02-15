@@ -1,0 +1,65 @@
+> ***Please check grammatical issues throughout the manuscript and comma splices because the final accepted manuscript submission moves very quickly to becoming the final published manuscript without editorial assistance from the journal.  I suggest converting from British English but, this is a “soft” suggestion.  Ultimately, it is your choice.
+
+I think (hope) I've fixed the grammatical issues. I have retained British English partly because it's what I'm used to and partly because I think that now, more than ever, it is important that the USA recognise that international standards are worthwhile.
+
+> **It is an atypical writing style for PLOS ONE to begin with a reference, e.g., Page 3, line 52, 54, and 57.  I suggest that you reference the papers at the end of the statement (or sentence, depending on which is more relevant).
+
+I find that when describing the contents of a paper, rather than a result supported by several different papers, this leads to awkward phrasing. "A did X" is simple and direct and avoids the passive voice, whereas "X was done by A" is cumbersome. Perhaps a part the difficulty I had in reconciling my preference with yours is that PLOS's reference style does not provide much of a noun. For example, I'm used to, e.g., "[Pearre 2016] did X"--in which the citation manager creates a more descriptive noun. I could manually enter author names along with the citation, but the whole point of integrating a bibliography manager into an editor is so that the former can produce the information required by the latter. I react to asking the author to provide a citation key that has access to the author's name and then also manually furnish the author's name much as I would react to submitting a paper in hardcopy.
+
+That said, I've updated the references to my best interpretation of your preferred style. Is this what you had in mind?
+
+> **Provide the following details in the intro:
+
+>   How much programming experience does one need in LabVIEW, MATLAB or Swift to use this software?
+
+Added a bullet point at the end of the Introduction.
+
+ >   What defines a “corpus” of songs. – How many?
+
+Added "1000 songs" to the 3-step procedure in the Introduction.
+
+>    What defines a typical “instant” in the song – what is the min-max range typically used?
+
+I don't understand this question. Can you clarify? An instant is a point in time somewhere during the song.
+
+>    Point 3, “We present….” Should be #1 in my opinion and not at the end.
+
+I disagree. This list describes an overview of the steps required, so it seems to me that this should be in workflow order.
+
+>    Can you briefly explain the relative cost parameter that is the tradeoff for the false-positive vs. false-negative rates?
+
+I thought it most appropriate to remove this from the Introduction. It is described in the paragraph on "Computing optimal output thresholds".
+
+
+> Normalisation should  be Normalization – Page 8 and elsewhere – unless this is a MATLAB term that I’m not aware of….  Oh, I see British English is used frequently…See comment #1 above.
+
+How ironic is it to fight against American imperialism by using British English?
+
+> LabVIEW implementation – why is it only implemented on a Windows-based PC?  You make the statement that Windows is a drawback, but do not explain why.  Please do so.  In the past, LabVIEW was compatible with MACs, is that no longer the case?
+
+It is far beyond the scope of this paper to explain why Windows might be considered a drawback, but in brief: the Windows security model is generally vulnerable to various attacks through malware and viri (as evidenced by the constant security problems seen in the field), the upgrade cycle is annoying and often breaks things, the multitasking scheduler offers poor priority control, the user interface and locations of many settings change on every release, pre-10 versions don't even have virtual desktops, Windows 10 now feeds you advertisements... Consequently we see Windows as a liability, and use it cautiously.
+
+LabVIEW can run on MacOS, but various hardware-interface features are unavailable there.
+
+> MATLAB – Why not implement this on a PC and a MAC and compare the results?  There is a drawback to MACs, the price, this is not discussed (as of yet);
+
+Partly because this paper is far too long already. The number of variations that could be tested is infinite, so we stopped before we'd hit them all. Especially for this one: the MATLAB implementation is the one least suited to the need of precise timing, and so a ballpark figure suffices.
+
+As for the price of Mac vs. Windows, that is a subject of a certain amount of research in its own right: in many environments MacOS has a higher upfront cost but then requires little ongoing maintenance/repair, whereas Windows machines, while cheaper initially, require more troubleshooting, more knowledgeable users, etc., especially anent security. On the other hand, in some environments, for skilled users, Windows may be cheaper in the long run. In short, I believe that discussing the relative cost of Mac vs Windows is beyond the scope of this paper.
+
+> Line 316, page 12 – what is meant by the term “ground truth”  I assume this is a term used in neural network programming, but please teach me and those who are
+not familiar with this approach.
+
+Very good point. This is now named explicitly in Section 2.3 ("Quantification").
+
+> ****Make it clearer in the manuscript that your tests are conducted on multiple ZFs.  A previous reviewer was unclear on that point, and I do not see it clearly spelled out in this version of the manuscript.
+
+Added to the beginning of Section 2.3 "Quantification", as well as to Table 1. And other points in the text. I hope this is clearer now.
+
+> Lines 365-368 – Consider revising the first sentence, and perhaps indenting the next section, instead of a new paragraph would be a better way to present the timing information.
+
+I've rewritten this bit. Thanks!
+
+> Line 398 – Page 15, “coloured noise”?   Please consider rephrasing – pConsider a tonal vs. entropy comparison for this section of the manuscript.
+
+The new comparison would work, but I was slightly misusing the term (it was intended only approximately anyway), so I've just replaced the phrase.
