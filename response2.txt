@@ -4,13 +4,13 @@ I think (hope) I've fixed the grammatical issues. I have retained British Englis
 
 > **It is an atypical writing style for PLOS ONE to begin with a reference, e.g., Page 3, line 52, 54, and 57.  I suggest that you reference the papers at the end of the statement (or sentence, depending on which is more relevant).
 
-I've updated the references to my best interpretation of your preferred style. Is this what you had in mind? I was always taught to avoid the passive voice, and your standard encourages it, but I've tried to work around this as much as I could.
+I've updated the references to my best interpretation of your preferred style. Is this what you had in mind? I was taught to avoid the passive voice, whereas in my case your standard makes it difficult to avoid, but I've tried to work around this as much as I could.
 
 > **Provide the following details in the intro:
 
 >   How much programming experience does one need in LabVIEW, MATLAB or Swift to use this software?
 
-I've added a bullet point at the end of the Introduction.
+Essentially none. I've added a bullet point at the end of the Introduction.
 
  >   What defines a “corpus” of songs. – How many?
 
@@ -36,7 +36,7 @@ How ironic is it to resist American imperialism by using British English?
 
 It is beyond the scope of this paper to explain why Windows might be considered a drawback. In brief: the Windows security model has historically been vulnerable to various attacks through malware and viri (as evidenced by the constant security problems seen in the field), the upgrade cycle often breaks things and introduces unwanted changes, the user interface and locations of many settings change on every release, pre-10 versions don't even have virtual desktops, Windows 10 now feeds you advertisements, the multitasking scheduler offers poor priority control, the file system's legacy compatability introduces several awkward and limiting conventions (e.g. no links, naming restrictions, limitations on available operations on open files), the remote operation capabilities are primitive... Consequently we see Windows as a disadvantage, and use it cautiously.
 
-LabVIEW can run on MacOS, but various interface features for National Instruments hardware are unavailable there.
+LabVIEW can run on MacOS, but various features for National Instruments hardware are unavailable there.
 
 > MATLAB – Why not implement this on a PC and a MAC and compare the results?  There is a drawback to MACs, the price, this is not discussed (as of yet);
 
@@ -59,4 +59,4 @@ I've rewritten this bit. Thanks!
 
 > Line 398 – Page 15, “coloured noise”?   Please consider rephrasing – Consider a tonal vs. entropy comparison for this section of the manuscript.
 
-The entropy comparison would work, but I was slightly misusing the term (it was intended only approximately anyway), so I've just replaced the phrase.
+The entropy comparison would work, but I was slightly misusing the term, so I've just replaced the phrase.
