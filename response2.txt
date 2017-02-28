@@ -1,10 +1,10 @@
 > ***Please check grammatical issues throughout the manuscript and comma splices because the final accepted manuscript submission moves very quickly to becoming the final published manuscript without editorial assistance from the journal.  I suggest converting from British English but, this is a “soft” suggestion.  Ultimately, it is your choice.
 
-I think (hope) I've fixed the grammatical issues. I have retained British English mostly because it's what I'm used to, and partly because I think that now, more than ever, it is important that researchers in the USA demonstrate that we value international standards.
+I think (hope) I've fixed the grammatical issues. I have retained British English mostly because it's what I'm used to, and also partly to suggest that we remember that the USA's way of conducting itself is merely one valid choice among many.
 
 > **It is an atypical writing style for PLOS ONE to begin with a reference, e.g., Page 3, line 52, 54, and 57.  I suggest that you reference the papers at the end of the statement (or sentence, depending on which is more relevant).
 
-I've updated the references to my best interpretation of your preferred style. Is this what you had in mind? I was taught to avoid the passive voice, whereas in my case your standard makes it difficult to avoid, but I've tried to work around this as much as I could.
+I was taught to avoid the passive voice, whereas in my review your standard makes that difficult, but I've updated the references to my best interpretation of your preferred style while trying to avoid this pitfall as best I can. Is this what you had in mind?
 
 > **Provide the following details in the intro:
 
@@ -14,7 +14,7 @@ Essentially none. I've added a bullet point at the end of the Introduction.
 
  >   What defines a “corpus” of songs. – How many?
 
-Added "1000 songs" to the 3-step procedure in the Introduction.
+I've added "1000 songs" to the 3-step procedure in the Introduction.
 
 >    What defines a typical “instant” in the song – what is the min-max range typically used?
 
@@ -30,8 +30,6 @@ I thought it most appropriate to remove this from the Introduction. It is descri
 
 > Normalisation should  be Normalization – Page 8 and elsewhere – unless this is a MATLAB term that I’m not aware of….  Oh, I see British English is used frequently…See comment #1 above.
 
-How ironic is it to resist American imperialism by using British English?
-
 > LabVIEW implementation – why is it only implemented on a Windows-based PC?  You make the statement that Windows is a drawback, but do not explain why.  Please do so.  In the past, LabVIEW was compatible with MACs, is that no longer the case?
 
 It is beyond the scope of this paper to explain why Windows might be considered a drawback. In brief: the Windows security model has historically been vulnerable to various attacks through malware and viri (as evidenced by the constant security problems seen in the field), the upgrade cycle often breaks things and introduces unwanted changes, the user interface and locations of many settings change on every release, pre-10 versions don't even have virtual desktops, Windows 10 now feeds you advertisements, the multitasking scheduler offers poor priority control, the file system's legacy compatability introduces several awkward and limiting conventions (e.g. no links, naming restrictions, limitations on available operations on open files), the remote operation capabilities are primitive... Consequently we see Windows as a disadvantage, and use it cautiously.
@@ -40,9 +38,9 @@ LabVIEW can run on MacOS, but various features for National Instruments hardware
 
 > MATLAB – Why not implement this on a PC and a MAC and compare the results?  There is a drawback to MACs, the price, this is not discussed (as of yet);
 
-Partly because this paper is far too long already. The number of variations that could be tested is infinite, so we stopped before we'd hit them all. Especially for this one: the MATLAB implementation is the one least suited to the need of precise timing, and so we feel that a ballpark figure suffices.
+Partly because this paper is far too long already. The number of variations that could be compared is infinite, so we stopped before we'd hit them all. Especially for this one: the MATLAB implementation is the one least suited to the need of precise timing, and so we feel that a ballpark figure suffices.
 
-As for the price of Mac vs. Windows, that is a subject of significant research in its own right: in many environments MacOS has a higher upfront cost but then requires little ongoing maintenance/repair, whereas Windows machines, while cheaper initially, require more troubleshooting, more knowledgeable users, etc., especially anent security. On the other hand, in some environments, for skilled users, Windows may be cheaper in the long run. In short, I believe that discussing the relative cost of Mac vs Windows is beyond the scope of this paper.
+As for the price of Mac vs. Windows, that is a subject of significant research in its own right: in many environments MacOS has a higher upfront cost but then requires little time-consuming configuration/maintenance/repair, whereas Windows machines, while cheaper initially, can require more troubleshooting, more knowledgeable users, etc., especially anent security. On the other hand, in some environments, for skilled users, Windows may be cheaper in the long run. In short, I believe that discussing the relative cost of Mac vs Windows is beyond the scope of this paper.
 
 > Line 316, page 12 – what is meant by the term “ground truth”  I assume this is a term used in neural network programming, but please teach me and those who are
 not familiar with this approach.
@@ -59,4 +57,4 @@ I've rewritten this bit. Thanks!
 
 > Line 398 – Page 15, “coloured noise”?   Please consider rephrasing – Consider a tonal vs. entropy comparison for this section of the manuscript.
 
-The entropy comparison would work, but I was slightly misusing the term, so I've just replaced the phrase.
+An entropy comparison could be powerful, but I was slightly misusing the term and only meant to convey a general idea anyway, so I've just replaced the phrase.
