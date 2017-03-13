@@ -688,20 +688,31 @@ performance in feedback experiments on many birds in our lab.
 % B: LNY46 0.28s @ 140ms
 % C: LNY42 0.38s
 % D: LNY4RB 0.25s
+% E: LR28 0.14s
 
-Data consisted of extracted, aligned songs, and additional song-length samples of non-song (cage noise, calls, other birds' song). These were divided into training and test sets. For Bird A, we used 1000 songs and 1000 non-song samples for training, and the remaining 1818 songs and 3636 nonsongs for testing. For birds B, C, and D, we used 1000 songs and 1000 non-songs for training, and another 1000 of each for testing.
+\begin{table}
+ \begin{tabular}{c|cccccc}
+    Bird & Training songs & Test songs & Training non-song & Test non-song & Target time  & Time window length\\ %\hline
+   A & 1000 & 1000 & 1000 & 3636 & 150:50:400 & 50 \\
+   B & 1000 & 1000 & 1000 & 1000 & 195 & 50 \\
+    C & 1000 & 1000 & 1000 & 1000 & 380 & 50 \\
+    D & 1000 & 1000 &  1000 & 1000 & 250 & 50 \\
+    E & 1000 & 1000 & 1000 & 1000 & 140 & 80
+  \end{tabular}
+  \caption{Sizes of our training and test sets, times of interest, and detection time window length (milliseconds).}
+  \label{table:datasizes}
+\end{table}
 
-%\begin{table}
-% \begin{tabular}{c|cccc}
-%    Bird & Training songs & Test songs & Training non-song & Test non-song \\ %\hline
- %   A & 1000 & 1818 & 1000 & 3636 \\
-  %  B & 1000 & 1000 & 1000 & 1000 \\
- %   C & 1000 & 1000 & 1000 & 1000 \\
-%    D & 1000 & 1000 &  1000 & 1000
-%  \end{tabular}
-%  \caption{Sizes of our training and test sets.}
-%  \label{table:datasizes}
-%\end{table}
+Data consisted of extracted, aligned songs, and additional song-length
+samples of non-song (cage noise, calls, other birds' song). These were
+divided into training and test sets. For all birds, we used 1000 songs
+and 1000 non-song samples for training. For Bird A we used the
+remaining 1818 songs and 3636 nonsongs for testing. For each of the
+other birds, we tested on another 1000 songs and 1000
+nonsongs. Table~\ref{table:datasizes} lists the dataset sizes, along
+with the target detection points and the length of the time history
+window used for detection, which was the only parameter that we
+adjusted.
 
 The MATLAB neural network toolbox further divides our ``training'' set
 into internal training, validation, and test sets.  Because we do our
@@ -962,7 +973,7 @@ that the detector will see---only the non-song data may be different.
   \vspace{8pt}\par\noindent
 }
 
-Accuracies for our six test syllables are shown in
+Accuracies for our six test syllables for bird A are shown in
 \fig{fig:accuracies} (accuracies for the synthetic $\delta$-function
 songs were always 100\%).  For each test syllable we trained 100
 different networks, which differ from each other in the random
@@ -998,15 +1009,19 @@ runs.
 \begin{table}
   \begin{tabular}{rc|rr}
     Bird & Target time & \% True positives & \% False positives \\ \hline
-    A&$ t^*_1$ & 99.72 &  0.0025 \\
+    A&$ t^*_1$ & 99.72 &  0.0025 \\ % lny64
     &$ t^*_2$ & 99.81 &  0.00053 \\
     &$ t^*_3$ & 99.78 &  0.00062 \\
     &$ t^*_4$ & 99.69 &  0.00082 \\
     &$ t^*_5$ & 99.75 &  0.00028 \\
     &$ t^*_6$ & 99.54 &  0.0012 \\
-    B&$ t^*$ & 99.37 & 0.0039 \\
-    C&$ t^*$ & 99.13 & 0.0011 \\
-    D&$ t^*$ & 99.34 &0.0026 \\
+    B&$ t^*$ & 99.370992640000068   0.003887539045000 \\ % lny46
+    C&$ t^*$ & 99.218862389999998   0.001205787775200 \\ % lny42
+    D&$ t^*$ & 99.342842499999975   0.00260723410200  \\ % lny4rb
+    E& $t^*$ & 99.726635259999981   0.003169430259900 \\ % lr28
+    E& $t^*$ & 99.464679732673261   0.004515502156436 \\ % lr12
+    E& $t^*$ & 99.862406879999966   0.001215710723800 \\ % lr13
+    E& $t^*$ & 99.646613329999980   0.003110002775000 % lr77
   \end{tabular}
   \caption{Mean values for the detection accuracies shown in \fig{fig:accuracies}.}
   \label{table:accuracies}
@@ -1205,7 +1220,7 @@ their improvements to the draft.  This work was funded by NIH grants
 \end{description}
 
 \noindent Our implementation of the syllable
-detector is available under an open-source license {\em (Tentatively GPL, but we are still evaluating which open source license is the most suitable for this software):}
+detector is available under the GNU General Public License 3.
 \begin{description}
 \item[Training the neural network:]\hfill
   \begin{trivlist}
