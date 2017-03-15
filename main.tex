@@ -448,7 +448,7 @@ the false positive rate it is necessary to provide negative training
 examples that include silence, cage noise, wing flapping, non-song
 vocalisations, and perhaps songs from other birds.  Although it will
 depend on the makeup of the non-song data, we have found that training
-with as low as a 1:1 ratio of non-song to song---or roughly 10-20
+with as low as a 1:1 ratio of non-song to song---or roughly 10
 minutes of non-song audio---yields excellent results on most birds.
 These data are also included in our accuracy tests.
 
@@ -558,7 +558,7 @@ We used an FFT of size 256; a Hamming window; and chose a target
 spectrogram frame interval of $t_\textrm{fft}=1.5$ milliseconds,
 resulting in a true frame interval of $t_\textrm{fft}=\lfloor 1.5\cdot
 44.1\rceil /44.1\approx 1.4966$ ms.  We set the network's input space
-to 30 ms long, and to span frequencies from 1--8 kHz, which contains
+to 50 ms long, and to span frequencies from 1--8 kHz, which contains
 the fundamentals and several overtones of most zebra finch
 vocalisations.
 
@@ -679,40 +679,38 @@ interface, reducing latency by half.
 \label{sec:quantify}
 
 We measure accuracy and characterise timing for 6 randomly chosen
-points in one bird's song (Bird A), and present accuracy results for
-three more birds (B, C, D) (timing does not appreciably vary among
+points in one bird's song (lny64), and present accuracy results for
+seven more birds (the detector's timing does not appreciably vary among
 birds). The results presented here are representative of real-world
 performance in feedback experiments on many birds in our lab.
 
-% A:
-% B: LNY46 0.28s @ 140ms
-% C: LNY42 0.38s
-% D: LNY4RB 0.25s
-% E: LR28 0.14s
 
 \begin{table}
- \begin{tabular}{c|cccccc}
-    Bird & Training songs & Test songs & Training non-song & Test non-song & Target time  & Time window length\\ %\hline
-   A & 1000 & 1000 & 1000 & 3636 & 150:50:400 & 50 \\
-   B & 1000 & 1000 & 1000 & 1000 & 195 & 50 \\
-    C & 1000 & 1000 & 1000 & 1000 & 380 & 50 \\
-    D & 1000 & 1000 &  1000 & 1000 & 250 & 50 \\
-    E & 1000 & 1000 & 1000 & 1000 & 140 & 80
+ \begin{tabular}{c|ccc}
+    Bird & Test songs & Test non-songs & Target time (ms) \\ \hline
+    lny64 & 1818 & 10545 & 150:50:400 \\
+    lny46 & 1000 & 1000 & 195 \\
+    lny42 & 1245 & 1223 & 380 \\
+    lny4rb & 1000 & 1000 & 250 \\
+    lr12 & 2000 & 2008 & 180 \\
+    lr13 & 2000 & 2001 & 300 \\
+    lr28 & 3000 & 3014 & 140 \\
+    lr77 & 2000 & 2008 & 320
   \end{tabular}
-  \caption{Sizes of our training and test sets, times of interest, and detection time window length (milliseconds).}
+  \caption{For each bird, detectors were trained for the specified
+    timepoints, using 1000 songs and 1000 non-song samples of the same
+    length. The rest of the audio samples---shown here---were used to
+    test the learned detectors.}
   \label{table:datasizes}
 \end{table}
 
 Data consisted of extracted, aligned songs, and additional song-length
 samples of non-song (cage noise, calls, other birds' song). These were
 divided into training and test sets. For all birds, we used 1000 songs
-and 1000 non-song samples for training. For Bird A we used the
-remaining 1818 songs and 3636 nonsongs for testing. For each of the
-other birds, we tested on another 1000 songs and 1000
-nonsongs. Table~\ref{table:datasizes} lists the dataset sizes, along
-with the target detection points and the length of the time history
-window used for detection, which was the only parameter that we
-adjusted.
+and 1000 non-song samples for training. Table~\ref{table:datasizes}
+lists the test dataset sizes and target detection points. For lny64,
+we arbitrarily chose six linearly spaced target times. For each of the
+other birds, we eyeballed one promising-looking detection point.
 
 The MATLAB neural network toolbox further divides our ``training'' set
 into internal training, validation, and test sets.  Because we do our
@@ -867,12 +865,15 @@ Committee of Boston University (protocol number 14-029).
 \section{Results}
 \label{sec:results}
 
-\fig{fig:song} shows the song for which we present accuracy and timing
-results.  Six example target trigger points are shown, at 150, 200,
-250, 300, 350, and 400 milliseconds after the beginning of the aligned
+\fig{fig:song} shows a typical song. The image is produced by
+averaging the aligned spectrograms, in this case for the bird lny64.
+Six target trigger points are shown for this song, at 150, 200, 250,
+300, 350, and 400 milliseconds after the beginning of the aligned
 samples, as indicated by the red lines, and referred to henceforth as
-$t^*_1\ldots t^*_6$ respectively.  The rectangles show the recognition
-window (30 ms, 1--8 kHz) for each instant in the song.
+$t^*_1\ldots t^*_6$ respectively.  For clarity, the rectangles show a
+shorter recognition window than our standard: here 30 ms, but still
+spanning 1--8 kHz, for each target time in the song.\marginpar{Is this
+  OK?  Should I update to a 50-ms window? They'll overlap!}
 
 The first two triggers, $t^*_1$ at 150 ms and $t^*_2$ at 200 ms, are
 far from pure tones, but are closer to bandpass-filtered white noise.  They would be
@@ -898,7 +899,7 @@ responsible for a small amount of our measured jitter, but note that few of the 
   % 9x10 inches
   % Fonts: Helvetica, scaled 130%
   \caption{Each plot shows one network output unit's responses to all
-    2818 presentations of the song shown in \fig{fig:song}.  For
+    2818 presentations of lny64's song shown in \fig{fig:song}.  For
     simplicity, we show only the syllables $t^*_1$, $t^*_4$, and
     $t^*_6$, and we do not show the non-response to presentation of non-song. The horizontal axis is time relative to the beginning of
     the aligned song, and the vertical axis is an index for the 2818
@@ -973,18 +974,20 @@ that the detector will see---only the non-song data may be different.
   \vspace{8pt}\par\noindent
 }
 
-Accuracies for our six test syllables for bird A are shown in
+Accuracies for our six test syllables for bird lny64 are shown
+in\marginpar{Update if I include all birds in this figure!}
 \fig{fig:accuracies} (accuracies for the synthetic $\delta$-function
 songs were always 100\%).  For each test syllable we trained 100
-different networks, which differ from each other in the random
-initialisation of network weights and on which random subset of our
-songs was used for training.  Each network's accuracy is shown as a
-single point in each chart in \fig{fig:accuracies}, and the means are
-shown in Table~\ref{table:accuracies}.  Evidently some syllables are
-easier to identify reliably than others (for example, $t^*_3$ and
-$t^*_6$ are occasionally confused due to their similar appearance, as
-could be guessed from \fig{fig:song}); thus, if the experimental
-design permits, it can be worthwhile to choose an easily identifiable
+different networks, which differ from each other both in the random
+initialisation of network weights and in which random subset of the
+song-and-nonsong corpus was used for training.  Each network's
+accuracy is shown as a single point in each chart in
+\fig{fig:accuracies}, and the means are shown in
+Table~\ref{table:accuracies}.  Evidently some syllables are easier to
+identify reliably than others (for example, $t^*_3$ and $t^*_6$ are
+occasionally confused due to their similar appearance, as could be
+guessed from \fig{fig:song}); thus, if the experimental design
+permits, it can be worthwhile to choose an easily identifiable
 syllable.  Furthermore, as can be seen from \fig{fig:accuracies}, for
 difficult syllables the training process occasionally yields a network
 that performs unusually poorly.  It is easy to spot these networks by
@@ -998,11 +1001,11 @@ runs.
   %\includegraphics[width=\textwidth]{accuracies-2hidden}
   
   \caption{Accuracy variability over 100 different training runs for
-    each of the six test syllables.  Each dot shows the test-set
+    each of the six test syllables for lny64.  Each dot shows the test-set
     accuracy for an independently trained detector.  Because the
     horizontal positions have been randomised slightly so as not to
     occlude same-valued measurements, test syllable is also indicated
-    by colour.  The means are given in Table~\ref{table:accuracies}.}
+    by colour.  The means for all birds are given in Table~\ref{table:accuracies}.}
   \label{fig:accuracies}
 \end{figure}
 
@@ -1043,7 +1046,7 @@ precision of timing, but also increase computational requirements both
 during training and at runtime.  \fig{fig:TimingVsFrame} shows how
 these numbers vary over a useful range of frame rates on our ideal
 detector, the Swift detector with serial output, and for the LabVIEW
-detector, for both the $\delta$-syllable and for the bird song at
+detector, for both the $\delta$-syllable and for lny64's song at
 $t^*_4$.
 
 \begin{figure}
@@ -1051,7 +1054,7 @@ $t^*_4$.
   \caption{Timing varies as the FFT frame interval changes.  Here we
     show results for the ideal detector and the LabVIEW and
     Swift+serial implementations, for the constructed
-    $\delta$-syllable and for trigger $t^*_4$ of the bird song.  The
+    $\delta$-syllable and for trigger $t^*_4$ of lny64's song.  The
     lines show latency; error bars are standard deviation (jitter).  Points have
     been shifted horizontally slightly for clarity; original positions are [0.5 1
       1.5 2 4] ms.}
@@ -1061,9 +1064,9 @@ $t^*_4$.
 \subsubsection{Syllable choice}
 
 Syllable choice impacts detector performance, but despite the variety
-of syllables chosen here, performance was fairly stable across
-syllables.  \fig{fig:TimingVsSyllable} shows measured timing data for
-the Swift+serial detector compared to the ideal, with
+of syllables shown here, performance was stable across syllables.
+\fig{fig:TimingVsSyllable} shows measured timing data for lny64's test
+syllables for the Swift+serial detector compared to the ideal, with
 $t_{\textrm{fft}}=1.5$ ms.  Given the variety of the test syllables,
 the variability is surprisingly low, and is summarised here with 95\%
 confidence intervals (with n=6):
@@ -1086,7 +1089,7 @@ timing consistency at the expense of latency, but we did not test this.
   \begin{center}
     \includegraphics[width=8cm]{Fig5}
   \end{center}
-  \caption{Timing data for our 6 test syllables, for the ideal and the
+  \caption{Timing data for lny64's 6 test syllables, for the ideal and the
     Swift+serial detectors, with an FFT frame rate of 1.5 ms.  Point
     centres show latency; error bars show jitter.}
   \label{fig:TimingVsSyllable}
@@ -1098,11 +1101,11 @@ timing consistency at the expense of latency, but we did not test this.
 
 
 We compared latency and jitter across our different detector
-implementations for the $\delta$-syllable and $t^*_4$, again with
+implementations for the $\delta$-syllable and lny64's $t^*_4$, again with
 $t_\mathrm{fft}=1.5$ ms.  Results are as follows:
 \vspace{8pt}
 \begin{tabular}{l|c|c|c| c}
-  & \multicolumn{2}{c}{$\delta$-syllable} & \multicolumn{2}{c}{Bird: $t^*_4$} \\
+  & \multicolumn{2}{c}{$\delta$-syllable} & \multicolumn{2}{c}{Bird lny64: $t^*_4$} \\
   Detector & Latency (ms) & Jitter (ms) & Latency (ms) & Jitter (ms) \\
   \hline
   Ideal & 0.66 & 0.38 & -1.0 & 2.0 \\
@@ -1122,7 +1125,7 @@ look like for the five implementations of our detector on $t^*_4$.
     \includegraphics[width=8cm]{Fig6}
   \end{center}
   \caption{The different detectors for the constructed
-    $\delta$-syllable and for the bird song at $t^*_4$.  Point centres
+    $\delta$-syllable and for lny64's song at $t^*_4$.  Point centres
     show latency; error bars show jitter.}
   \label{fig:TimingVsDetector}
 \end{figure}
@@ -1132,7 +1135,7 @@ look like for the five implementations of our detector on $t^*_4$.
     \includegraphics[width=8cm]{Fig7}
   \end{center}
   \caption{Raw timing curves for all detectors measured during
-    detection of $t^*_4$ using 1.5-ms frames.  We extract the trigger events from each curve, from which we obtain the mean---latency---and
+    detection of lny64's $t^*_4$ using 1.5-ms frames.  We extract the trigger events from each curve, from which we obtain the mean---latency---and
     standard deviation---jitter.}
   \label{fig:timing}
 \end{figure}
@@ -1170,8 +1173,8 @@ requirements and the difficulty of debugging LabVIEW programmes.  With
 serial output, MATLAB's performance is good, although its buffer
 handling is sensitive to system load.
 
-The song presented here was recorded with a fixed microphone mounted
-inside the cage.  We found that higher accuracy is achieved when a
+The songs presented here were recorded with fixed microphones mounted
+inside the cages.  We found that higher accuracy is achieved when a
 microphone is instead mounted on the bird's head, which maintains
 volume and reduces changes in timbre as the bird moves.
 % We have head mounted microphone data?
