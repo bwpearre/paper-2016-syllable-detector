@@ -861,14 +861,15 @@ Committee of Boston University (protocol number 14-029).
 \label{sec:results}
 
 \fig{fig:song} shows a typical song. The image is produced by
-averaging the aligned spectrograms, in this case for the bird lny64.
-Six target trigger points are shown for this song, at 150, 200, 250,
-300, 350, and 400 milliseconds after the beginning of the aligned
-samples, as indicated by the red lines, and referred to henceforth as
-$t^*_1\ldots t^*_6$ respectively.  For clarity, the rectangles show a
-shorter recognition window than our standard: here 30 ms, but still
-spanning 1--8 kHz, for each target time in the song.\marginpar{Is this
-  OK?  Should I update to a 50-ms window? They'll overlap!}
+averaging the aligned spectrograms for the bird lny64.  Six target
+trigger points are shown for this song, at 150, 200, 250, 300, 350,
+and 400 milliseconds after the beginning of the aligned samples, as
+indicated by the red lines, and for convenience will be referred to
+henceforth as $t^*_1\ldots t^*_6$ respectively.  For clarity, the
+rectangles show a shorter recognition window than our standard: here
+30 ms, but still spanning 1--8 kHz, for each target time in the
+song.\marginpar{Is this OK?  Should I update to a 50-ms window?
+  They'll overlap.}
 
 The first two triggers, $t^*_1$ at 150 ms and $t^*_2$ at 200 ms, are
 far from pure tones, but are closer to bandpass-filtered white noise.  They would be
@@ -894,15 +895,17 @@ responsible for a small amount of our measured jitter, but note that few of the 
   % 9x10 inches
   % Fonts: Helvetica, scaled 130%
   \caption{Each plot shows one network output unit's responses to all
-    2818 presentations of lny64's song shown in \fig{fig:song}.  For
-    simplicity, we show only the syllables $t^*_1$, $t^*_4$, and
-    $t^*_6$, and we do not show the non-response to presentation of non-song. The horizontal axis is time relative to the beginning of
-    the aligned song, and the vertical axis is an index for the 2818
-    individual song presentations. The grey shading shows the audio
-    amplitude of song Y at time T. Detection events on training songs
-    are shown in cyan, with detections of unseen test songs in red.  To provide an intuition of intra-song variability, songs have been
-    stably sorted by the time of detection events; thus, each of the
-    three detection graphs shows the songs in a different order.}
+    2818 presentations of lny64's song shown in \fig{fig:song}.  We
+    show only the syllables $t^*_1$, $t^*_4$, and $t^*_6$, and we do
+    not show the non-response to presentation of non-song. The
+    horizontal axis is time relative to the beginning of the aligned
+    song, and the vertical axis is an index for the 2818 individual
+    song presentations. The grey shading shows the audio amplitude of
+    song Y at time T. Detection events on training songs are shown in
+    cyan, with detections of unseen test songs in red.  To provide an
+    intuition of intra-song variability, songs have been stably sorted
+    by the time of detection events; thus, each of the three detection
+    graphs shows the songs in a different order.}
   \label{fig:detection_raster}
 \end{figure}
 
@@ -918,7 +921,7 @@ eliminate the large number of variables involved in microphone, cage,
 playback and re-digitising, we evaluated the neural network's accuracy
 directly on the digitised recording.  When training and runtime data
 are gathered on the same hardware setup, this is the digital signal
-that the detector will see---only the non-song data may be different.
+that the detector will see.
 %Accuracy \marginpar{Should be! Verify! And/or explain that there is a bug in the LabVIEW implementation, if there in fact is. ALSO need to present a picture of the test syllable or etc \dots} is identical across the three detectors.
 \noprint{
   Typical confusion matrices for these syllables are:
@@ -1013,13 +1016,13 @@ runs.
     &$ t^*_4$ & 99.69 &  0.00082 \\
     &$ t^*_5$ & 99.75 &  0.00028 \\
     &$ t^*_6$ & 99.54 &  0.0012 \\
-    B&$ t^*$ & 99.370992640000068   0.003887539045000 \\ % lny46
-    C&$ t^*$ & 99.218862389999998   0.001205787775200 \\ % lny42
-    D&$ t^*$ & 99.342842499999975   0.00260723410200  \\ % lny4rb
-    E& $t^*$ & 99.726635259999981   0.003169430259900 \\ % lr28
-    E& $t^*$ & 99.464679732673261   0.004515502156436 \\ % lr12
-    E& $t^*$ & 99.862406879999966   0.001215710723800 \\ % lr13
-    E& $t^*$ & 99.646613329999980   0.003110002775000 % lr77
+    B&$ t^*$ & 99.370992640000068   &0.003887539045000 \\ % lny46
+    C&$ t^*$ & 99.218862389999998   &0.001205787775200 \\ % lny42
+    D&$ t^*$ & 99.342842499999975   &0.00260723410200  \\ % lny4rb
+    E& $t^*$ & 99.726635259999981   &0.003169430259900 \\ % lr28
+    E& $t^*$ & 99.464679732673261   &0.004515502156436 \\ % lr12
+    E& $t^*$ & 99.862406879999966   &0.001215710723800 \\ % lr13
+    E& $t^*$ & 99.646613329999980   &0.003110002775000 % lr77
   \end{tabular}
   \caption{Mean values for the detection accuracies shown in \fig{fig:accuracies}.}
   \label{table:accuracies}
