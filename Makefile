@@ -100,7 +100,10 @@ showps	: $(PSF)
 
 ps	: $(PSF) 
 
-pdf	: clean $(PDF) 
+pdf	: clean $(PDF)
+
+diff	: main.tex
+	latexdiff ../paper-2016-syllable-detector-last-submitted-version/main.tex main.tex > diff.tex
 
 # TODO: This probably needs fixing
 #html	: @$(DEP) $(EPSPICS)
