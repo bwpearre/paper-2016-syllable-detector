@@ -209,11 +209,11 @@ in one hemisphere or the other showed that control of song rapidly
 switches between hemispheres \cite{Wang2008interhemispheric}.
 Feedback experiments have shown that Field L and the caudolateral
 mesopallium may hold a representation of song against which auditory
-signals are compared \cite{Keller2009}.  Renditions of a syllable that
-were disrupted by white noise when they were slightly above (or below)
-the syllable's average pitch showed that the apparently random natural
+signals are compared \cite{Keller2009}.  The disruption by white noise
+of renditions of a syllable that were slightly above (or below) the
+syllable's average pitch showed that the apparently random natural
 variability in songbird motor output is used to drive change in the
-song \cite{Tumer2007pitchshift}. Furthermore, AFP produces a
+song \cite{Tumer2007pitchshift}, and AFP produces a
 corrective signal to bias song away from those disruptions
 \cite{Andalman2009}. The song change is isolated to within roughly 10
 milliseconds (ms) of the stimulus, and the shape of the learned
@@ -234,7 +234,7 @@ is no standard syllable detector.  Desiderata for such a detector include:
 \begin{description}
 \item[Accuracy:] How often does the system produce false positives or false negatives?
 \item[Latency:] The average delay between the target syllable being sung and the detection.
-\item[Jitter:] The amount that latency changes from instance to instance of song.  Our measure of jitter is the standard deviation $\sigma$ of latency.
+\item[Jitter:] The amount that latency changes from instance to instance of song.  Our measure of jitter is the standard deviation of latency.
 \item[Versatility:] Is detection possible at ``difficult'' syllables?
 \item[Ease of use:] How automated is the process of programming a detector?
 \item[Cost:] What are the hardware and software requirements?
@@ -244,7 +244,7 @@ A variety of syllable-triggering systems have been used, but few have
 been documented or characterised in detail.  In 1999,
 detection was achieved by a group of IIR filters with hand-tuned logical
 operators \cite{Leonardo1999}.  The system had a latency of 50 or 100 ms,
-and jitter or accuracy were not reported.  As access to
+and accuracy and jitter were not reported.  As access to
 computational resources has improved, approaches have changed: in
 2009, hand-tuned filters were implemented on a Tucker-Davis Technologies digital signal processor, bringing latency down to around 4 ms \cite{Andalman2009}. But as with other filter-bank techniques, it
 is not strictly a syllable detector but rather a pitch and timbre
@@ -252,7 +252,7 @@ detector---it cannot identify a frequency sweep, or distinguish a
 short chirp from a long one---and thus requires careful selection of
 target syllables.  Furthermore, the method is neither inexpensive nor,
 based on our experience with a similar technique, accurate.
-2009 also saw the application of a neural network to a spectral image of
+2009 saw the application of a neural network to a spectral image of
 song \cite{Keller2009}.  They reported a jitter of 4.3 ms, but further implementation and
 performance details are not available.  In 2011, stable portions of syllables were matched to spectral templates in 8-ms
 segments \cite{Warren2011}.  This detector achieved a jitter of 4.5 ms, and false-negative and
@@ -274,7 +274,10 @@ outputs a TTL pulse (a brief 5-volt pulse) at the chosen moment. The
 approach consists of three steps:
 
 \begin{enumerate}
-\item Record and align a corpus of training songs.  The technique has been published in \cite{Poole2012}. 200 songs generally yield acceptable results, but here we standardise on 1000-song training sets.
+\item Record and align a corpus of training songs.  The technique has
+  been published in \cite{Poole2012}. As few as 200 songs can yield
+  acceptable results, but here we standardise on 1000-song training
+  sets.
 \item Choose one or more instants in the song that should create a trigger event, and train a
   neural network to recognise them. This step is carried out offline.  While any neural network software would produce similar results, we used MATLAB 2015b's neural network toolbox.
 \item Once trained and saved, the neural network is used by a realtime
@@ -307,11 +310,12 @@ We begin with a few hundred recordings of a given bird's song, as well
 as calls, cage noise, and other non-song audio data.  Male zebra finch
 song is most highly stereotyped when a female is present (``directed
 song'') and slightly more variable otherwise (``undirected''); we
-train and test on undirected song since this is more commonly studied,
-as well as more challenging.  Recordings were made inside a
+train and test on undirected song since this is both more commonly
+studied and more challenging.  Recordings were made inside a
 sound-isolating chamber in which was mounted a recording microphone
-(Audio-Technica AT803), using methods similar to those described in \cite{Tchernichovski2011SAP}, Chapter 2.  The songs were
-time-aligned as described in \cite{Poole2012}.
+(Audio-Technica AT803), using methods similar to those described in
+\cite{Tchernichovski2011SAP}, Chapter 2.  The songs were time-aligned
+as described in \cite{Poole2012}.
 
 We rely on two circular buffers:
 \begin{description}
@@ -395,7 +399,7 @@ ms---the latter will yield $n_\textrm{fft} = |T|=\lfloor 50\textrm{
 generally work well.
 
 Six examples of chosen target moments in the song, with recognition
-regions $F = 1--8$ kHz and $T=30$ ms, are shown in \fig{fig:song}.
+regions $F =$ 1--8 kHz and $T=30$ ms, are shown in \fig{fig:song}.
 
 %% \subsubsection{Song micro-realignment}
 
@@ -445,7 +449,6 @@ vocalisations, and perhaps songs from other birds.  Although it will
 depend on the makeup of the non-song data, we have found that training
 with as low as a 1:1 ratio of non-song to song---or roughly 10
 minutes of non-song audio---yields excellent results on most birds.
-These data are also included in our accuracy tests.
 
 
 \subsubsection{Normalisation}
@@ -544,10 +547,10 @@ $\Delta t=10$ ms, and arbitrarily set $C_n=1$.
 
 \subsubsection{De-bouncing}
 
-During runtime, the network may produce above-threshold responses to nearby
-frames.  Thus, after the first response, subsequent responses are suppressed
-for 100 ms.  However, for the accuracy figures presented here, we used
-the un-de-bounced network response.
+During runtime, the network may produce above-threshold responses to
+nearby frames.  Thus, after the first response, subsequent responses
+are suppressed for 100 ms.  However, for the accuracy measurements
+presented here, we used the un-de-bounced network response.
 
 \subsubsection{Our parameter choices}
 
@@ -630,7 +633,7 @@ processor at 2.6GHz  with 16 gigabytes of RAM, running Mac OS X 10.11.
 This implementation requires special software and hardware: LabVIEW
 from National Instruments---we used 2014 service pack 1---and a data acquisition card---we use the
 National Instruments PCI-6251 card on a PC with an Intel Core i5-4590
-processor at 3.7GHz (a relatively low-end machine) with 32 gigabytes
+processor at 3.7GHz (a relatively low-end machine) with 24 gigabytes
 of RAM, running Microsoft Windows 8.1 Pro and Windows 10.
 
 This implementation has several drawbacks: it requires expensive hardware and software from National Instruments (a data acquisition card and LabVIEW), Windows (we use hardware features of LabVIEW that are unavailable on MacOS or Linux), and due to the programming language it
@@ -740,11 +743,13 @@ canonical detection event provided by the right channel.
 
 We define the accuracy of the network based on its classification
 performance per frame. In order to avoid the apparent problem of every
-non-detected non-syllable counting as a true negative, we also tried
-defining accuracy on a per-song basis, such that a song-length sample without the
-target syllable counted as a single true negative.  Computing the
-optimal output thresholds on a per-frame rather than a per-song basis resulted in higher
-thresholds and thus a slight reduction in both the false-positive and true-positive rates (reversible by increasing $C_n$), while also providing a valid
+non-detected non-matching frame counting as a true negative, we also
+tried defining accuracy on a per-song basis, such that a song-length
+sample without the target syllable counted as a single true negative.
+Computing the optimal output thresholds on a per-frame rather than a
+per-song basis resulted in higher thresholds and thus a slight
+reduction in both the false-positive and true-positive rates
+(reversible by increasing $C_n$), while also providing a valid
 definition of false-positive rate for data streams that had not been
 segmented into song-sized chunks and thus allowing easy interpretation
 of false-positive rates from calls, cage noise, etc.
@@ -871,10 +876,9 @@ averaging the aligned spectrograms for the bird lny64.  Six target
 trigger points are shown for this song, at 150, 200, 250, 300, 350,
 and 400 milliseconds after the beginning of the aligned samples, as
 indicated by the red lines. In discussion, we will refer to these six
-as $t^*_1\ldots t^*_6$ respectively.  For clarity, the rectangles show
+as $t^*_1\ldots t^*_6$ respectively.  To avoid overlap in the graphic, the rectangles show
 a shorter recognition window than our standard: here 30 ms, but still
-spanning 1--8 kHz, for each target time in the song.\marginpar{Is this
-  OK?  Should I update to a 50-ms window?  They'll overlap.}
+spanning 1--8 kHz, for each target time in the song.
 
 The first two triggers, $t^*_1$ at 150 ms and $t^*_2$ at 200 ms, are
 far from pure tones, but are closer to bandpass-filtered white noise.  They would be
@@ -1014,19 +1018,19 @@ runs.
   % replot_accuracies_concatanated('tex', true) for confusion_log_perf.txt (1.5 ms).
   \begin{tabular}{lc|cc}
     Bird & Target time (ms) & \% True positives & \% False positives \\ \hline
-lny64 & 	150 $[t^*_1]$ & 	99.66 & 	0.0026 \\ % /Volumes/Data/song/lny64/confusion_log_perf.txt
-      & 	200 $[t^*_2]$ & 	99.75 & 	0.00052 \\ %                                               
-      & 	250 $[t^*_3]$ & 	99.79 & 	0.00051 \\ %                                               
-      & 	300 $[t^*_4]$ & 	99.70 & 	0.00077 \\ %                                               
-      & 	350 $[t^*_5]$ & 	99.73 & 	0.00022 \\ %                                               
-      & 	400 $[t^*_6]$ & 	99.52 & 	0.0010 \\ %                                                
-lny42 & 	380 & 	99.09 & 	0.0011 \\ % /Volumes/Data/song/lny42/confusion_log_perf.txt          
-lny46 & 	140 & 	99.53 & 	0.0041 \\ % /Volumes/Data/song/lny46/confusion_log_perf.txt          
-lny4rb & 	250 & 	99.36 & 	0.0025 \\ % /Volumes/Data/song/lny4rb/confusion_log_perf.txt        
-lr12 & 	180 & 	99.52 & 	0.0033 \\ % /Volumes/Data/song/lr12/all/confusion_log_perf.txt        
-lr13 & 	300 & 	99.83 & 	0.0013 \\ % /Volumes/Data/song/lr13/all/confusion_log_perf.txt        
-lr28 & 	140 & 	99.73 & 	0.0028 \\ % /Volumes/Data/song/lr28/all/confusion_log_perf.txt        
-lr77 & 	320 & 	99.58 & 	0.0028  % /Volumes/Data/song/lr77/all/confusion_log_perf.txt          
+lny64 &         150 $[t^*_1]$ &         99.66 &         0.0026 \\ % /Volumes/Data/song/lny64/confusion_log_perf.txt
+      &         200 $[t^*_2]$ &         99.75 &         0.00052 \\ %                                               
+      &         250 $[t^*_3]$ &         99.79 &         0.00051 \\ %                                               
+      &         300 $[t^*_4]$ &         99.70 &         0.00077 \\ %                                               
+      &         350 $[t^*_5]$ &         99.73 &         0.00022 \\ %                                               
+      &         400 $[t^*_6]$ &         99.52 &         0.0010 \\ %                                                
+lny42 &         380 &   99.09 &         0.0011 \\ % /Volumes/Data/song/lny42/confusion_log_perf.txt          
+lny46 &         140 &   99.17 &         0.0037 \\ % /Volumes/Data/song/lny46/confusion_log_perf.txt          
+lny4rb &        250 &   99.37 &         0.0026 \\ % /Volumes/Data/song/lny4rb/confusion_log_perf.txt        
+lr12 &  180 &   99.52 &         0.0033 \\ % /Volumes/Data/song/lr12/all/confusion_log_perf.txt        
+lr13 &  300 &   99.83 &         0.0013 \\ % /Volumes/Data/song/lr13/all/confusion_log_perf.txt        
+lr28 &  140 &   99.73 &         0.0028 \\ % /Volumes/Data/song/lr28/all/confusion_log_perf.txt        
+lr77 &  320 &   99.58 &         0.0028  % /Volumes/Data/song/lr77/all/confusion_log_perf.txt          
   \end{tabular}
   \caption{Mean values for the detection accuracies shown in \fig{fig:accuracies}.}
   \label{table:accuracies}
@@ -1040,9 +1044,10 @@ our test syllables, and the mean false positive rate increases by
 roughly 23\%.
 
 Changing the FFT interval to 2 ms significantly reduces the
-computational requirement. We found that some syllables were slightly
-easier to detect and some more difficult, with no significant
-difference on average.
+computational requirement during learning. For most syllables, results
+were identical, but some syllables are slightly easier to detect and
+some slightly more difficult, with no significant difference on
+average.
 
 \subsection{Timing}
 
@@ -1253,26 +1258,26 @@ detector is available under the GNU General Public License 3.
     \end{itemize}
   \item[Usage:]\hfill
     \begin{itemize}
-      \item The main programme is {\tt learn\_detector.m}.
-    \item The top section of {\tt learn\_detector.m} contains global
-      configuration variables.  The important ones are the data
-      directory and the bird name: as supplied, the software looks for
-      {\tt \textless data directory\textgreater/\textless bird
-        name\textgreater/song.mat}.  Modify as necessary.
-    \item The format for the data file {\tt \textless data
-      directory\textgreater/\textless bird name\textgreater/song.mat}
-      is specified in {\tt syllable-detector-learn/README.md}: a
-      MATLAB file containing aligned song, nonsong (calls, cage noise,
-      etc), and the audio sampling frequency.
-    \item The configuration file {\tt \textless data
-      directory\textgreater/\textless bird name\textgreater/params.m}
-      is also described in {\tt README.md}.  If the file is empty, the
-      programme will display an image showing the average of the song
-      spectrograms (frequency vs.~time), tell the user how to define
-      syllables of interest, and exit.  If {\tt times\_of\_interest}
-      is defined, the programme will train the neural network.
-      Optionally, {\tt params.m} can also override any of the
-      configuration parameters at the top of {\tt learn\_detector.m}.
+    \item The main programme is {\tt learn\_detector.m}.
+    \item The top section of {\tt learn\_detector.m}
+      describes the configuration variables.
+    \item The current directory should contain the data in {\tt
+      song.mat}. The format for this file is specified in {\tt
+      README.md}: a MATLAB file containing aligned song, nonsong
+      (calls, cage noise, etc), and the audio sampling frequency.
+    \item {\tt learn\_detector} also looks in the current directory for
+      a configuration file {\tt params.m}, described in {\tt
+        README.md}.  If the file is empty, the programme will display
+      an image showing the average of the song spectrograms (frequency
+      vs.~time), tell the user how to define syllables of interest,
+      and exit.  If {\tt times\_of\_interest\_ms} is defined, the
+      programme will train the neural network.  Optionally, {\tt
+        params.m} can also override any of the configuration
+      parameters at the top of {\tt learn\_detector.m}.
+    \item Configuration may also be controlled by specifying
+      parameter-value pairs to the function call in the common MATLAB
+      fashion; for example, {\tt
+        learn\_detector('times\_of\_interest\_ms', [150 200])}.
     \item The software will produce a neural network file, {\tt
       detector\_bird\_times\_\dots.mat} (the ellipses signify other
       information encoded in the filename).  It will also produce the
