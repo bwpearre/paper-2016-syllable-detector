@@ -682,27 +682,27 @@ performance in feedback experiments on many birds in our lab.
 
 \begin{table}
  \begin{tabular}{c|ccc}
-    Bird & Test songs & Test non-songs & Target time (ms) \\ \hline
-    lny64 & 1818 & 10545 & 150:50:400 \\
-    lny46 & 1000 & 1000 & 195 \\
-    lny42 & 1245 & 1223 & 380 \\
-    lny4rb & 1000 & 1000 & 250 \\
-    lr12 & 2000 & 2008 & 180 \\
-    lr13 & 2000 & 2001 & 300 \\
-    lr28 & 3000 & 3014 & 140 \\
-    lr77 & 2000 & 2008 & 320
+    Bird & Test songs = Test non-songs & Target time (ms) \\ \hline
+    lny64 & 1818 & 150:50:400 \\
+    lny46 & 1000 & 195 \\
+    lny42 & 1245 & 380 \\
+    lny4rb & 1000 & 250 \\
+    lr12 & 2000 & 180 \\
+    lr13 & 2000 & 300 \\
+    lr28 & 3000 & 140 \\
+    lr77 & 2000 & 320
   \end{tabular}
   \caption{For each bird, detectors were trained for the specified
     timepoints, using 1000 songs and 1000 non-song samples of the same
-    length. The rest of the audio samples---shown here---were used to
-    test the learned detectors.}
+    length. The test set consisted of the remaining songs and an
+    equal number of non-songs.}
   \label{table:datasizes}
 \end{table}
 
 Data consisted of extracted, aligned songs, and additional song-length
 samples of non-song (cage noise, calls, other birds' song). These were
 divided into training and test sets. For all birds, we used 1000 songs
-and 1000 non-song samples for training. Table~\ref{table:datasizes}
+and 1000 non-song samples for training. The test set consisted of the remaining songs and an equal number of non-songs. Table~\ref{table:datasizes}
 lists the test dataset sizes and target detection points. For lny64,
 we arbitrarily chose six linearly spaced target times. For each of the
 other birds, we eyeballed one promising-looking detection point.
