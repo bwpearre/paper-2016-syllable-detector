@@ -154,7 +154,7 @@ Author \textsuperscript{a}~contributed the original MATLAB and LabVIEW implement
 %\textpilcrow Membership list can be found in the Acknowledgments section.
 
 % Use the asterisk to denote corresponding authorship and provide email address in note below.
-\textsuperscript{\textcurrency} Corresponding author: bwpearre@gmail.com (BP)
+\textsuperscript{\textcurrency} Corresponding author: bwpearre@bu.edu (BP)
 
 \end{flushleft}
 
@@ -177,7 +177,7 @@ Author \textsuperscript{a}~contributed the original MATLAB and LabVIEW implement
   syllable detector that can control hardware at precisely timed
   moments during zebra finch song.  Many moments during song can be
   isolated and detected with false negative and false positive rates
-  well under 1\% and 0.001\% respectively. The detector can run on a
+  well under 1\% and 0.005\% respectively. The detector can run on a
   stock Mac Mini with triggering delay of less than a millisecond and
   a jitter of $\sigma\approx 2$ milliseconds.
 \end{abstract}
@@ -284,7 +284,7 @@ approach consists of three steps:
 This method makes the following contributions:
 \begin{itemize}
 \item Fast: sub-millisecond latencies, with jitter around 2 ms.
-\item Accurate: false negative rates under 1\% and false positive rates under 0.001\% for a variety of syllables.
+\item Accurate: false negative rates under 1\% and false positive rates under 0.005\% for a variety of syllables.
 \item State-of-the-art performance with default parameters.
 \item Requires almost no programming experience.
 \item Runs on inexpensive hardware.
@@ -340,17 +340,17 @@ like \fig{fig:song}.
 \begin{figure}
   % Width: 8, Height: 3, Fonts scale: 120%
   \includegraphics[width=\textwidth]{Fig1}
-  \caption{The spectrogram of a typical song, used as the example
+  \caption{The spectrogram of the song of lny64, used as an example
     throughout this paper.  This image was made by superposing the
     spectra of our 2818 aligned songs.  Our example detection points,
-    $t^*_1\ldots t^*_6$, are shown as red lines, with the recognition
-    regions (30 ms $\times$ 1--8 kHz) marked as rectangles.}
+    $t^*_1\ldots t^*_6$, are shown as red lines, with example recognition
+    regions of 30 ms $\times$ 1--8 kHz marked as rectangles.}
   \label{fig:song}
 \end{figure}
 
 
 
-Note that this results in time being discretised into chunks of length
+This results in time being discretised into chunks of length
 $t_\mathrm{fft}$.  Because each Fourier transform computation contains
 a small number $n_\mathrm{fft}$ of new audio samples (in the example
 above, 40 new samples and $256-40$ that have already been examined),
@@ -383,19 +383,19 @@ and an audio test file.
 The neural network's inputs are the FFT values from a rectangular
 region of the spectrogram covering a predefined range of frequency
 values $F$ (for example, 1--8 kHz) at some number of the most recent
-frames $n_\textrm{fft}$.  Any time $t$ falls within frame
-$\tau(t)$, and $t-t_\textrm{fft}$ falls within the previous frame, so the recognition region that the neural network receives as input
-consists of the spectrogram values over $F$ at $\tau(t)$ and those
-from the contiguous set of recent frames: $T = \{$ $\tau(t)$,
+frames $n_\textrm{fft}$.  Any time $t$ falls within frame $\tau(t)$,
+and $t-t_\textrm{fft}$ falls within the previous frame, so the
+recognition region that the neural network receives as input consists
+of the spectrogram values over $F$ at $\tau(t)$ and those from the
+contiguous set of recent frames: $T = \{$ $\tau(t)$,
 $\tau(t-t_\textrm{fft})$, $\tau(t-{2t_\textrm{fft}})\ldots$
-$\tau(t-n_\textrm{fft}t_\textrm{fft})\}$.  We have found that a 30-ms
-time window---which will yield $n_\textrm{fft} = |T|=\lfloor 30\textrm{
+$\tau(t-n_\textrm{fft}t_\textrm{fft})\}$.  Time windows of 30--50
+ms---the latter will yield $n_\textrm{fft} = |T|=\lfloor 50\textrm{
   ms}/t_\textrm{fft}\rceil$ frames---of frequencies spanning 1--8 kHz
-works well for most syllables.
+generally work well.
 
-Six examples of chosen target moments in the song, and their
-corresponding recognition regions $F$ and $T$, are shown in
-\fig{fig:song}.
+Six examples of chosen target moments in the song, with recognition
+regions $F = 1--8$ kHz and $T=30$ ms, are shown in \fig{fig:song}.
 
 %% \subsubsection{Song micro-realignment}
 
@@ -499,9 +499,10 @@ $y_t$:
 \begin{equation*}
   y_t = W_1 \tanh (W_0 \xi_t + b_0) + b_1
 \end{equation*}
-During the network's training phase, the elements of the matrices and bias vectors are learned by back-propagation of errors
-over a training set.  A more detailed explanation of neural networks
-may be found in \cite{hkp}.
+During the network's training phase, the elements of the matrices and
+bias vectors are learned by back-propagation of errors over a training
+set.  A more detailed explanation of neural networks may be found in
+\cite{hkp}.
 
 Essentially, after training, the network is available in the form of
 the two matrices $W_0$ and $W_1$ and the two vectors $b_0$ and $b_1$,
@@ -510,12 +511,13 @@ vector additions and the application of the squashing function.
 
 \subsubsection{Training the network}
 
-The network is trained using MATLAB's neural network toolbox, with Scaled Conjugate Gradient ({\tt trainscg}). We tried
-a variety of feedforward neural network geometries, from simple
-1-layer perceptrons to geometries with many hidden nodes, as well as
-autoencoders. Perhaps surprisingly, even the former yields excellent
-results on many syllables, but a 2-layer perceptron with a very small
-hidden layer---with a unit count 2-4 times the number of target
+The network is trained using MATLAB's neural network toolbox, with
+Scaled Conjugate Gradient ({\tt trainscg}). We tried a variety of
+feedforward neural network geometries, from simple 1-layer perceptrons
+to geometries with many hidden nodes, as well as autoencoders. Perhaps
+surprisingly, even the former yields excellent results on many
+syllables, but a 2-layer perceptron with a very small hidden
+layer---with a unit count 2-4 times the number of target
 syllables---was a good compromise between accuracy and training
 speed. For more variable songs, deep structure-preserving networks may
 be more appropriate, but they are slow to train and unnecessary for
@@ -562,7 +564,11 @@ syllables, but various other parameter sets yield results similar to
 those presented here.  Some of the parameters trade off detection
 accuracy or temporal precision vs.~training time. For example,
 decreasing the frame interval generally decreases both latency and
-jitter, but also increases training time.
+jitter, but also increases training time. Sometimes the effects are
+syllable-specific: for example, using a 30-ms time window rather than
+50 ms speeds training while usually having a minimal effect on
+detector performance, but occasionally a syllable will be seen for
+which extending the window to 80 ms is very helpful.
 
 \subsection{Realtime detection}
 
@@ -864,12 +870,11 @@ Committee of Boston University (protocol number 14-029).
 averaging the aligned spectrograms for the bird lny64.  Six target
 trigger points are shown for this song, at 150, 200, 250, 300, 350,
 and 400 milliseconds after the beginning of the aligned samples, as
-indicated by the red lines, and for convenience will be referred to
-henceforth as $t^*_1\ldots t^*_6$ respectively.  For clarity, the
-rectangles show a shorter recognition window than our standard: here
-30 ms, but still spanning 1--8 kHz, for each target time in the
-song.\marginpar{Is this OK?  Should I update to a 50-ms window?
-  They'll overlap.}
+indicated by the red lines. In discussion, we will refer to these six
+as $t^*_1\ldots t^*_6$ respectively.  For clarity, the rectangles show
+a shorter recognition window than our standard: here 30 ms, but still
+spanning 1--8 kHz, for each target time in the song.\marginpar{Is this
+  OK?  Should I update to a 50-ms window?  They'll overlap.}
 
 The first two triggers, $t^*_1$ at 150 ms and $t^*_2$ at 200 ms, are
 far from pure tones, but are closer to bandpass-filtered white noise.  They would be
@@ -972,17 +977,15 @@ that the detector will see.
   \vspace{8pt}\par\noindent
 }
 
-Accuracies for our six test syllables for bird lny64 are shown
-in\marginpar{Update if I include all birds in this figure!}
-\fig{fig:accuracies} (accuracies for the synthetic $\delta$-function
+Accuracies are shown in \fig{fig:accuracies} (accuracies for the synthetic $\delta$-function
 songs were always 100\%).  For each test syllable we trained 100
 different networks, which differ from each other both in the random
-initialisation of network weights and in which random subset of the
-song-and-nonsong corpus was used for training.  Each network's
+initialisation of network weights and in the random subset of the
+song-and-nonsong corpus that was used for training.  Each network's
 accuracy is shown as a single point in each chart in
 \fig{fig:accuracies}, and the means are shown in
 Table~\ref{table:accuracies}.  Evidently some syllables are easier to
-identify reliably than others (for example, $t^*_3$ and $t^*_6$ are
+identify reliably than others (for example, for lny64, $t^*_3$ (250 ms) and $t^*_6$ (400 ms) are
 occasionally confused due to their similar appearance, as could be
 guessed from \fig{fig:song}); thus, if the experimental design
 permits, it can be worthwhile to choose an easily identifiable
@@ -999,37 +1002,47 @@ runs.
   %\includegraphics[width=\textwidth]{accuracies-2hidden}
   
   \caption{Accuracy variability over 100 different training runs for
-    each of the six test syllables for lny64.  Each dot shows the test-set
+    each of the test detection points.  Each dot shows the test-set
     accuracy for an independently trained detector.  Because the
     horizontal positions have been randomised slightly so as not to
     occlude same-valued measurements, test syllable is also indicated
-    by colour.  The means for all birds are given in Table~\ref{table:accuracies}.}
+    by colour.  The means are given in Table~\ref{table:accuracies}.}
   \label{fig:accuracies}
 \end{figure}
 
 \begin{table}
-  \begin{tabular}{rc|rr}
-    Bird & Target time & \% True positives & \% False positives \\ \hline
-    A&$ t^*_1$ & 99.72 &  0.0025 \\ % lny64
-    &$ t^*_2$ & 99.81 &  0.00053 \\
-    &$ t^*_3$ & 99.78 &  0.00062 \\
-    &$ t^*_4$ & 99.69 &  0.00082 \\
-    &$ t^*_5$ & 99.75 &  0.00028 \\
-    &$ t^*_6$ & 99.54 &  0.0012 \\
-    B&$ t^*$ & 99.370992640000068   &0.003887539045000 \\ % lny46
-    C&$ t^*$ & 99.218862389999998   &0.001205787775200 \\ % lny42
-    D&$ t^*$ & 99.342842499999975   &0.00260723410200  \\ % lny4rb
-    E& $t^*$ & 99.726635259999981   &0.003169430259900 \\ % lr28
-    E& $t^*$ & 99.464679732673261   &0.004515502156436 \\ % lr12
-    E& $t^*$ & 99.862406879999966   &0.001215710723800 \\ % lr13
-    E& $t^*$ & 99.646613329999980   &0.003110002775000 % lr77
+  % replot_accuracies_concatanated('tex', true) for confusion_log_perf.txt (1.5 ms).
+  \begin{tabular}{lc|cc}
+    Bird & Target time (ms) & \% True positives & \% False positives \\ \hline
+lny64 & 	150 $[t^*_1]$ & 	99.66 & 	0.0026 \\ % /Volumes/Data/song/lny64/confusion_log_perf.txt
+      & 	200 $[t^*_2]$ & 	99.75 & 	0.00052 \\ %                                               
+      & 	250 $[t^*_3]$ & 	99.79 & 	0.00051 \\ %                                               
+      & 	300 $[t^*_4]$ & 	99.70 & 	0.00077 \\ %                                               
+      & 	350 $[t^*_5]$ & 	99.73 & 	0.00022 \\ %                                               
+      & 	400 $[t^*_6]$ & 	99.52 & 	0.0010 \\ %                                                
+lny42 & 	380 & 	99.09 & 	0.0011 \\ % /Volumes/Data/song/lny42/confusion_log_perf.txt          
+lny46 & 	140 & 	99.53 & 	0.0041 \\ % /Volumes/Data/song/lny46/confusion_log_perf.txt          
+lny4rb & 	250 & 	99.36 & 	0.0025 \\ % /Volumes/Data/song/lny4rb/confusion_log_perf.txt        
+lr12 & 	180 & 	99.52 & 	0.0033 \\ % /Volumes/Data/song/lr12/all/confusion_log_perf.txt        
+lr13 & 	300 & 	99.83 & 	0.0013 \\ % /Volumes/Data/song/lr13/all/confusion_log_perf.txt        
+lr28 & 	140 & 	99.73 & 	0.0028 \\ % /Volumes/Data/song/lr28/all/confusion_log_perf.txt        
+lr77 & 	320 & 	99.58 & 	0.0028  % /Volumes/Data/song/lr77/all/confusion_log_perf.txt          
   \end{tabular}
   \caption{Mean values for the detection accuracies shown in \fig{fig:accuracies}.}
   \label{table:accuracies}
 \end{table}
   
 
-We repeated the above experiment using only 2 hidden units per syllable.  Training under this condition is much faster, but the mean true positive rate per syllable decreases by an average of 18\% across our test syllables, and the mean false positive rate increases by roughly 23\%.
+We repeated the above experiment using only 2 hidden units per
+syllable.  Training under this condition is much faster, but the mean
+true positive rate per syllable decreases by an average of 18\% across
+our test syllables, and the mean false positive rate increases by
+roughly 23\%.
+
+Changing the FFT interval to 2 ms significantly reduces the
+computational requirement. We found that some syllables were slightly
+easier to detect and some more difficult, with no significant
+difference on average.
 
 \subsection{Timing}
 
@@ -1102,8 +1115,8 @@ We compared latency and jitter across our different detector
 implementations for the $\delta$-syllable and lny64's $t^*_4$, again with
 $t_\mathrm{fft}=1.5$ ms.  Results are as follows:
 \vspace{8pt}
-\begin{tabular}{l|c|c|c| c}
-  & \multicolumn{2}{c}{$\delta$-syllable} & \multicolumn{2}{c}{Bird lny64: $t^*_4$} \\
+\begin{tabular}{l|c|c|c|c}
+  & \multicolumn{2}{c}{$\delta$-syllable} & \multicolumn{2}{c}{Bird: $t^*_4$} \\
   Detector & Latency (ms) & Jitter (ms) & Latency (ms) & Jitter (ms) \\
   \hline
   Ideal & 0.66 & 0.38 & -1.0 & 2.0 \\
@@ -1148,7 +1161,7 @@ also likely to work well for Bengalese finches due to their similarly stereotype
 following benefits:
 \begin{itemize}
 \item The detector is accurate. False negative and false positive
-  rates can be well under 1\% and 0.001\% respectively, and trading
+  rates can be well under 1\% and 0.005\% respectively, and trading
   these two numbers off against each other is through a single
   relative-cost parameter.
 \item Latency is generally under a millisecond, with jitter around 2
