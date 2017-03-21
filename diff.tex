@@ -1,7 +1,7 @@
 \documentclass[10pt,letterpaper]{article}
 %DIF LATEXDIFF DIFFERENCE FILE
 %DIF DEL ../paper-2016-syllable-detector-last-submitted-version/main.tex   Mon Mar 20 16:13:51 2017
-%DIF ADD main.tex                                                          Mon Mar 20 16:58:01 2017
+%DIF ADD main.tex                                                          Tue Mar 21 15:12:34 2017
 \usepackage[top=0.85in,left=2.75in,footskip=0.75in]{geometry}
 
 % Use adjustwidth environment to exceed column width (see example table in text)
@@ -291,20 +291,19 @@ well as external sounds, and concluded that these regions }\DIFdelend may hold a
 signals are compared \DIFdelbegin \DIFdel{.
 \mbox{%DIFAUXCMD
 \cite{Tumer2007pitchshift} }%DIFAUXCMD
-played a disruptive sound during renditions
-}\DIFdelend \DIFaddbegin \DIFadd{\mbox{%DIFAUXCMD
+played a disruptive sound during }\DIFdelend \DIFaddbegin \DIFadd{\mbox{%DIFAUXCMD
 \cite{Keller2009}}%DIFAUXCMD
-.  Renditions }\DIFaddend of a syllable that
-were \DIFaddbegin \DIFadd{disrupted by white noise when they were }\DIFaddend slightly above (or below)
-\DIFdelbegin \DIFdel{its average pitch ,
-and }\DIFdelend \DIFaddbegin \DIFadd{the syllable's average pitch }\DIFaddend showed that the \DIFdelbegin \DIFdel{presence of this }\DIFdelend apparently random natural
+.  The disruption by white noise
+of }\DIFaddend renditions of a syllable that were slightly above (or below) \DIFdelbegin \DIFdel{its average pitch ,
+and }\DIFdelend \DIFaddbegin \DIFadd{the
+syllable's average pitch }\DIFaddend showed that the \DIFdelbegin \DIFdel{presence of this }\DIFdelend apparently random natural
 variability in songbird motor output is used to drive change in the
 song \DIFdelbegin \DIFdel{.  \mbox{%DIFAUXCMD
 \cite{Andalman2009} }%DIFAUXCMD
 extended this experiment and showed that
 }\DIFdelend \DIFaddbegin \DIFadd{\mbox{%DIFAUXCMD
 \cite{Tumer2007pitchshift}}%DIFAUXCMD
-. Furthermore, }\DIFaddend AFP produces a
+, and }\DIFaddend AFP produces a
 corrective signal to bias song away from those disruptions
 \DIFdelbegin \DIFdel{.  \mbox{%DIFAUXCMD
 \cite{Charlesworth2011learning} }%DIFAUXCMD
@@ -342,7 +341,7 @@ is no standard syllable detector.  Desiderata \DIFaddbegin \DIFadd{for such a de
 \begin{description}
 \item[Accuracy:] How often does the system produce false positives or false negatives?
 \item[Latency:] The average delay between the target syllable being sung and the detection.
-\item[Jitter:] The amount that latency changes from instance to instance of song.  Our measure of jitter is the standard deviation $\sigma$ of latency.
+\item[Jitter:] The amount that latency changes from instance to instance of song.  Our measure of jitter is the standard deviation \DIFdelbegin \DIFdel{$\sigma$ }\DIFdelend of latency.
 \item[Versatility:] Is detection possible at ``difficult'' syllables?
 \item[Ease of use:] How automated is the process of programming a detector?
 \item[Cost:] What are the hardware and software requirements?
@@ -356,7 +355,7 @@ used groups }\DIFdelend \DIFaddbegin \DIFadd{detection was achieved by a group }
 operators \DIFdelbegin \DIFdel{.  Their }\DIFdelend \DIFaddbegin \DIFadd{\mbox{%DIFAUXCMD
 \cite{Leonardo1999}}%DIFAUXCMD
 .  The }\DIFaddend system had a latency of 50 or 100 ms,
-and \DIFdelbegin \DIFdel{they did not report on }\DIFdelend jitter or accuracy \DIFaddbegin \DIFadd{were not reported}\DIFaddend .  As access to
+and \DIFdelbegin \DIFdel{they did not report on jitter or accuracy }\DIFdelend \DIFaddbegin \DIFadd{accuracy and jitter were not reported}\DIFaddend .  As access to
 computational resources has improved, approaches have changed: in
 2009, \DIFdelbegin \DIFdel{\mbox{%DIFAUXCMD
 \cite{Andalman2009} }%DIFAUXCMD
@@ -372,7 +371,7 @@ target syllables.  Furthermore, the method is neither inexpensive nor,
 based on our experience with a similar technique, accurate.
 \DIFdelbegin \DIFdel{\mbox{%DIFAUXCMD
 \cite{Keller2009} }%DIFAUXCMD
-applied }\DIFdelend \DIFaddbegin \DIFadd{2009 also saw the application of }\DIFaddend a neural network to a spectral image of
+applied }\DIFdelend \DIFaddbegin \DIFadd{2009 saw the application of }\DIFaddend a neural network to a spectral image of
 song \DIFaddbegin \DIFadd{\mbox{%DIFAUXCMD
 \cite{Keller2009}}%DIFAUXCMD
 }\DIFaddend .  They reported a jitter of 4.3 ms, but further implementation and
@@ -406,7 +405,10 @@ outputs a TTL pulse (a brief 5-volt pulse) at the chosen moment. The
 approach consists of three steps:
 
 \begin{enumerate}
-\item Record and align a corpus of training songs.  The technique has been published in \cite{Poole2012}. \DIFaddbegin \DIFadd{200 songs generally yield acceptable results, but here we standardise on 1000-song training sets.
+\item Record and align a corpus of training songs.  The technique has
+  been published in \cite{Poole2012}. \DIFaddbegin \DIFadd{As few as 200 songs can yield
+  acceptable results, but here we standardise on 1000-song training
+  sets.
 }\DIFaddend \item Choose one or more instants in the song that should create a trigger event, and train a
   neural network to recognise them. This step is carried out offline.  While any neural network software would produce \DIFdelbegin \DIFdel{equivalent }\DIFdelend \DIFaddbegin \DIFadd{similar }\DIFaddend results, we used MATLAB 2015b's neural network toolbox.
 \item Once trained and saved, the neural network is used by a realtime
@@ -440,11 +442,13 @@ We begin with a few hundred recordings of a given bird's song, as well
 as calls, cage noise, and other non-song audio data.  Male zebra finch
 song is most highly stereotyped when a female is present (``directed
 song'') and slightly more variable otherwise (``undirected''); we
-train and test on undirected song since this is more commonly studied,
-as well as more challenging.  Recordings were made inside a
+train and test on undirected song since this is \DIFaddbegin \DIFadd{both }\DIFaddend more commonly
+studied \DIFdelbegin \DIFdel{,
+as well as }\DIFdelend \DIFaddbegin \DIFadd{and }\DIFaddend more challenging.  Recordings were made inside a
 sound-isolating chamber in which was mounted a recording microphone
-(Audio-Technica AT803), using methods similar to those described in \cite{Tchernichovski2011SAP}, Chapter 2.  The songs were
-time-aligned as described in \cite{Poole2012}.
+(Audio-Technica AT803), using methods similar to those described in
+\cite{Tchernichovski2011SAP}, Chapter 2.  The songs were time-aligned
+as described in \cite{Poole2012}.
 
 We rely on two circular buffers:
 \begin{description}
@@ -532,7 +536,7 @@ ms---the latter will yield $n_\textrm{fft} = |T|=\lfloor 50\textrm{
 Six examples of chosen target moments in the song, \DIFdelbegin \DIFdel{and their
 corresponding recognition
 regions $F$ and $T$}\DIFdelend \DIFaddbegin \DIFadd{with recognition
-regions $F = 1--8$ kHz and $T=30$ ms}\DIFaddend , are shown in \fig{fig:song}.
+regions $F =$ 1--8 kHz and $T=30$ ms}\DIFaddend , are shown in \fig{fig:song}.
 
 %% \subsubsection{Song micro-realignment}
 
@@ -583,7 +587,8 @@ depend on the makeup of the non-song data, we have found that training
 with as low as a 1:1 ratio of non-song to song---or roughly \DIFdelbegin \DIFdel{10-20
 }\DIFdelend \DIFaddbegin \DIFadd{10
 }\DIFaddend minutes of non-song audio---yields excellent results on most birds.
-These data are also included in our accuracy tests.
+\DIFdelbegin \DIFdel{These data are also included in our accuracy tests.
+}\DIFdelend 
 
 
 \subsubsection{Normalisation}
@@ -682,10 +687,10 @@ $\Delta t=10$ ms, and arbitrarily set $C_n=1$.
 
 \subsubsection{De-bouncing}
 
-During runtime, the network may produce above-threshold responses to nearby
-frames.  Thus, after the first response, subsequent responses are suppressed
-for 100 ms.  However, for the accuracy figures presented here, we used
-the un-de-bounced network response.
+During runtime, the network may produce above-threshold responses to
+nearby frames.  Thus, after the first response, subsequent responses
+are suppressed for 100 ms.  However, for the accuracy \DIFdelbegin \DIFdel{figures }\DIFdelend \DIFaddbegin \DIFadd{measurements
+}\DIFaddend presented here, we used the un-de-bounced network response.
 
 \subsubsection{Our parameter choices}
 
@@ -705,8 +710,9 @@ decreasing the frame interval generally decreases both latency and
 jitter, but also increases training time. \DIFaddbegin \DIFadd{Sometimes the effects are
 syllable-specific: for example, using a 30-ms time window rather than
 50 ms speeds training while usually having a minimal effect on
-detector performance, but occasionally a syllable will be seen for
-which extending the window to 80 ms is very helpful.
+detector performance (as is the case, for example, for all of the
+detection points for lny64), but occasionally a syllable will be seen
+for which extending the window to 80 ms is helpful.
 }\DIFaddend 
 
 \subsection{Realtime detection}
@@ -769,7 +775,7 @@ processor at 2.6GHz  with 16 gigabytes of RAM, running Mac OS X 10.11.
 This implementation requires special software and hardware: LabVIEW
 from National Instruments---we used 2014 service pack 1---and a data acquisition card---we use the
 National Instruments PCI-6251 card on a PC with an Intel Core i5-4590
-processor at 3.7GHz (a relatively low-end machine) with 32 gigabytes
+processor at 3.7GHz (a relatively low-end machine) with \DIFdelbegin \DIFdel{32 }\DIFdelend \DIFaddbegin \DIFadd{24 }\DIFaddend gigabytes
 of RAM, running Microsoft Windows 8.1 Pro \DIFdelbegin \DIFdel{.
 }\DIFdelend \DIFaddbegin \DIFadd{and Windows 10.
 }\DIFaddend 
@@ -833,29 +839,28 @@ performance \DIFdelbegin \DIFdel{over }\DIFdelend \DIFaddbegin \DIFadd{in feedba
 \DIFdelbegin \DIFdel{We divided the data into training and test sets.  For the results
 reported in the following section, the training set consisted of }\DIFdelend \DIFaddbegin \begin{table}
  \begin{tabular}{c|ccc}
-    \DIFaddFL{Bird }& \DIFaddFL{Test songs }& \DIFaddFL{Test non-songs }& \DIFaddFL{Target time (ms) }\\ \hline
-    \DIFaddFL{lny64 }& \DIFaddFL{1818 }& \DIFaddFL{10545 }& \DIFaddFL{150:50:400 }\\
-    \DIFaddFL{lny46 }& \DIFaddendFL 1000 \DIFdelbeginFL \DIFdelFL{instances of the song of one bird, and }\DIFdelendFL \DIFaddbeginFL & \DIFaddFL{1000 }& \DIFaddFL{195 }\\
-    \DIFaddFL{lny42 }& \DIFaddFL{1245 }& \DIFaddFL{1223 }& \DIFaddFL{380 }\\
-    \DIFaddFL{lny4rb }& \DIFaddFL{1000 }& \DIFaddFL{1000 }& \DIFaddFL{250 }\\
-    \DIFaddFL{lr12 }& \DIFaddendFL 2000 \DIFaddbeginFL & \DIFaddFL{2008 }& \DIFaddFL{180 }\\
-    \DIFaddFL{lr13 }& \DIFaddFL{2000 }& \DIFaddFL{2001 }& \DIFaddFL{300 }\\
-    \DIFaddFL{lr28 }& \DIFaddFL{3000 }& \DIFaddFL{3014 }& \DIFaddFL{140 }\\
-    \DIFaddFL{lr77 }& \DIFaddFL{2000 }& \DIFaddFL{2008 }& \DIFaddFL{320
+    \DIFaddFL{Bird }& \DIFaddFL{Test songs = Test non-songs }& \DIFaddFL{Target time (ms) }\\ \hline
+    \DIFaddFL{lny64 }& \DIFaddFL{1818 }& \DIFaddFL{150:50:400 }\\
+    \DIFaddFL{lny46 }& \DIFaddendFL 1000 \DIFdelbeginFL \DIFdelFL{instances of the song of one bird, and }\DIFdelendFL \DIFaddbeginFL & \DIFaddFL{195 }\\
+    \DIFaddFL{lny42 }& \DIFaddFL{1245 }& \DIFaddFL{380 }\\
+    \DIFaddFL{lny4rb }& \DIFaddFL{1000 }& \DIFaddFL{250 }\\
+    \DIFaddFL{lr12 }& \DIFaddendFL 2000 \DIFaddbeginFL & \DIFaddFL{180 }\\
+    \DIFaddFL{lr13 }& \DIFaddFL{2000 }& \DIFaddFL{300 }\\
+    \DIFaddFL{lr28 }& \DIFaddFL{3000 }& \DIFaddFL{140 }\\
+    \DIFaddFL{lr77 }& \DIFaddFL{2000 }& \DIFaddFL{320
   }\end{tabular}
   \caption{\DIFaddFL{For each bird, detectors were trained for the specified
     timepoints, using 1000 songs and 1000 non-song samples of the same
-    length. The rest of the audio samples---shown here---were used to
-    test the learned detectors.}}
+    length. The test set consisted of the remaining songs and an
+    equal number of non-songs.}}
   \label{table:datasizes}
 \end{table}
 
 \DIFadd{Data consisted of extracted, aligned songs, and additional }\DIFaddend song-length
-samples of non-song (cage noise, calls, other birds' song). \DIFdelbegin \DIFdel{Our test set
-consisted of an additional 1818 iterations of the bird's song and 3636
-song-length samples of non-song}\DIFdelend \DIFaddbegin \DIFadd{These were
+samples of non-song (cage noise, calls, other birds' song). \DIFdelbegin \DIFdel{Our test }\DIFdelend \DIFaddbegin \DIFadd{These were
 divided into training and test sets. For all birds, we used 1000 songs
-and 1000 non-song samples for training. Table~\ref{table:datasizes}
+and 1000 non-song samples for training. The test }\DIFaddend set consisted of \DIFdelbegin \DIFdel{an additional 1818 iterations of the bird's song and 3636
+song-length samples of non-song}\DIFdelend \DIFaddbegin \DIFadd{the remaining songs and an equal number of non-songs. Table~\ref{table:datasizes}
 lists the test dataset sizes and target detection points. For lny64,
 we arbitrarily chose six linearly spaced target times. For each of the
 other birds, we eyeballed one promising-looking detection point}\DIFaddend .
@@ -889,11 +894,13 @@ canonical detection event provided by the }\DIFaddend right channel.
 
 We define the accuracy of the network based on its classification
 performance per frame. In order to avoid the apparent problem of every
-non-detected non-syllable counting as a true negative, we also tried
-defining accuracy on a per-song basis, such that a song-length sample without the
-target syllable counted as a single true negative.  Computing the
-optimal output thresholds on a per-frame rather than a per-song basis resulted in higher
-thresholds and thus a slight reduction in both the false-positive and true-positive rates (reversible by increasing $C_n$), while also providing a valid
+non-detected \DIFdelbegin \DIFdel{non-syllable }\DIFdelend \DIFaddbegin \DIFadd{non-matching frame }\DIFaddend counting as a true negative, we also
+tried defining accuracy on a per-song basis, such that a song-length
+sample without the target syllable counted as a single true negative.
+Computing the optimal output thresholds on a per-frame rather than a
+per-song basis resulted in higher thresholds and thus a slight
+reduction in both the false-positive and true-positive rates
+(reversible by increasing $C_n$), while also providing a valid
 definition of false-positive rate for data streams that had not been
 segmented into song-sized chunks and thus allowing easy interpretation
 of false-positive rates from calls, cage noise, etc.
@@ -1024,11 +1031,9 @@ trigger points are shown \DIFaddbegin \DIFadd{for this song}\DIFaddend , at 150,
 and 400 milliseconds after the beginning of the aligned samples, as
 indicated by the red lines\DIFdelbegin \DIFdel{, and referred to henceforth }\DIFdelend \DIFaddbegin \DIFadd{. In discussion, we will refer to these six
 }\DIFaddend as $t^*_1\ldots t^*_6$ respectively.  \DIFdelbegin \DIFdel{The rectangles show
-the recognition window (}\DIFdelend \DIFaddbegin \DIFadd{For clarity, the rectangles show
+the recognition window (}\DIFdelend \DIFaddbegin \DIFadd{To avoid overlap in the graphic, the rectangles show
 a shorter recognition window than our standard: here }\DIFaddend 30 ms, \DIFaddbegin \DIFadd{but still
-spanning }\DIFaddend 1--8 kHz\DIFdelbegin \DIFdel{) for each instant }\DIFdelend \DIFaddbegin \DIFadd{, for each target time }\DIFaddend in the song.\DIFaddbegin \marginpar{Is this
-  OK?  Should I update to a 50-ms window?  They'll overlap.}
-\DIFaddend 
+spanning }\DIFaddend 1--8 kHz\DIFdelbegin \DIFdel{) for each instant }\DIFdelend \DIFaddbegin \DIFadd{, for each target time }\DIFaddend in the song.
 
 The first two triggers, $t^*_1$ at 150 ms and $t^*_2$ at 200 ms, are
 far from pure tones, but are closer to \DIFdelbegin \DIFdel{coloured }\DIFdelend \DIFaddbegin \DIFadd{bandpass-filtered white }\DIFaddend noise.  They would be
@@ -1172,20 +1177,19 @@ runs.
 \DIFdelFL{Target time }\DIFdelendFL %DIF >  replot_accuracies_concatanated('tex', true) for confusion_log_perf.txt (1.5 ms).
   \DIFaddbeginFL \begin{tabular}{lc|cc}
     \DIFaddFL{Bird }& \DIFaddFL{Target time (ms) }\DIFaddendFL & \% True positives & \% False positives \\ \hline
-\DIFdelbeginFL \DIFdelFL{$t^*_1$ }\DIFdelendFL \DIFaddbeginFL \DIFaddFL{lny64 }\DIFaddendFL & 	\DIFdelbeginFL \DIFdelFL{99.34 }\DIFdelendFL \DIFaddbeginFL \DIFaddFL{150 $[t^*_1]$ }\DIFaddendFL & 	\DIFdelbeginFL \DIFdelFL{0.0015 }\DIFdelendFL \DIFaddbeginFL \DIFaddFL{99.66 }& 	\DIFaddFL{0.0026 }\DIFaddendFL \\ \DIFdelbeginFL \DIFdelFL{$t^*_2$ }\DIFdelendFL %DIF >  /Volumes/Data/song/lny64/confusion_log_perf.txt
-      & 	\DIFdelbeginFL \DIFdelFL{99.65 }\DIFdelendFL \DIFaddbeginFL \DIFaddFL{200 $[t^*_2]$ }\DIFaddendFL & 	\DIFdelbeginFL \DIFdelFL{0.00040 }\DIFdelendFL \DIFaddbeginFL \DIFaddFL{99.75 }& 	\DIFaddFL{0.00052 }\DIFaddendFL \\ \DIFdelbeginFL \DIFdelFL{$t^*_3$ }\DIFdelendFL %DIF >                                                
-      & 	\DIFdelbeginFL \DIFdelFL{98.98 }\DIFdelendFL \DIFaddbeginFL \DIFaddFL{250 $[t^*_3]$ }\DIFaddendFL & 	\DIFdelbeginFL \DIFdelFL{0.0015 }\DIFdelendFL \DIFaddbeginFL \DIFaddFL{99.79 }& 	\DIFaddFL{0.00051 }\DIFaddendFL \\ \DIFdelbeginFL \DIFdelFL{$t^*_4$ }\DIFdelendFL %DIF >                                                
-      & 	\DIFdelbeginFL \DIFdelFL{99.30 }\DIFdelendFL \DIFaddbeginFL \DIFaddFL{300 $[t^*_4]$ }\DIFaddendFL & 	\DIFdelbeginFL \DIFdelFL{0.00093 }\DIFdelendFL \DIFaddbeginFL \DIFaddFL{99.70 }& 	\DIFaddFL{0.00077 }\DIFaddendFL \\ \DIFdelbeginFL \DIFdelFL{$t^*_5$ }\DIFdelendFL %DIF >                                                
-      & 	\DIFaddbeginFL \DIFaddFL{350 $[t^*_5]$ }& 	\DIFaddendFL 99.73 & 	\DIFdelbeginFL \DIFdelFL{0.000094 }\DIFdelendFL \DIFaddbeginFL \DIFaddFL{0.00022 }\DIFaddendFL \\ \DIFdelbeginFL \DIFdelFL{$t^*_6$ }\DIFdelendFL %DIF >                                                
-      & 	\DIFdelbeginFL \DIFdelFL{98.31 }\DIFdelendFL \DIFaddbeginFL \DIFaddFL{400 $[t^*_6]$ }\DIFaddendFL & 	\DIFdelbeginFL \DIFdelFL{0.0026
-  }\DIFdelendFL \DIFaddbeginFL \DIFaddFL{99.52 }& 	\DIFaddFL{0.0010 }\\ %DIF >                                                 
-\DIFaddFL{lny42 }& 	\DIFaddFL{380 }& 	\DIFaddFL{99.09 }& 	\DIFaddFL{0.0011 }\\ %DIF >  /Volumes/Data/song/lny42/confusion_log_perf.txt          
-\DIFaddFL{lny46 }& 	\DIFaddFL{140 }& 	\DIFaddFL{99.53 }& 	\DIFaddFL{0.0041 }\\ %DIF >  /Volumes/Data/song/lny46/confusion_log_perf.txt          
-\DIFaddFL{lny4rb }& 	\DIFaddFL{250 }& 	\DIFaddFL{99.36 }& 	\DIFaddFL{0.0025 }\\ %DIF >  /Volumes/Data/song/lny4rb/confusion_log_perf.txt        
-\DIFaddFL{lr12 }& 	\DIFaddFL{180 }& 	\DIFaddFL{99.52 }& 	\DIFaddFL{0.0033 }\\ %DIF >  /Volumes/Data/song/lr12/all/confusion_log_perf.txt        
-\DIFaddFL{lr13 }& 	\DIFaddFL{300 }& 	\DIFaddFL{99.83 }& 	\DIFaddFL{0.0013 }\\ %DIF >  /Volumes/Data/song/lr13/all/confusion_log_perf.txt        
-\DIFaddFL{lr28 }& 	\DIFaddFL{140 }& 	\DIFaddFL{99.73 }& 	\DIFaddFL{0.0028 }\\ %DIF >  /Volumes/Data/song/lr28/all/confusion_log_perf.txt        
-\DIFaddFL{lr77 }& 	\DIFaddFL{320 }& 	\DIFaddFL{99.58 }& 	\DIFaddFL{0.0028  %DIF >  /Volumes/Data/song/lr77/all/confusion_log_perf.txt          
+\DIFdelbeginFL \DIFdelFL{$t^*_1$ }\DIFdelendFL \DIFaddbeginFL \DIFaddFL{lny64 }\DIFaddendFL &         \DIFdelbeginFL \DIFdelFL{99.34 }\DIFdelendFL \DIFaddbeginFL \DIFaddFL{150 $[t^*_1]$ }\DIFaddendFL &         \DIFdelbeginFL \DIFdelFL{0.0015 }\DIFdelendFL \DIFaddbeginFL \DIFaddFL{99.66 }&         \DIFaddFL{0.0026 }\DIFaddendFL \\ \DIFdelbeginFL \DIFdelFL{$t^*_2$ }\DIFdelendFL %DIF >  /Volumes/Data/song/lny64/confusion_log_perf.txt
+      &         \DIFdelbeginFL \DIFdelFL{99.65 }\DIFdelendFL \DIFaddbeginFL \DIFaddFL{200 $[t^*_2]$ }\DIFaddendFL &         \DIFdelbeginFL \DIFdelFL{0.00040 }\DIFdelendFL \DIFaddbeginFL \DIFaddFL{99.75 }&         \DIFaddFL{0.00052 }\DIFaddendFL \\ \DIFdelbeginFL \DIFdelFL{$t^*_3$ }\DIFdelendFL %DIF >                                                
+      &         \DIFdelbeginFL \DIFdelFL{98.98 }\DIFdelendFL \DIFaddbeginFL \DIFaddFL{250 $[t^*_3]$ }\DIFaddendFL &         \DIFdelbeginFL \DIFdelFL{0.0015 }\DIFdelendFL \DIFaddbeginFL \DIFaddFL{99.79 }&         \DIFaddFL{0.00051 }\DIFaddendFL \\ \DIFdelbeginFL \DIFdelFL{$t^*_4$ }\DIFdelendFL %DIF >                                                
+      &         \DIFdelbeginFL \DIFdelFL{99.30 }\DIFdelendFL \DIFaddbeginFL \DIFaddFL{300 $[t^*_4]$ }\DIFaddendFL &         \DIFdelbeginFL \DIFdelFL{0.00093 }\DIFdelendFL \DIFaddbeginFL \DIFaddFL{99.70 }&         \DIFaddFL{0.00077 }\DIFaddendFL \\ \DIFdelbeginFL \DIFdelFL{$t^*_5$ }\DIFdelendFL %DIF >                                                
+      &         \DIFaddbeginFL \DIFaddFL{350 $[t^*_5]$ }&         \DIFaddendFL 99.73 &         \DIFdelbeginFL \DIFdelFL{0.000094 }\DIFdelendFL \DIFaddbeginFL \DIFaddFL{0.00022 }\DIFaddendFL \\ \DIFdelbeginFL \DIFdelFL{$t^*_6$ }\DIFdelendFL %DIF >                                                
+      &         \DIFdelbeginFL \DIFdelFL{98.31 }\DIFdelendFL \DIFaddbeginFL \DIFaddFL{400 $[t^*_6]$ }\DIFaddendFL &         \DIFaddbeginFL \DIFaddFL{99.52 }&         \DIFaddFL{0.0010 }\\ %DIF >                                                 
+\DIFaddFL{lny42 }&         \DIFaddFL{380 }&   \DIFaddFL{99.09 }&         \DIFaddFL{0.0011 }\\ %DIF >  /Volumes/Data/song/lny42/confusion_log_perf.txt          
+\DIFaddFL{lny46 }&         \DIFaddFL{140 }&   \DIFaddFL{99.17 }&         \DIFaddFL{0.0037 }\\ %DIF >  /Volumes/Data/song/lny46/confusion_log_perf.txt          
+\DIFaddFL{lny4rb }&        \DIFaddFL{250 }&   \DIFaddFL{99.37 }&         \DIFaddendFL 0.0026 \DIFaddbeginFL \\ %DIF >  /Volumes/Data/song/lny4rb/confusion_log_perf.txt        
+\DIFaddFL{lr12 }&  \DIFaddFL{180 }&   \DIFaddFL{99.52 }&         \DIFaddFL{0.0033 }\\ %DIF >  /Volumes/Data/song/lr12/all/confusion_log_perf.txt        
+\DIFaddFL{lr13 }&  \DIFaddFL{300 }&   \DIFaddFL{99.83 }&         \DIFaddFL{0.0013 }\\ %DIF >  /Volumes/Data/song/lr13/all/confusion_log_perf.txt        
+\DIFaddFL{lr28 }&  \DIFaddFL{140 }&   \DIFaddFL{99.73 }&         \DIFaddFL{0.0028 }\\ %DIF >  /Volumes/Data/song/lr28/all/confusion_log_perf.txt        
+\DIFaddFL{lr77 }&  \DIFaddFL{320 }&   \DIFaddFL{99.58 }&         \DIFaddFL{0.0028  %DIF >  /Volumes/Data/song/lr77/all/confusion_log_perf.txt          
   }\DIFaddendFL \end{tabular}
   \caption{Mean values for the detection accuracies shown in \fig{fig:accuracies}.}
   \label{table:accuracies}
@@ -1199,9 +1203,10 @@ our test syllables, and the mean false positive rate increases by
 roughly 23\%.
 
 \DIFaddbegin \DIFadd{Changing the FFT interval to 2 ms significantly reduces the
-computational requirement. We found that some syllables were slightly
-easier to detect and some more difficult, with no significant
-difference on average.
+computational requirement during learning. For most syllables, results
+were identical, but some syllables are slightly easier to detect and
+some slightly more difficult, with no significant difference on
+average.
 }
 
 \DIFaddend \subsection{Timing}
@@ -1418,26 +1423,38 @@ detector is available under \DIFdelbegin \DIFdel{an open-source license }%DIFDEL
     \end{itemize}
   \item[Usage:]\hfill
     \begin{itemize}
-      \item The main programme is {\tt learn\_detector.m}.
-    \item The top section of {\tt learn\_detector.m} contains global
-      configuration variables.  The important ones are the data
+    \item The main programme is {\tt learn\_detector.m}.
+    \item The top section of {\tt learn\_detector.m}
+      \DIFdelbegin \DIFdel{contains global
+      }\DIFdelend \DIFaddbegin \DIFadd{describes the }\DIFaddend configuration variables.
+    \DIFdelbegin \DIFdel{The important ones are the data
       directory and the bird name: as supplied, the software looks for
-      {\tt \textless data directory\textgreater/\textless bird
-        name\textgreater/song.mat}.  Modify as necessary.
-    \item The format for the data file {\tt \textless data
-      directory\textgreater/\textless bird name\textgreater/song.mat}
-      is specified in {\tt syllable-detector-learn/README.md}: a
-      MATLAB file containing aligned song, nonsong (calls, cage noise,
-      etc), and the audio sampling frequency.
-    \item The configuration file {\tt \textless data
-      directory\textgreater/\textless bird name\textgreater/params.m}
-      is also described in {\tt README.md}.  If the file is empty, the
-      programme will display an image showing the average of the song
-      spectrograms (frequency vs.~time), tell the user how to define
-      syllables of interest, and exit.  If {\tt times\_of\_interest}
-      is defined, the programme will train the neural network.
-      Optionally, {\tt params.m} can also override any of the
-      configuration parameters at the top of {\tt learn\_detector.m}.
+      }\DIFdelend \DIFaddbegin \item \DIFadd{The current directory should contain the data in }\DIFaddend {\tt
+      \DIFdelbegin \DIFdel{\textless data directory\textgreater/\textless bird
+        name\textgreater/}\DIFdelend song.mat}. \DIFdelbegin \DIFdel{Modify as necessary.
+    }%DIFDELCMD < \item %%%
+\item%DIFAUXCMD
+\DIFdelend The format for \DIFdelbegin \DIFdel{the data file }%DIFDELCMD < {\tt %%%
+\DIFdel{\textless data
+      directory\textgreater/\textless bird name\textgreater/song.mat}%DIFDELCMD < }
+%DIFDELCMD <       %%%
+\DIFdelend \DIFaddbegin \DIFadd{this file }\DIFaddend is specified in {\tt
+      \DIFdelbegin \DIFdel{syllable-detector-learn/}\DIFdelend README.md}: a MATLAB file containing aligned song, nonsong
+      (calls, cage noise, etc), and the audio sampling frequency.
+    \item \DIFdelbegin \DIFdel{The }\DIFdelend \DIFaddbegin {\tt \DIFadd{learn\_detector}} \DIFadd{also looks in the current directory for
+      a }\DIFaddend configuration file {\tt \DIFdelbegin \DIFdel{\textless data
+      directory\textgreater/\textless bird name\textgreater/}\DIFdelend params.m}\DIFdelbegin \DIFdel{is also }\DIFdelend \DIFaddbegin \DIFadd{, }\DIFaddend described in {\tt
+        README.md}.  If the file is empty, the programme will display
+      an image showing the average of the song spectrograms (frequency
+      vs.~time), tell the user how to define syllables of interest,
+      and exit.  If {\tt times\_of\_interest\DIFaddbegin \DIFadd{\_ms}\DIFaddend } is defined, the
+      programme will train the neural network.  Optionally, {\tt
+        params.m} can also override any of the configuration
+      parameters at the top of {\tt learn\_detector.m\DIFaddbegin }\DIFadd{.
+    }\item \DIFadd{Configuration may also be controlled by specifying
+      parameter-value pairs to the function call in the common MATLAB
+      fashion; for example, }{\tt
+        \DIFadd{learn\_detector('times\_of\_interest\_ms', }[\DIFadd{150 200}]\DIFadd{)}\DIFaddend }.
     \item The software will produce a neural network file, {\tt
       detector\_bird\_times\_\dots.mat} (the ellipses signify other
       information encoded in the filename).  It will also produce the
