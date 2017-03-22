@@ -1019,19 +1019,19 @@ runs.
   % replot_accuracies_concatanated('tex', true) for confusion_log_perf.txt (1.5 ms).
   \begin{tabular}{lc|cc}
     Bird & Target time (ms) & \% True positives & \% False positives \\ \hline
-lny64 &         150 $[t^*_1]$ &         99.66 &         0.0026 \\ % /Volumes/Data/song/lny64/confusion_log_perf.txt
-      &         200 $[t^*_2]$ &         99.75 &         0.00052 \\ %                                               
-      &         250 $[t^*_3]$ &         99.79 &         0.00051 \\ %                                               
-      &         300 $[t^*_4]$ &         99.70 &         0.00077 \\ %                                               
-      &         350 $[t^*_5]$ &         99.73 &         0.00022 \\ %                                               
-      &         400 $[t^*_6]$ &         99.52 &         0.0010 \\ %                                                
-lny42 &         380 &   99.09 &         0.0011 \\ % /Volumes/Data/song/lny42/confusion_log_perf.txt          
-lny46 &         140 &   99.11 &         0.0036 \\ % /Volumes/Data/song/lny46/confusion_log_perf.txt          
-lny4rb &        250 &   99.37 &         0.0026 \\ % /Volumes/Data/song/lny4rb/confusion_log_perf.txt        
-lr12 &  180 &   99.52 &         0.0033 \\ % /Volumes/Data/song/lr12/all/confusion_log_perf.txt        
-lr13 &  300 &   99.83 &         0.0013 \\ % /Volumes/Data/song/lr13/all/confusion_log_perf.txt        
-lr28 &  140 &   99.73 &         0.0028 \\ % /Volumes/Data/song/lr28/all/confusion_log_perf.txt        
-lr77 &  320 &   99.58 &         0.0028  % /Volumes/Data/song/lr77/all/confusion_log_perf.txt          
+lny64 & 	150 $[t^*_1]$ & 	99.66 & 	0.0026 \\ % /Volumes/Data/song/lny64/confusion_log_perf.txt
+      & 	200 $[t^*_2]$ & 	99.75 & 	0.00052 \\ %                                               
+      & 	250 $[t^*_3]$ & 	99.79 & 	0.00051 \\ %                                               
+      & 	300 $[t^*_4]$ & 	99.70 & 	0.00077 \\ %                                               
+      & 	350 $[t^*_5]$ & 	99.73 & 	0.00022 \\ %                                               
+      & 	400 $[t^*_6]$ & 	99.52 & 	0.0010 \\ %                                                
+lny42 & 	380 & 	99.09 & 	0.0011 \\ % /Volumes/Data/song/lny42/confusion_log_perf.txt          
+lny46 & 	140 & 	99.11 & 	0.0036 \\ % /Volumes/Data/song/lny46/confusion_log_perf.txt          
+lny4rb & 	250 & 	99.37 & 	0.0026 \\ % /Volumes/Data/song/lny4rb/confusion_log_perf.txt        
+lr12 & 	180 & 	99.52 & 	0.0033 \\ % /Volumes/Data/song/lr12/all/confusion_log_perf.txt        
+lr13 & 	300 & 	99.83 & 	0.0013 \\ % /Volumes/Data/song/lr13/all/confusion_log_perf.txt        
+lr28 & 	140 & 	99.73 & 	0.0028 \\ % /Volumes/Data/song/lr28/all/confusion_log_perf.txt        
+lr77 & 	320 & 	99.58 & 	0.0028  % /Volumes/Data/song/lr77/all/confusion_log_perf.txt          
   \end{tabular}
   \caption{Mean values for the detection accuracies shown in \fig{fig:accuracies}.}
   \label{table:accuracies}
@@ -1231,27 +1231,25 @@ their improvements to the draft.  This work was funded by NIH grants
 \section{Resources}
 \label{sec:resources}
 
-{\em If accepted, before final submission, DOIs for the latest code will be created as described in https://guides.github.com/activities/citable-code/ so that our results may be reproduced and the software deployed.  For now, in lieu of final release DOIs, we provide these links to our development repositories.  If you would like final versions and test datasets for review, please contact the corresponding author (bwpearre@bu.edu).}
-%\marginpar{PLOS doesn't really say where such things should go.}
-%\marginpar{Cleanup: mostly done.  But it would be nice to move all this to the lab's GitHub group.}
 \begin{description}
-  \item[Song alignment:] Jeff Markowitz's song alignment software \cite{Poole2012} can be found at
+\item[Data:]
+  Data and training configuration files for the 8 birds discussed here are available from the Open Science Framework at DOI: 10.17605/OSF.IO/BX76R . DOIs for the versions of the programmes used here are provided for reproducibility; however, we generally recommend downloading the latest release.
+%\item[Licenses:]
+%  All software is licensed under Open-Source-Initiative--approved licenses. Please see the software packages for individual choices.
+\item[Song alignment:] Jeff Markowitz's song alignment software \cite{Poole2012} can be found at
     {\tt https://github.com/jmarkow/zftftb}
-\end{description}
-
-\noindent Our implementation of the syllable
-detector is available under the GNU General Public License 3.
-\begin{description}
 \item[Training the neural network:]\hfill
   \begin{trivlist}
   \item {\tt https://github.com/gardner-lab/syllable-detector-learn}
+    \item DOI: 10.5281/zenodo.437555
   \end{trivlist}
 
   \begin{description}
-  \item[Installation:]\hfill
+  \item[Installation:]\hfill\\
+    See {\tt README.md} in the repository for complete, up-to-date instructions.
     \begin{itemize}
-    \item Clone the Github repository onto your computer.
-    \item You also need the following packages from MATLAB File Exchange somewhere in your MATLAB path:
+    \item Clone the Github repository onto your computer, and add it to your MATLAB path.
+    \item You also need the following packages from MATLAB File Exchange in your MATLAB path:
       \begin{description}
       \item[Significant Figures] by Teck Por Lam.  File ID \#10669.
       \item[Generate maximally perceptually-distinct colors] by Tim Holy.  File ID \#29702.
@@ -1288,7 +1286,12 @@ detector is available under the GNU General Public License 3.
   
 \item[Runtime:]\hfill
   \begin{description}
-  \item[MATLAB:] {\tt https://github.com/gardner-lab/syllable-detector-matlab}
+    
+  \item[MATLAB:]\hfill
+    \begin{trivlist}
+    \item {\tt https://github.com/gardner-lab/syllable-detector-matlab}
+    \item DOI: 10.5281/zenodo.437557
+    \end{trivlist}
     \begin{description}
     \item[Installation:]\hfill
       \begin{itemize}
@@ -1323,7 +1326,12 @@ detector is available under the GNU General Public License 3.
       \item Information about the detector is logged to a file called ``detector\_status.log''.
       \end{itemize}
     \end{description}
-  \item[Swift:] {\tt https://github.com/gardner-lab/\dots\ syllable-detector-swift/releases/tag/0.3.2}
+    
+  \item[Swift:]\hfill
+    \begin{trivlist}
+    \item {\tt https://github.com/gardner-lab/syllable-detector-swift}
+    \item DOI: 10.5281/zenodo.437559
+    \end{trivlist}
     \begin{description}
     \item[Installation:]\hfill
       \begin{trivlist}
@@ -1363,7 +1371,12 @@ detector is available under the GNU General Public License 3.
       to the detector and generating appropriate output TTL signals.
       \end{itemize}
     \end{description}
-  \item[LabVIEW:] {\tt https://github.com/gardner-lab/\dots\ syllable-detector-runtime-labview}
+    
+  \item[LabVIEW:]\hfill
+    \begin{trivlist}
+    \item {\tt https://github.com/gardner-lab/syllable-detector-runtime-labview}
+    \item 10.5281/zenodo.437558 
+    \end{trivlist}
     \begin{description}
     \item[Installation:]\hfill
       \begin{trivlist}
