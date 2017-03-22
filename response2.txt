@@ -1,3 +1,9 @@
+Hi!
+
+Please find the new draft and difference document.
+
+I've added DOIs to code and data to the Appendix. PLOS doesn't seem to specify the format for this section; if I should make any changes, please tell me what you'd like to see.
+
 > ***Please check grammatical issues throughout the manuscript and comma splices because the final accepted manuscript submission moves very quickly to becoming the final published manuscript without editorial assistance from the journal.  I suggest converting from British English but, this is a “soft” suggestion.  Ultimately, it is your choice.
 
 I think (hope) I've fixed the grammatical issues. I have retained British English mostly because it's what I'm used to, and also partly to suggest that we remember that the USA's way of conducting itself is merely one valid choice among many.

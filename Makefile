@@ -58,7 +58,7 @@ RM = rm -f
 OUTDATED = echo "EPS-file is out-of-date!" && false
 
 
-all 	: $(TRG)
+all 	: $(TRG) diff
 	$(refreshxdvi)
 
 define run-latex
