@@ -213,12 +213,12 @@ signals are compared \cite{Keller2009}.  The disruption by white noise
 of renditions of a syllable that were slightly above (or below) the
 syllable's average pitch showed that the apparently random natural
 variability in songbird motor output is used to drive change in the
-song \cite{Tumer2007pitchshift}, and AFP produces a
+song \cite{Tumer2007pitchshift}, and the AFP produces a
 corrective signal to bias song away from those disruptions
 \cite{Andalman2009}. The song change is isolated to within roughly 10
 milliseconds (ms) of the stimulus, and the shape of the learned
 response can be predicted by a simple mechanism
-\cite{Charlesworth2011learning}. AFP transfers the error signal to the
+\cite{Charlesworth2011learning}. The AFP transfers the error signal to the
 robust nucleus of the arcopallium (RA) using NMDA-receptor--mediated
 glutamatergic transmission \cite{Warren2011}. The course of song
 recovery after applying such a pitch-shift paradigm showed that the
@@ -254,7 +254,7 @@ target syllables.  Furthermore, the method is neither inexpensive nor,
 based on our experience with a similar technique, accurate.
 2009 saw the application of a neural network to a spectral image of
 song \cite{Keller2009}.  They reported a jitter of 4.3 ms, but further implementation and
-performance details are not available.  In 2011, stable portions of syllables were matched to spectral templates in 8-ms
+performance details are not available.  In 2011, stable portions of syllables were matched to spectral templates in 8 ms
 segments \cite{Warren2011}.  This detector achieved a jitter of 4.5 ms, and false-negative and
 false-positive rates of up to 2\% and 4\% respectively.  Hardware
 requirements and ease of use were not reported.  In 2013, spectral
@@ -429,7 +429,7 @@ multiple frames from the spectrogram---as of one value of $t$.
 
 Training targets $y_t$ are vectors with one element for each desired
 detection syllable.  That element is, roughly, 1 if the input vector
-comes from the target time ($t=t^*$), 0 otherwise, for each target
+matches the target syllable ($t=t^*$), 0 otherwise, for each target
 syllable (of which there may be any number, although they increase
 training time, and in our implementations the number of distinct
 output pulses is constrained by hardware).  Since the song alignment
@@ -454,10 +454,9 @@ minutes of non-song audio---yields excellent results on most birds.
 \subsubsection{Normalisation}
 
 In order to present consistent and meaningful inputs to the neural
-network, we normalise the incoming data stream so that changes in the
-song structure of the sound are emphasised over changes in volume, and
-to maximise the effectiveness of the neural network's training
-algorithm.
+network and to maximise the effectiveness of the neural network's training
+algorithm, we normalise the incoming data stream so that changes in the
+song structure of the sound are emphasised over changes in volume.
 
 The first normalisation step is designed to eliminate differences in
 amplitude due to changes in the bird's location and other variations
@@ -595,7 +594,7 @@ The computers had ample memory resources.
 \subsubsection{Swift}
 
 This detector uses the Swift programming language and Core Audio
-interface included in Apple's operating systems.
+interface included in Apple's Mac OS X operating systems.
 
 The Core Audio frameworks provide an adjustable hardware buffer size
 for reading from and writing to audio hardware (different from our two
@@ -667,7 +666,7 @@ computational overhead of the interpreted programming language.
 
 The most versatile implementation, MATLAB runs on a variety of
 hardware and operating systems, and is perhaps the easiest to modify.
-While it did not perform as well on our test system as the other
+While it did not perform as well as the other
 implementations, the convenience may outweigh the timing
 performance penalty for some experiments.  Key to minimising jitter is
 the size of the audio buffer: on a 2014 Mac Mini running MATLAB 2015b
@@ -678,14 +677,14 @@ As with the Swift detector, it is also possible to modify the
 MATLAB implementation to generate the TTL pulse from a microcontroller
 (Arduino) controlled via a serial over USB interface. This eliminates
 the double buffer required when sending triggers via the audio
-interface, reducing latency by half.
+interface, reducing latency by close to half.
 
 \subsection{Quantification}
 \label{sec:quantify}
 
 We measure accuracy and characterise timing for 6 randomly chosen
 points in one bird's song (lny64), and present accuracy results for
-seven more birds (the detector's timing does not appreciably vary among
+seven more birds (the detector's timing does not appreciably vary across
 birds). The results presented here are representative of real-world
 performance in feedback experiments on many birds in our lab.
 
@@ -751,7 +750,7 @@ Computing the optimal output thresholds on a per-frame rather than a
 per-song basis resulted in higher thresholds and thus a slight
 reduction in both the false-positive and true-positive rates
 (reversible by increasing $C_n$), while also providing a valid
-definition of false-positive rate for data streams that had not been
+definition of the false-positive rate for data streams that had not been
 segmented into song-sized chunks and thus allowing easy interpretation
 of false-positive rates from calls, cage noise, etc.
 
@@ -898,7 +897,7 @@ song is shown as a single grayscale row.  By sorting according to time
 of each syllable's detection, the rest of the song is shown in the
 context of the timing for that moment.  This gives an intuition of the
 timing variability within each song and across songs (which is
-responsible for a small amount of our measured jitter, but note that few of the songs are significantly timeshifted).
+responsible for a small amount of our measured jitter, but note that few of the songs are significantly time-shifted).
 
 \begin{figure}
   \includegraphics[width=\textwidth]{Fig2}
