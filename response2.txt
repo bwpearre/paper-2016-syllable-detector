@@ -1,4 +1,4 @@
-Hi!
+Dear Dr. Cooper,
 
 Please find the new draft and difference document.
 
@@ -6,7 +6,7 @@ I've added DOIs to code and data to the Appendix. PLOS doesn't seem to specify t
 
 > ***Please check grammatical issues throughout the manuscript and comma splices because the final accepted manuscript submission moves very quickly to becoming the final published manuscript without editorial assistance from the journal.  I suggest converting from British English but, this is a “soft” suggestion.  Ultimately, it is your choice.
 
-I think (hope) I've fixed the grammatical issues. I have retained British English mostly because it's what I'm used to, and also partly to suggest that we remember that the USA's way of conducting itself is merely one valid choice among many.
+I think (hope) I've fixed the grammatical issues. I have retained British English mostly because it's what I'm used to, and also partly to remember that the USA's way of conducting itself is merely one valid choice among many.
 
 > **It is an atypical writing style for PLOS ONE to begin with a reference, e.g., Page 3, line 52, 54, and 57.  I suggest that you reference the papers at the end of the statement (or sentence, depending on which is more relevant).
 
@@ -44,7 +44,7 @@ LabVIEW can run on MacOS, but various features for National Instruments hardware
 
 > MATLAB – Why not implement this on a PC and a MAC and compare the results?  There is a drawback to MACs, the price, this is not discussed (as of yet);
 
-Partly because this paper is far too long already. The number of variations that could be compared is infinite, so we stopped before we'd hit them all. Especially for this one: the MATLAB implementation is the one least suited to the need of precise timing, and so we feel that a ballpark figure suffices.
+Partly because this paper is far too long already. The number of variations that could be compared is infinite, so we stopped before we'd hit them all. Especially for this one: the MATLAB implementation is the one least suited to the need of precise timing, and so we feel that a more careful analysis of its timing will add minimal value.
 
 As for the price of Mac vs. Windows, that is a subject of significant research in its own right: in many environments MacOS has a higher upfront cost but then requires little time-consuming configuration/maintenance/repair, whereas Windows machines, while cheaper initially, can require more troubleshooting, more knowledgeable users, etc., especially anent security. On the other hand, in some environments, for skilled users, Windows may be cheaper in the long run. In short, I believe that discussing the relative cost of Mac vs Windows is beyond the scope of this paper.
 
@@ -55,7 +55,9 @@ Very good point. This is now named explicitly in Section 2.3 ("Quantification").
 
 > ****Make it clearer in the manuscript that your tests are conducted on multiple ZFs.  A previous reviewer was unclear on that point, and I do not see it clearly spelled out in this version of the manuscript.
 
-Added to the beginning of Section 2.3 "Quantification", as well as to Table 1. And other points in the text. I hope this is clearer now.
+I've included detailed accuracy measurements for 7 additional birds. Please see the beginning of Section 2.3 "Quantification", as well as Tables 1 and 2 and Figure 3.
+
+In the process of running the new birds we found a minor bug in the training code that changed our accuracies somewhat (under some conditions, the ratio of song to non-song used for training was wrong). Timing was unaffected.
 
 > Lines 365-368 – Consider revising the first sentence, and perhaps indenting the next section, instead of a new paragraph would be a better way to present the timing information.
 
@@ -64,3 +66,6 @@ I've rewritten this bit. Thanks!
 > Line 398 – Page 15, “coloured noise”?   Please consider rephrasing – Consider a tonal vs. entropy comparison for this section of the manuscript.
 
 An entropy comparison could be powerful, but I was slightly misusing the term and only meant to convey a general idea anyway, so I've just replaced the phrase.
+
+
+Thank you for your careful reading and your suggestions!
