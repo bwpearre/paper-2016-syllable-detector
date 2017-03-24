@@ -10,7 +10,7 @@ I think (hope) I've fixed the grammatical issues. I have retained British Englis
 
 > **It is an atypical writing style for PLOS ONE to begin with a reference, e.g., Page 3, line 52, 54, and 57.  I suggest that you reference the papers at the end of the statement (or sentence, depending on which is more relevant).
 
-I was taught to avoid the passive voice, whereas in my review your standard makes that difficult, but I've updated the references to my best interpretation of your preferred style while trying to avoid this pitfall as best I can. Is this what you had in mind?
+I've updated the references to my best interpretation of your preferred style.
 
 > **Provide the following details in the intro:
 
