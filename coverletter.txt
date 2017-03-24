@@ -1,4 +1,4 @@
-Dear editors,
+Dear Dr. Cooper,
 
 The paper introduces and evaluates a piece of software that is of
 general interest to a small but growing audience: neuroscientists
@@ -17,20 +17,8 @@ accuracy, precision, speed, ease of use, availability, and cost.
 
 I'd submitted this paper to PLOS CompBio, and asked to have it treated
 as a Software or Methods paper.  They suggested that I resubmit to
-PLOS ONE.  We believe we've addressed the reviewers' concerns, and
-would like to offer the revised manuscript for your consideration.
-
-If accepted, before final submission, all code will be placed under an
-appropriate open source license, final release versions generated, and
-DOIs created as described in
-https://guides.github.com/activities/citable-code/ .  The relevant
-example/testing datasets will be uploaded to one of your approved
-repositories.  For now, in lieu of final release DOIs, we provide
-links to our development repositories.  If you would like anything
-else, such as access to the datasets for review, please contact me.
-
-The Academic Editor on your staff who would probably find this paper
-most interesting is Johan J Bolhuis.
+PLOS ONE, and you took charge of the review and kindly offered your
+suggestions. We've incorporated them to the best of our ability.
 
 Thank you!
 -Ben Pearre <bwpearre@gmail.com>
