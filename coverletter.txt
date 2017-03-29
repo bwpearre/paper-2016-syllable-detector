@@ -1,24 +1,12 @@
 Dear Dr. Cooper,
 
-The paper introduces and evaluates a piece of software that is of
-general interest to a small but growing audience: neuroscientists
-working in the zebra finch, and possibly other bird species.  It
-allows precisely timed triggering of other experimental apparatus in
-response to syllables during bird song.  Since such a method
-facilitates a wide variety of experiments in this species, many labs
-have developed functionally similar software, but few have released
-details on how they did it, and those few who reported on accuracy
-have not done so very thoroughly.
+Thank you again!
 
-We've gone to some lengths to describe the software and characterise
-its performance in detail.  Based on the descriptions available from
-other labs, our software advances the state of the art in terms of
-accuracy, precision, speed, ease of use, availability, and cost.
+Please find attached a manuscript containing the revisions that you suggested.
 
-I'd submitted this paper to PLOS CompBio, and asked to have it treated
-as a Software or Methods paper.  They suggested that I resubmit to
-PLOS ONE, and you took charge of the review and kindly offered your
-suggestions. We've incorporated them to the best of our ability.
+I've included a little more detail in the response document (response3.txt).
 
-Thank you!
+I sincerely appreciate the care with which you've read yet another draft.
+
+Prosper,
 -Ben Pearre <bwpearre@gmail.com>
