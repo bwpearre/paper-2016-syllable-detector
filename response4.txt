@@ -1,0 +1,15 @@
+Dear PLOS,
+
+I've made the requested changes.
+
+1. Yes, looks good.
+
+2. As requested by the formatting guide you sent, I've removed the funding sources from Acknowledgments. I'll make sure that it's in the Financial Disclosure.
+
+3. Done.
+
+4. Please make sure I've done that correctly. Elsewhere you'd said that you don't allow subsubsections, so I'd been using labeled "paragraphs" instead. But here, 3 levels means sections, subsections, and subsubsections, so I've reverted to that. Good?
+
+5. Done.
+
+6. I believe that the seven figures are now all compliant.

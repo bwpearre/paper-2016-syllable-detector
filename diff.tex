@@ -1,7 +1,7 @@
 \documentclass[10pt,letterpaper]{article}
 %DIF LATEXDIFF DIFFERENCE FILE
-%DIF DEL ../paper-2016-syllable-detector-last/main.tex   Wed Mar 29 18:13:25 2017
-%DIF ADD main.tex                                        Wed Mar 29 18:04:20 2017
+%DIF DEL ../paper-2016-syllable-detector-last/main.tex   Mon Jul 17 14:42:20 2017
+%DIF ADD main.tex                                        Mon Jul 17 15:45:53 2017
 \usepackage[top=0.85in,left=2.75in,footskip=0.75in]{geometry}
 
 % Use adjustwidth environment to exceed column width (see example table in text)
@@ -94,7 +94,11 @@
 \renewcommand{\marginpar}[1]{\oldmarginpar{\linespread{1}\scriptsize{#1}}}
 
 % PLOS wants \paragraph for some reason...
-\renewcommand{\subsubsection}[1]{\paragraph{#1}}
+%DIF 94c94
+%DIF < \renewcommand{\subsubsection}[1]{\paragraph{#1}}
+%DIF -------
+%\renewcommand{\subsubsection}[1]{\paragraph{#1}} %DIF > 
+%DIF -------
 
 \setlength{\marginparwidth}{55mm}
 
@@ -123,50 +127,11 @@
 \providecommand{\DIFaddendFL}{} %DIF PREAMBLE
 \providecommand{\DIFdelbeginFL}{} %DIF PREAMBLE
 \providecommand{\DIFdelendFL}{} %DIF PREAMBLE
+%DIF END PREAMBLE EXTENSION ADDED BY LATEXDIFF
+%DIF PREAMBLE EXTENSION ADDED BY LATEXDIFF
 %DIF HYPERREF PREAMBLE %DIF PREAMBLE
 \providecommand{\DIFadd}[1]{\texorpdfstring{\DIFaddtex{#1}}{#1}} %DIF PREAMBLE
 \providecommand{\DIFdel}[1]{\texorpdfstring{\DIFdeltex{#1}}{}} %DIF PREAMBLE
-\newcommand{\DIFscaledelfig}{0.5}
-%DIF HIGHLIGHTGRAPHICS PREAMBLE %DIF PREAMBLE
-\RequirePackage{settobox} %DIF PREAMBLE
-\RequirePackage{letltxmacro} %DIF PREAMBLE
-\newsavebox{\DIFdelgraphicsbox} %DIF PREAMBLE
-\newlength{\DIFdelgraphicswidth} %DIF PREAMBLE
-\newlength{\DIFdelgraphicsheight} %DIF PREAMBLE
-% store original definition of \includegraphics %DIF PREAMBLE
-\LetLtxMacro{\DIFOincludegraphics}{\includegraphics} %DIF PREAMBLE
-\newcommand{\DIFaddincludegraphics}[2][]{{\color{blue}\fbox{\DIFOincludegraphics[#1]{#2}}}} %DIF PREAMBLE
-\newcommand{\DIFdelincludegraphics}[2][]{% %DIF PREAMBLE
-\sbox{\DIFdelgraphicsbox}{\DIFOincludegraphics[#1]{#2}}% %DIF PREAMBLE
-\settoboxwidth{\DIFdelgraphicswidth}{\DIFdelgraphicsbox} %DIF PREAMBLE
-\settoboxtotalheight{\DIFdelgraphicsheight}{\DIFdelgraphicsbox} %DIF PREAMBLE
-\scalebox{\DIFscaledelfig}{% %DIF PREAMBLE
-\parbox[b]{\DIFdelgraphicswidth}{\usebox{\DIFdelgraphicsbox}\\[-\baselineskip] \rule{\DIFdelgraphicswidth}{0em}}\llap{\resizebox{\DIFdelgraphicswidth}{\DIFdelgraphicsheight}{% %DIF PREAMBLE
-\setlength{\unitlength}{\DIFdelgraphicswidth}% %DIF PREAMBLE
-\begin{picture}(1,1)% %DIF PREAMBLE
-\thicklines\linethickness{2pt} %DIF PREAMBLE
-{\color[rgb]{1,0,0}\put(0,0){\framebox(1,1){}}}% %DIF PREAMBLE
-{\color[rgb]{1,0,0}\put(0,0){\line( 1,1){1}}}% %DIF PREAMBLE
-{\color[rgb]{1,0,0}\put(0,1){\line(1,-1){1}}}% %DIF PREAMBLE
-\end{picture}% %DIF PREAMBLE
-}\hspace*{3pt}}} %DIF PREAMBLE
-} %DIF PREAMBLE
-\LetLtxMacro{\DIFOaddbegin}{\DIFaddbegin} %DIF PREAMBLE
-\LetLtxMacro{\DIFOaddend}{\DIFaddend} %DIF PREAMBLE
-\LetLtxMacro{\DIFOdelbegin}{\DIFdelbegin} %DIF PREAMBLE
-\LetLtxMacro{\DIFOdelend}{\DIFdelend} %DIF PREAMBLE
-\DeclareRobustCommand{\DIFaddbegin}{\DIFOaddbegin \let\includegraphics\DIFaddincludegraphics} %DIF PREAMBLE
-\DeclareRobustCommand{\DIFaddend}{\DIFOaddend \let\includegraphics\DIFOincludegraphics} %DIF PREAMBLE
-\DeclareRobustCommand{\DIFdelbegin}{\DIFOdelbegin \let\includegraphics\DIFdelincludegraphics} %DIF PREAMBLE
-\DeclareRobustCommand{\DIFdelend}{\DIFOaddend \let\includegraphics\DIFOincludegraphics} %DIF PREAMBLE
-\LetLtxMacro{\DIFOaddbeginFL}{\DIFaddbeginFL} %DIF PREAMBLE
-\LetLtxMacro{\DIFOaddendFL}{\DIFaddendFL} %DIF PREAMBLE
-\LetLtxMacro{\DIFOdelbeginFL}{\DIFdelbeginFL} %DIF PREAMBLE
-\LetLtxMacro{\DIFOdelendFL}{\DIFdelendFL} %DIF PREAMBLE
-\DeclareRobustCommand{\DIFaddbeginFL}{\DIFOaddbeginFL \let\includegraphics\DIFaddincludegraphics} %DIF PREAMBLE
-\DeclareRobustCommand{\DIFaddendFL}{\DIFOaddendFL \let\includegraphics\DIFOincludegraphics} %DIF PREAMBLE
-\DeclareRobustCommand{\DIFdelbeginFL}{\DIFOdelbeginFL \let\includegraphics\DIFdelincludegraphics} %DIF PREAMBLE
-\DeclareRobustCommand{\DIFdelendFL}{\DIFOaddendFL \let\includegraphics\DIFOincludegraphics} %DIF PREAMBLE
 %DIF END PREAMBLE EXTENSION ADDED BY LATEXDIFF
 
 \begin{document}
@@ -181,10 +146,10 @@
 \newline
 % Insert author names, affiliations and corresponding author email (do not include titles, positions, or degrees).
 \\
-Ben Pearre\textsuperscript{1,a,\textcurrency},
-L.~Nathan Perkins\textsuperscript{1,b},
-Jeffrey E.~Markowitz\textsuperscript{2,c},
-Timothy J.~Gardner\textsuperscript{1,d}
+Ben Pearre\textsuperscript{1,\DIFdelbegin \DIFdel{a,}\DIFdelend \textcurrency},
+L.~Nathan Perkins\textsuperscript{1\DIFdelbegin \DIFdel{,b}\DIFdelend },
+Jeffrey E.~Markowitz\textsuperscript{2\DIFdelbegin \DIFdel{,c}\DIFdelend },
+Timothy J.~Gardner\textsuperscript{1\DIFdelbegin \DIFdel{,d}\DIFdelend }
 \\
 \bigskip
 \textsuperscript{1} Department of Biology, Boston University, Boston, Massachusetts, United States of America\\
@@ -198,12 +163,19 @@ Timothy J.~Gardner\textsuperscript{1,d}
 %
 % Primary Equal Contribution Note
 %\Yinyang These authors contributed equally to this work.
-Author \textsuperscript{a}~contributed the original MATLAB and LabVIEW implementations and most of the manuscript.
+\DIFdelbegin \DIFdel{Author \textsuperscript{a}~contributed the original MATLAB and LabVIEW implementations and most of the manuscript.
 \textsuperscript{b}~contributed the Swift implementation and its description herein, helped debug the training code, and measured the timing for most of the detectors.
 \textsuperscript{c}~wrote several types of filter-bank software against which we compared, made suggestions for the neural network detector, and reformatted the MATLAB code for distribution.
 \textsuperscript{d}~provided a stream of suggested techniques, metrics, and goals.
+}\DIFdelend 
 
-% Additional Equal Contribution Note
+%DIF > Author \textsuperscript{a}~contributed the original MATLAB and LabVIEW %implementations and most of the manuscript.
+%DIF > \textsuperscript{b}~contributed the Swift implementation and its description herein, %helped debug the training code, and measured the timing for most of the detectors.
+%DIF > textsuperscript{c}~wrote several types of filter-bank software against which we %compared, made suggestions for the neural network detector, and reformatted the %MATLAB code for distribution.
+%DIF > \textsuperscript{d}~provided a stream of suggested techniques, metrics, and goals.
+\DIFaddbegin 
+
+\DIFaddend % Additional Equal Contribution Note
 % Also use this double-dagger symbol for special authorship notes, such as senior authorship.
 %\ddag These authors also contributed equally to this work.
 
@@ -296,14 +268,14 @@ motor learning \cite{Canopoli2014}.
 
 Despite the power and versatility of vocal feedback experiments, there
 is no standard syllable detector.  Desiderata for such a detector include:
-\begin{description}
+ \begin{description} 
 \item[Accuracy:] How often does the system produce false positives or false negatives?
 \item[Latency:] The average delay between the target syllable being sung and the detection.
 \item[Jitter:] The amount that latency changes from instance to instance of song.  Our measure of jitter is the standard deviation of latency.
 \item[Versatility:] Is detection possible at ``difficult'' syllables?
 \item[Ease of use:] How automated is the process of programming a detector?
 \item[Cost:] What are the hardware and software requirements?
-\end{description}
+ \end{description} 
 
 A variety of syllable-triggering systems have been used, but few have
 been documented or characterised in detail.  In 1999,
@@ -338,7 +310,7 @@ song using a neural network applied to the song spectrogram, and
 outputs a TTL pulse (a brief 5-volt pulse) at the chosen moment. The
 approach consists of three steps:
 
-\begin{enumerate}
+ \begin{enumerate} 
 \item Record and align a corpus of training songs.  The technique has
   been published in \cite{Poole2012}. As few as 200 songs can yield
   acceptable results, but here we standardise on 1000-song training
@@ -348,16 +320,16 @@ approach consists of three steps:
 \item Once trained and saved, the neural network is used by a realtime
   detection programme that listens to an audio signal and indicates detection of the target
   syllables via a TTL pulse.  We present three detection implementations, in MATLAB, LabVIEW, and Swift, that trade off hardware requirements, ease of maintenance, and performance.
-\end{enumerate}
+ \end{enumerate} 
 This method makes the following contributions:
-\begin{itemize}
+ \begin{itemize} 
 \item Fast: sub-millisecond latencies, with jitter around 2 ms.
 \item Accurate: false negative rates under 1\% and false positive rates under 0.005\% for a variety of syllables.
 \item State-of-the-art performance with default parameters.
 \item Requires almost no programming experience.
 \item Runs on inexpensive hardware.
 \item Described in detail here, with reference implementations provided and benchmarked.
-\end{itemize}
+ \end{itemize} 
 
 %We present the method in Section~\ref{sec:method}.  Section~\ref{sec:results} presents our measurements.
 %We
@@ -369,7 +341,7 @@ This method makes the following contributions:
 \label{sec:method}
 
 
-\subsection{\DIFdelbegin \DIFdel{Learning }\DIFdelend \DIFaddbegin \DIFadd{Training }\DIFaddend a detector}
+\subsection{Training a detector}
 
 We begin with a few hundred recordings of a given bird's song, as well
 as calls, cage noise, and other non-song audio data.  Male zebra finch
@@ -383,14 +355,14 @@ sound-isolating chamber in which was mounted a recording microphone
 as described in \cite{Poole2012}.
 
 We rely on two circular buffers:
-\begin{description}
+ \begin{description} 
 \item[Audio buffer:] This contains the most recent audio samples, and
   is of the length required to compute the Fast Fourier Transform
   (FFT)---usually 256 samples.
 \item[FFT buffer:] The results of each new FFT are placed here.  It
   contains the $n_\textrm{fft}$ most recent FFTs, which will serve as
   inputs to the neural network (described below).
-\end{description}
+ \end{description} 
 
 Audio is recorded at some sample rate $1/t_\mathrm{sample}$ (for example, 44.1 kHz), and new data are appended to the circular audio buffer.
 
@@ -408,7 +380,9 @@ like \fig{fig:song}.
 
 \begin{figure}
   % Width: 8, Height: 3, Fonts scale: 120%
-  \includegraphics[width=\textwidth]{Fig1}
+  \DIFdelbeginFL %DIFDELCMD < \includegraphics[width=\textwidth]{Fig1}
+%DIFDELCMD <   %%%
+\DIFdelendFL %DIF > \includegraphics[width=\textwidth]{Fig1}
   \caption{The spectrogram of the song of the bird ``lny64'', used as an example
     throughout this paper.  This image was made by superposing the
     spectra of our 2818 aligned songs.  Our example detection points,
@@ -965,7 +939,9 @@ timing variability within each song and across songs (which is
 responsible for a small amount of our measured jitter, but note that few of the songs are significantly time-shifted).
 
 \begin{figure}
-  \includegraphics[width=\textwidth]{Fig2}
+  \DIFdelbeginFL %DIFDELCMD < \includegraphics[width=\textwidth]{Fig2}
+%DIFDELCMD <   %%%
+\DIFdelendFL %DIF > \includegraphics[width=\textwidth]{Fig2}
   % 9x10 inches
   % Fonts: Helvetica, scaled 130%
   \caption{Each plot shows one network output unit's responses to all
@@ -1066,10 +1042,11 @@ or on the test audio file, perhaps taking the best of a few training
 runs.
 
 \begin{figure}
-  %DIF <  Width 8, height 3, font 120%
-  %DIF >  Width 10, height 4, font 100%
-  \includegraphics[width=\textwidth]{Fig3}
-  %\includegraphics[width=\textwidth]{accuracies-2hidden}
+  % Width 10, height 4, font 100%
+  \DIFdelbeginFL %DIFDELCMD < \includegraphics[width=\textwidth]{Fig3}
+%DIFDELCMD <   %%%
+%DIF < \includegraphics[width=\textwidth]{accuracies-2hidden}
+  \DIFdelendFL %DIF > \includegraphics[width=\textwidth]{Fig3}
 
   \caption{Accuracy variability over 100 different training runs for
     each of the test detection points.  Each dot shows the test-set
@@ -1132,7 +1109,9 @@ detector, for both the $\delta$-syllable and for lny64's song at
 $t^*_4$.
 
 \begin{figure}
-  \includegraphics[width=\textwidth]{Fig4}
+  \DIFdelbeginFL %DIFDELCMD < \includegraphics[width=\textwidth]{Fig4}
+%DIFDELCMD <   %%%
+\DIFdelendFL %DIF > \includegraphics[width=\textwidth]{Fig4}
   \caption{Timing varies as the FFT frame interval changes.  Here we
     show results for the ideal detector and the LabVIEW and
     Swift+serial implementations, for the constructed
@@ -1150,16 +1129,27 @@ of syllables shown here, performance was stable across syllables.
 \fig{fig:TimingVsSyllable} shows measured timing data for lny64's test
 syllables for the Swift+serial detector compared to the ideal, with
 $t_{\textrm{fft}}=1.5$ ms.  Given the variety of the test syllables,
-the variability is surprisingly low, and is summarised here with 95\%
+the variability is surprisingly low, and is summarised \DIFdelbegin \DIFdel{here with 95\%
 confidence intervals (with n=6):
-\vspace{8pt}\par\noindent
-\begin{tabular}{r|cc}
-  Detector & Latency & Jitter \\ 
-  \hline   Ideal & $-0.8\pm 0.3$ ms & $2.1\pm 0.1$ ms \\
-  Swift+serial & $0.0\pm 0.6$ ms & $2.0\pm 0.1$ ms
-\end{tabular}
-\vspace{8pt}\par\noindent
-The negative latency is due to the way in which the network responds
+}%DIFDELCMD < \vspace{8pt}\par\noindent
+%DIFDELCMD < %%%
+\DIFdelend \DIFaddbegin \DIFadd{in
+Table~\ref{table:TimingVsSyllable}.
+}
+
+\begin{table}
+  \DIFaddendFL \begin{tabular}{r|cc}
+    Detector & Latency & Jitter \\ 
+    \hline   Ideal & $-0.8\pm 0.3$ ms & $2.1\pm 0.1$ ms \\
+    Swift+serial & $0.0\pm 0.6$ ms & $2.0\pm 0.1$ ms
+  \end{tabular}
+  \DIFdelbeginFL %DIFDELCMD < \vspace{8pt}\par\noindent
+%DIFDELCMD < %%%
+\DIFdelendFL \DIFaddbeginFL \caption{\DIFaddFL{Latency and jitter variability (95\% confidence) for lny64's six test syllables.}}
+  \label{table:TimingVsSyllable}
+\end{table}
+
+\DIFaddend The negative latency is due to the way in which the network responds
 to the song through time: as the recognition region looks increasingly
 similar to the trained match, the network's evaluation of similarity
 rises, and will generally cross the triggering threshold before it
@@ -1169,7 +1159,9 @@ timing consistency at the expense of latency, but we did not test this.
 
 \begin{figure}
   \begin{center}
-    \includegraphics[width=8cm]{Fig5}
+    \DIFdelbeginFL %DIFDELCMD < \includegraphics[width=8cm]{Fig5}
+%DIFDELCMD <   %%%
+\DIFdelendFL %DIF > \includegraphics[width=8cm]{Fig5}
   \end{center}
   \caption{Timing data for lny64's 6 test syllables, for the ideal and the
     Swift+serial detectors, with an FFT frame rate of 1.5 ms.  Point
@@ -1178,33 +1170,48 @@ timing consistency at the expense of latency, but we did not test this.
 \end{figure}
 
 
-
 \subsubsection{Detector Implementations}
-
 
 We compared latency and jitter across our different detector
 implementations for the $\delta$-syllable and lny64's $t^*_4$, again with
-$t_\mathrm{fft}=1.5$ ms.  Results are as follows:
-\vspace{8pt}
-\begin{tabular}{l|c|c|c|c}
-  & \multicolumn{2}{c}{$\delta$-syllable} & \multicolumn{2}{c}{Bird: $t^*_4$} \\
-  Detector & Latency (ms) & Jitter (ms) & Latency (ms) & Jitter (ms) \\
-  \hline
-  Ideal & 0.66 & 0.38 & -1.0 & 2.0 \\
-  LabVIEW & 1.5 & 0.69 & -0.18 & 2.4 \\
-  Swift+serial & 0.88 & 1.6 & -0.075 & 2.0 \\
-  Swift+audio & 5.9 & 2.6 & 1.2 & 4.9 \\
-  MATLAB+serial & 8.1 & 2.3 & 3.8 & 2.0 \\
-  MATLAB+audio & 13 & 5.9 & 8.4 & 5.9
-\end{tabular}
-\vspace{8pt}\par\noindent
-These data are also plotted in \fig{fig:TimingVsDetector}, and
-\fig{fig:timing} gives a more detailed view of what the timing curves
+$t_\mathrm{fft}=1.5$ ms.  Results are \DIFdelbegin \DIFdel{as follows:
+}%DIFDELCMD < \vspace{8pt}
+%DIFDELCMD < %%%
+\DIFdelend \DIFaddbegin \DIFadd{shown in Table~\ref{table:TimingVsDetector} and }\fig{fig:TimingVsDetector}\DIFadd{.
+}\fig{fig:timing} \DIFadd{gives a more detailed view of what the timing curves
+look like for the five implementations of our detector on lny64's $t^*_4$.
+}
+
+\begin{table}
+  \DIFaddendFL \begin{tabular}{l|c|c|c|c}
+    & \multicolumn{2}{c}{$\delta$-syllable} & \DIFdelbeginFL %DIFDELCMD < \multicolumn{2}{c}{Bird: $t^*_4$} %%%
+\DIFdelendFL \DIFaddbeginFL \multicolumn{2}{c}{lny64: $t^*_4$} \DIFaddendFL \\
+    Detector & Latency (ms) & Jitter (ms) & Latency (ms) & Jitter (ms) \\
+    \hline
+    Ideal & 0.66 & 0.38 & -1.0 & 2.0 \\
+    LabVIEW & 1.5 & 0.69 & -0.18 & 2.4 \\
+    Swift+serial & 0.88 & 1.6 & -0.075 & 2.0 \\
+    Swift+audio & 5.9 & 2.6 & 1.2 & 4.9 \\
+    MATLAB+serial & 8.1 & 2.3 & 3.8 & 2.0 \\
+    MATLAB+audio & 13 & 5.9 & 8.4 & 5.9
+  \end{tabular}
+  \DIFdelbeginFL %DIFDELCMD < \vspace{8pt}\par\noindent
+%DIFDELCMD < %%%
+\DIFdelFL{These data are also plotted in }%DIFDELCMD < \fig{fig:TimingVsDetector}%%%
+\DIFdelFL{, and
+}%DIFDELCMD < \fig{fig:timing} %%%
+\DIFdelFL{gives a more detailed view of what the timing curves
 look like for the five implementations of our detector on $t^*_4$.
+}\DIFdelendFL \DIFaddbeginFL \caption{\DIFaddFL{Latency and jitter for each of our detector implementations on the synthetic $\delta$-syllable and on syllable $t^*_4$ from lny64.}}
+  \label{table:TimingVsDetector}
+\end{table}
+\DIFaddend 
 
 \begin{figure}
   \begin{center}
-    \includegraphics[width=8cm]{Fig6}
+    \DIFdelbeginFL %DIFDELCMD < \includegraphics[width=8cm]{Fig6}
+%DIFDELCMD <   %%%
+\DIFdelendFL %DIF > \includegraphics[width=8cm]{Fig6}
   \end{center}
   \caption{The different detectors for the constructed
     $\delta$-syllable and for lny64's song at $t^*_4$.  Point centres
@@ -1214,7 +1221,9 @@ look like for the five implementations of our detector on $t^*_4$.
 
 \begin{figure}
   \begin{center}
-    \includegraphics[width=8cm]{Fig7}
+    \DIFdelbeginFL %DIFDELCMD < \includegraphics[width=8cm]{Fig7}
+%DIFDELCMD <   %%%
+\DIFdelendFL %DIF > \includegraphics[width=8cm]{Fig7}
   \end{center}
   \caption{Raw timing curves for all detectors measured during
     detection of lny64's $t^*_4$ using 1.5-ms frames.  We extract the trigger events from each curve, from which we obtain the mean---latency---and
@@ -1230,7 +1239,7 @@ This syllable detector is appropriate for zebra finch song, and
 although our tests were carried out on songs from that species, it is
 also likely to work well for Bengalese finches due to their similarly stereotyped syllables.  It offers the
 following benefits:
-\begin{itemize}
+ \begin{itemize} 
 \item The detector is accurate. False negative and false positive
   rates can be well under 1\% and 0.005\% respectively, and trading
   these two numbers off against each other is through a single
@@ -1246,7 +1255,7 @@ following benefits:
 \item A single detector can generate different target pulses for
   multiple syllables at almost no additional computational cost during
   runtime, although training time will increase.
-\end{itemize}
+ \end{itemize} 
 
 Although there are differences, the Swift+serial detector and the
 LabVIEW implementation are roughly comparable in performance.  We
@@ -1288,15 +1297,18 @@ these approaches in future work.
 
 \section{Acknowledgments}
 We would like to thank Winthrop F.~Gillis, William A.~Liberti, and Sanne Moorman for
-their improvements to the draft.  This work was funded by NIH grants
+their improvements to the draft.
+\DIFdelbegin \DIFdel{This work was funded by NIH grants
 5R01NS089679-02 and 5U01NS090454-02.  The funders had no role in study design, data collection and analysis, decision to publish, or preparation of the manuscript.
+}\DIFdelend %DIF >   This work was funded by NIH grants
+%DIF > 5R01NS089679-02 and 5U01NS090454-02.  The funders had no role in study %design, data collection and analysis, decision to publish, or preparation of the %manuscript.
 
 \appendix
 
 \section{Resources}
 \label{sec:resources}
 
-\begin{description}
+ \begin{description} 
 \item[Data:]
   Data and training configuration files for the 8 birds discussed here are available from the Open Science Framework at DOI: 10.17605/OSF.IO/BX76R . DOIs for the versions of the programmes used here are provided for reproducibility; however, we generally recommend downloading the latest release.
 %\item[Licenses:]
@@ -1309,19 +1321,19 @@ their improvements to the draft.  This work was funded by NIH grants
     \item DOI: 10.5281/zenodo.437555
   \end{trivlist}
 
-  \begin{description}
+   \begin{description} 
   \item[Installation:]\hfill\\
     See {\tt README.md} in the repository for complete, up-to-date instructions.
-    \begin{itemize}
+     \begin{itemize} 
     \item Clone the Github repository onto your computer, and add it to your MATLAB path.
     \item You also need the following packages from MATLAB File Exchange in your MATLAB path:
-      \begin{description}
+       \begin{description} 
       \item[Significant Figures] by Teck Por Lam.  File ID \#10669.
       \item[Generate maximally perceptually-distinct colors] by Tim Holy.  File ID \#29702.
-      \end{description}
-    \end{itemize}
+       \end{description} 
+     \end{itemize} 
   \item[Usage:]\hfill
-    \begin{itemize}
+     \begin{itemize} 
     \item The main programme is {\tt learn\_detector.m}.
     \item The top section of {\tt learn\_detector.m}
       describes the configuration variables.
@@ -1346,26 +1358,26 @@ their improvements to the draft.  This work was funded by NIH grants
       detector\_bird\_times\_\dots.mat} (the ellipses signify other
       information encoded in the filename).  It will also produce the
       audio test file described in Methods.
-    \end{itemize}
-  \end{description}
+     \end{itemize} 
+   \end{description} 
 
 \item[Runtime:]\hfill
-  \begin{description}
+   \begin{description} 
 
   \item[MATLAB:]\hfill
     \begin{trivlist}
     \item {\tt https://github.com/gardner-lab/syllable-detector-matlab}
     \item DOI: 10.5281/zenodo.437557
     \end{trivlist}
-    \begin{description}
+     \begin{description} 
     \item[Installation:]\hfill
-      \begin{itemize}
+       \begin{itemize} 
       \item Clone the Github repository onto your computer.
       \item Usage requires MATLAB with the Data Acquisition Toolbox and the 
       Parallel Computing Toolbox.
-      \end{itemize}
+       \end{itemize} 
     \item[Connection:]\hfill
-      \begin{itemize}
+       \begin{itemize} 
       \item Either connect the microphone directly into the microphone jack or through a 
       preamp into the audio input jack. The current implementation only supports a single 
       channel of audio.
@@ -1376,9 +1388,9 @@ their improvements to the draft.  This work was funded by NIH grants
       Github repository, and provides a simple serial protocol for controlling pins). 
       Connect the Arduino to the computer via USB. The TTL signal will be available on
       pin 7.
-      \end{itemize}
+       \end{itemize} 
     \item[Usage:]\hfill
-      \begin{itemize}
+       \begin{itemize} 
       \item Switch to the directory of the repository and run {\tt nndetector\_live}. You
       can optionally specify parameters as string/value pairs. When you run the command,
       you will be prompted to select an input device, output device and select a ``.mat''
@@ -1389,21 +1401,21 @@ their improvements to the draft.  This work was funded by NIH grants
       To specify the buffer sizes, use the {\tt buffer\_size\_input} and 
       {\tt buffer\_size\_output} parameters.
       \item Information about the detector is logged to a file called ``detector\_status.log''.
-      \end{itemize}
-    \end{description}
+       \end{itemize} 
+     \end{description} 
 
   \item[Swift:]\hfill
     \begin{trivlist}
     \item {\tt https://github.com/gardner-lab/syllable-detector-swift}
     \item DOI: 10.5281/zenodo.437559
     \end{trivlist}
-    \begin{description}
+     \begin{description} 
     \item[Installation:]\hfill
       \begin{trivlist}
       \item Download the most recent release from the Github repository onto your computer.
       \end{trivlist}
     \item[Connection:]\hfill
-      \begin{itemize}
+       \begin{itemize} 
       \item Either connect the microphone directly into the microphone jack or through a 
       preamp into the audio input jack. If the input jack supports multiple channels (e.g., 
       audio input jacks are usually stereo), you can connect multiple audio sources and run 
@@ -1415,9 +1427,9 @@ their improvements to the draft.  This work was funded by NIH grants
       simple serial protocol for controlling pins). Connect the Arduino 
       to the computer via USB. The TTL signal for the first input will be available on 
       pin 7, the second input on pin 8, etc.
-      \end{itemize}
+       \end{itemize} 
     \item[Usage:]\hfill
-      \begin{itemize}
+       \begin{itemize} 
       \item Use {\tt convert\_to\_text.m} to convert the Matlab output file to a format 
       easily readable by Swift. This will generate a text version of the neural network.
       \item Launch the application downloaded above. It will provide an 
@@ -1426,44 +1438,157 @@ their improvements to the draft.  This work was funded by NIH grants
       channels associated with the input. For each channel, select the text-encoded version of 
       the detector created in the previous step. Once configured, press run to begin 
       monitoring the inputs.
-      \end{itemize}
+       \end{itemize} 
     \item[Customisation:]\hfill
-      \begin{itemize}
+       \begin{itemize} 
       \item You can clone the Github repository and use Xcode to edit the project, if you 
       are interested in extending or modifying the functionality. To hook into either 
       the raw input or output, look at the ``Processor.swift'' file. The 
       {\tt Processor} class acts as a coordinator, receiving incoming audio, passing that
       to the detector and generating appropriate output TTL signals.
-      \end{itemize}
-    \end{description}
+       \end{itemize} 
+     \end{description} 
 
   \item[LabVIEW:]\hfill
     \begin{trivlist}
     \item {\tt https://github.com/gardner-lab/syllable-detector-runtime-labview}
     \item 10.5281/zenodo.437558 
     \end{trivlist}
-    \begin{description}
+     \begin{description} 
     \item[Installation:]\hfill
       \begin{trivlist}
       \item Clone the Github repository onto your computer.
       \end{trivlist}
     \item[Connection:]\hfill
-      \begin{itemize}
+       \begin{itemize} 
       \item The microphone should be connected, optionally through a preamplifier, to the data acquisition card, by default on Analog Input 0 (AI0).
       \item Outputs are on the Digital I/O (DIO) channels.  See the block diagram of {\tt nnfft.vi} for documentation, or just connect to DIO0.
-      \end{itemize}
+       \end{itemize} 
     \item[Usage:]\hfill
-      \begin{itemize}
+       \begin{itemize} 
       \item Use LabVIEW to open {\tt nnfft.vi}.
         \item A file chooser is provided in the front panel of {\tt nnfft.vi}.  Use it to point to the network file
       produced by {\tt learn\_detector.m}, and use LabView's ``Run''
       button to begin detection.
-      \end{itemize}
-    \end{description}
-  \end{description}
+       \end{itemize} 
+     \end{description} 
+   \end{description} 
 
-\end{description}
+ \end{description} 
 
-\bibliography{birds}
+%\bibliography{birds}
+\begin{thebibliography}{10}
+
+\bibitem{Kao2005}
+Kao MH, Doupe AJ, Brainard MS.
+\newblock Contributions of an avian basal ganglia--forebrain circuit to
+  real-time modulation of song.
+\newblock Letters to Nature. 2005 February;433:638--643.
+\newblock Available from:
+  \url{http://www.nature.com/nature/journal/v433/n7026/abs/nature03127.html}.
+
+\bibitem{Wang2008interhemispheric}
+Wang CZH, Herbst JA, Keller GB, Hahnloser RHR.
+\newblock Rapid Interhemispheric Switching during Vocal Production in a
+  Songbird.
+\newblock PLOS Biology. 2008 October;6(10).
+\newblock Available from:
+  \url{http://journals.plos.org/plosbiology/article?id=10.1371/journal.pbio.0060250}.
+
+\bibitem{Keller2009}
+Keller GB, Hahnloser RHR.
+\newblock Neural processing of auditory feedback during vocal practice in a
+  songbird.
+\newblock Nature. 2009 January;457:187--190.
+\newblock Available from:
+  \url{http://www.nature.com/nature/journal/v457/n7226/abs/nature07467.html}.
+
+\bibitem{Tumer2007pitchshift}
+Tumer EC, Brainard MS.
+\newblock Performance variability enables adaptive plasticity of 'crystallized'
+  adult birdsong.
+\newblock Nature. 2007 December;450:1240--1244.
+\newblock Available from:
+  \url{http://www.nature.com/nature/journal/v450/n7173/abs/nature06390.html}.
+
+\bibitem{Andalman2009}
+Andalman AS, Fee MS.
+\newblock A basal ganglia-forebrain circuit in the songbird biases motor output
+  to avoid vocal errors.
+\newblock Proceedings of the National Academy of Sciences of the United States
+  of America. 2009 July;106(30):12518--12523.
+\newblock Available from:
+  \url{http://www.ncbi.nlm.nih.gov/pmc/articles/PMC2709669/}.
+
+\bibitem{Charlesworth2011learning}
+Charlesworth JD, Tumer EC, Warren TL, Brainard MS.
+\newblock Learning the microstructure of successful behavior.
+\newblock Nature Neuroscience. 2011;14(3):373--380.
+\newblock Available from:
+  \url{http://www.ncbi.nlm.nih.gov/pmc/articles/PMC3045469/}.
+
+\bibitem{Warren2011}
+Warren TL, Tumer EC, Charlesworth JD, Brainard MS.
+\newblock Mechanisms and time course of vocal learning and consolidation in the
+  adult songbird.
+\newblock Journal of Neurophysiology. 2011 October;106(4):1806--1821.
+\newblock Available from:
+  \url{http://jn.physiology.org/content/106/4/1806.full}.
+
+\bibitem{Canopoli2014}
+Canopoli A, Herbst JA, Hahnloser RHR.
+\newblock A Higher Sensory Brain Region Is Involved in Reversing
+  Reinforcement-Induced Vocal Changes in a Songbird.
+\newblock The Journal of Neuroscience. 2014;34(20):7018--7026.
+\newblock Available from:
+  \url{http://www.jneurosci.org/content/34/20/7018.full}.
+
+\bibitem{Leonardo1999}
+Leonardo A, Konishi M.
+\newblock Decrystallization of adult birdsong by perturbation of auditory
+  feedback.
+\newblock Nature. 1999 June;399:466--470.
+\newblock Available from:
+  \url{http://www.nature.com/nature/journal/v399/n6735/abs/399466a0.html}.
+
+\bibitem{Skocik2013}
+Skocik M, Kozhevnikov A.
+\newblock Real-time system for studies of the effects of acoustic feedback on
+  animal vocalizations.
+\newblock Frontiers in Neural Circuits. 2013 January;6(111).
+\newblock Available from:
+  \url{http://www.ncbi.nlm.nih.gov/pmc/articles/PMC3539774/}.
+
+\bibitem{Poole2012}
+Poole B, Markowitz JE, Gardner TJ.
+\newblock The Song Must Go On: Resilience of the Songbird Vocal Motor Pathway.
+\newblock PLOS One. 2012 June;7(6).
+\newblock Available from:
+  \url{http://journals.plos.org/plosone/article?id=10.1371/journal.pone.0038173}.
+
+\bibitem{Tchernichovski2011SAP}
+Tchernichovski O. Sound Analysis Pro User Manual; 2011.
+\newblock Available from: \url{http://soundanalysispro.com/manual-1}.
+
+\bibitem{Jacobsen2003SlidingDFT}
+Jacobsen E, Lyons R.
+\newblock The sliding DFT.
+\newblock IEEE Signal Processing Magazine. 2003 Mar;20(2):74--80.
+\newblock Available from:
+  \url{http://www.cmlab.csie.ntu.edu.tw/DSPCourse/reference/Sliding\%20DFT.pdf}.
+
+\bibitem{hkp}
+Hertz JA, Krogh AS, Palmer RG.
+\newblock Introduction to the Theory of Neural Computation.
+\newblock Perseus Books; 1991.
+
+\bibitem{Noll1970pitchdetection}
+Noll AM.
+\newblock Pitch determination of human speech by the harmonic product spectrum,
+  the harmonic sum spectrum, and a maximum likelihood estimate.
+\newblock In: Proceedings of the symposium on computer processing in
+  communications. vol.~19; 1970. p. 779--797.
+
+\end{thebibliography}
 
 \end{document}
