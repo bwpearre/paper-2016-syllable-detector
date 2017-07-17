@@ -1004,7 +1004,6 @@ runs.
 \begin{figure}
   % Width 10, height 4, font 100%
   \includegraphics[width=\textwidth]{Fig3}
-  %\includegraphics[width=\textwidth]{accuracies-2hidden}
   
   \caption{Accuracy variability over 100 different training runs for
     each of the test detection points.  Each dot shows the test-set
@@ -1085,15 +1084,19 @@ of syllables shown here, performance was stable across syllables.
 \fig{fig:TimingVsSyllable} shows measured timing data for lny64's test
 syllables for the Swift+serial detector compared to the ideal, with
 $t_{\textrm{fft}}=1.5$ ms.  Given the variety of the test syllables,
-the variability is surprisingly low, and is summarised here with 95\%
-confidence intervals (with n=6):
-\vspace{8pt}\par\noindent
-\begin{tabular}{r|cc}
-  Detector & Latency & Jitter \\ 
-  \hline   Ideal & $-0.8\pm 0.3$ ms & $2.1\pm 0.1$ ms \\
-  Swift+serial & $0.0\pm 0.6$ ms & $2.0\pm 0.1$ ms
-\end{tabular}
-\vspace{8pt}\par\noindent
+the variability is surprisingly low, and is summarised in
+Table~\ref{table:TimingVsSyllable}.
+
+\begin{table}
+  \begin{tabular}{r|cc}
+    Detector & Latency & Jitter \\ 
+    \hline   Ideal & $-0.8\pm 0.3$ ms & $2.1\pm 0.1$ ms \\
+    Swift+serial & $0.0\pm 0.6$ ms & $2.0\pm 0.1$ ms
+  \end{tabular}
+  \caption{Latency and jitter variability (95\% confidence) for lny64's six test syllables.}
+  \label{table:TimingVsSyllable}
+\end{table}
+
 The negative latency is due to the way in which the network responds
 to the song through time: as the recognition region looks increasingly
 similar to the trained match, the network's evaluation of similarity
@@ -1113,29 +1116,30 @@ timing consistency at the expense of latency, but we did not test this.
 \end{figure}
 
 
-
 \subsubsection{Detector Implementations}
-
 
 We compared latency and jitter across our different detector
 implementations for the $\delta$-syllable and lny64's $t^*_4$, again with
-$t_\mathrm{fft}=1.5$ ms.  Results are as follows:
-\vspace{8pt}
-\begin{tabular}{l|c|c|c|c}
-  & \multicolumn{2}{c}{$\delta$-syllable} & \multicolumn{2}{c}{Bird: $t^*_4$} \\
-  Detector & Latency (ms) & Jitter (ms) & Latency (ms) & Jitter (ms) \\
-  \hline
-  Ideal & 0.66 & 0.38 & -1.0 & 2.0 \\
-  LabVIEW & 1.5 & 0.69 & -0.18 & 2.4 \\
-  Swift+serial & 0.88 & 1.6 & -0.075 & 2.0 \\
-  Swift+audio & 5.9 & 2.6 & 1.2 & 4.9 \\
-  MATLAB+serial & 8.1 & 2.3 & 3.8 & 2.0 \\
-  MATLAB+audio & 13 & 5.9 & 8.4 & 5.9
-\end{tabular}
-\vspace{8pt}\par\noindent
+$t_\mathrm{fft}=1.5$ ms.  Results are shown in Table~\ref{table:TimingVsDetector}.
 These data are also plotted in \fig{fig:TimingVsDetector}, and
 \fig{fig:timing} gives a more detailed view of what the timing curves
-look like for the five implementations of our detector on $t^*_4$.
+look like for the five implementations of our detector on lny64's $t^*_4$.
+
+\begin{table}
+  \begin{tabular}{l|c|c|c|c}
+    & \multicolumn{2}{c}{$\delta$-syllable} & \multicolumn{2}{c}{lny64: $t^*_4$} \\
+    Detector & Latency (ms) & Jitter (ms) & Latency (ms) & Jitter (ms) \\
+    \hline
+    Ideal & 0.66 & 0.38 & -1.0 & 2.0 \\
+    LabVIEW & 1.5 & 0.69 & -0.18 & 2.4 \\
+    Swift+serial & 0.88 & 1.6 & -0.075 & 2.0 \\
+    Swift+audio & 5.9 & 2.6 & 1.2 & 4.9 \\
+    MATLAB+serial & 8.1 & 2.3 & 3.8 & 2.0 \\
+    MATLAB+audio & 13 & 5.9 & 8.4 & 5.9
+  \end{tabular}
+  \caption{Latency and jitter for each of our detector implementations on the synthetic $\delta$-syllable and on syllable $t^*_4$ from lny64.}
+  \label{table:TimingVsDetector}
+\end{table}
 
 \begin{figure}
   \begin{center}
@@ -1223,8 +1227,9 @@ these approaches in future work.
 
 \section{Acknowledgments}
 We would like to thank Winthrop F.~Gillis, William A.~Liberti, and Sanne Moorman for
-their improvements to the draft.  This work was funded by NIH grants
-5R01NS089679-02 and 5U01NS090454-02.  The funders had no role in study design, data collection and analysis, decision to publish, or preparation of the manuscript.
+their improvements to the draft.
+%  This work was funded by NIH grants
+%5R01NS089679-02 and 5U01NS090454-02.  The funders had no role in study %design, data collection and analysis, decision to publish, or preparation of the %manuscript.
 
 \appendix
 
