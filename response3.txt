@@ -1,0 +1,24 @@
+Dear Dr. Cooper,
+
+Thank you again! In answer to your comments:
+
+> 1.  Line 32:  Please correct typo:  "Desired data" is what I believe you mean here
+
+I see what you mean, but I am also listing desirable traits (assuming that it is inferred that Accuracy, Latency, Jitter, etc should be good). I'd prefer to leave it as is.
+
+> 2.  Line 99:  "Learning a detector"  Do you mean training a detector?
+
+I have made that change. Thanks!
+
+> 3.  Figure 3, please adjust the y axis label on the graph so that it does not overlap with the scale labels.
+
+Done. Thank you! I should have noticed that.
+
+> Last, I tried to locate the files using the DOI, and was unable to do so.  This may reflect my ignorance, as I was able to find all of the files and software with the http links.  I believe that this is suitable for the PLOS data availability policy.  Please confirm the DOIs prior to submitting your revised manuscript.  This is nice work, I look forward to seeing this used in the field.
+
+How did you try to locate them by DOI? Google doesn't seem to have indexed them yet, but asking http://doi.org for them (either from their main page's search box or prepending "doi.org/<doi>" produced the correct pages for me. If you'd like, I can add a "http://doi.org/" prefix to each DOI, but I most often see just the DOIs listed rather than URLs.
+
+This time, I've created a difference document from the last submission you saw, with only the above changes. That scarcely seems useful--the only changes are your 2 and 3, and the latter doesn't get tagged by my difference finder--but it was easy.
+
+Many thanks!
+-Ben
