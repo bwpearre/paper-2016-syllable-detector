@@ -2,7 +2,7 @@ Dear PLOS,
 
 I've made the requested changes.
 
-1. Yes, looks good.
+1. Yes, that looks correct.
 
 2. As requested by the formatting guide you sent, I've removed the funding sources from Acknowledgments. I'll make sure that it's in the Financial Disclosure.
 
@@ -13,3 +13,6 @@ I've made the requested changes.
 5. Done.
 
 6. I believe that the seven figures are now all compliant.
+
+Thank you!
+-Ben
