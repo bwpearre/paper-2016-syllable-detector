@@ -61,6 +61,9 @@ OUTDATED = echo "EPS-file is out-of-date!" && false
 all 	: $(TRG) diff
 	$(refreshxdvi)
 
+nodiff : $(TRG)
+	$(refreshxdvi)
+
 define run-latex
 	$(COPY)
 	$(LATEX) $<

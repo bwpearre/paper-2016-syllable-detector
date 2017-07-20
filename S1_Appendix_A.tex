@@ -1,0 +1,278 @@
+\documentclass[10pt,letterpaper]{article}
+\usepackage[top=0.85in,left=2.75in,footskip=0.75in]{geometry}
+
+% Use adjustwidth environment to exceed column width (see example table in text)
+%\usepackage{changepage}
+
+% Use Unicode characters when possible
+\usepackage[utf8]{inputenc}
+
+% textcomp package and marvosym package for additional characters
+%\usepackage{textcomp,marvosym}
+
+% fixltx2e package for \textsubscript
+\usepackage{fixltx2e}
+
+% amsmath and amssymb packages, useful for mathematical formulas and symbols
+\usepackage{amsmath,amssymb}
+
+% cite package, to clean up citations in the main text. Do not remove.
+%\usepackage{cite}
+
+% Use nameref to cite supporting information files (see Supporting Information section for more info)
+\usepackage{nameref}
+\usepackage[colorlinks=true,urlcolor=blue]{hyperref}
+
+% line numbers
+%\usepackage[right]{lineno}
+
+% ligatures disabled
+\usepackage{microtype}
+\DisableLigatures[f]{encoding = *, family = * }
+
+% rotating package for sideways tables
+%\usepackage{rotating}
+
+% Remove comment for double spacing
+%\usepackage{setspace} 
+%\doublespacing
+
+% Text layout
+\raggedright
+%\setlength{\parindent}{0.5cm}
+%\textwidth 5.25in 
+%\textheight 8.75in
+
+% Bold the 'Figure #' in the caption and separate it from the title/caption with a period
+% Captions will be left justified
+\usepackage[aboveskip=1pt,labelfont=bf,labelsep=period,justification=raggedright,singlelinecheck=off]{caption}
+
+% Use the PLoS provided BiBTeX style
+\bibliographystyle{plos2015}
+
+% Remove brackets from numbering in List of References
+%\makeatletter
+%\renewcommand{\@biblabel}[1]{\quad#1.}
+%\makeatother
+
+% Leave date blank
+\date{}
+
+% Header and Footer with logo
+%\usepackage{lastpage,fancyhdr,graphicx}
+%\usepackage{epstopdf}
+%\pagestyle{myheadings}
+%\pagestyle{fancy}
+%\fancyhf{}
+%\lhead{\includegraphics[width=2.0in]{PLOS-submission.eps}}
+%\rfoot{\thepage/\pageref{LastPage}}
+%\renewcommand{\footrule}{\hrule height 2pt \vspace{2mm}}
+%\fancyheadoffset[L]{2.25in}
+%\fancyfootoffset[L]{2.25in}
+%\lfoot{\sf PLOS}
+
+%% Include all macros below
+
+%\newcommand{\lorem}{{\bf LOREM}}
+%\newcommand{\ipsum}{{\bf IPSUM}}
+
+%% END MACROS SECTION
+
+
+%%% Begin BWP
+%\usepackage{amsmath, amsthm, amssymb, wasysym, graphicx}
+%\usepackage[small, hang, bf]{caption}
+%\usepackage{natbib}
+%\renewcommand\cite{\citep}
+%\newcommand\citepossessive[1]{\citeauthor{#1}'s \citeyearpar{#1}}
+\newcommand\eq[1]{Eq.~\ref{#1}}
+\newcommand\fig[1]{Fig.~\ref{#1}}
+\newcommand\sref[1]{Section~\ref{#1}}
+\let\oldmarginpar\marginpar
+\renewcommand{\marginpar}[1]{\oldmarginpar{\linespread{1}\scriptsize{#1}}}
+
+% PLOS wants \paragraph for some reason...
+%\renewcommand{\subsubsection}[1]{\paragraph{#1}}
+
+\setlength{\marginparwidth}{55mm}
+
+
+\newcommand\argmin{\mathop{\textrm{{\rm argmin}}}\limits}
+\newcommand{\noprint}[1]{}
+
+
+\hyphenation{cross-valid-ation}
+%%% End BWP
+
+
+\begin{document}
+\appendix
+
+\section{Online Resources}
+
+\subsection{Data}
+Data and training configuration files for the 8 birds discussed here are available from the Open Science Framework at DOI: 10.17605/OSF.IO/BX76R . DOIs for the versions of the programmes used here are provided for reproducibility; however, we generally recommend downloading the latest release.
+
+\subsection{Song alignment}
+Jeff Markowitz's song alignment software [11] can be found at
+\url{https://github.com/jmarkow/zftftb}
+
+\subsection{Training the neural network}
+\begin{trivlist}
+\item \url{https://github.com/gardner-lab/syllable-detector-learn}
+\item DOI: 10.5281/zenodo.437555
+\end{trivlist}
+
+\begin{description}
+\item[Installation:]\hfill
+See {\tt README.md} in the repository for complete, up-to-date instructions.
+\begin{itemize}
+    \item Clone the Github repository onto your computer, and add it to your MATLAB path.
+    \item You also need the following packages from MATLAB File Exchange in your MATLAB path:
+      \begin{description}
+      \item[Significant Figures] by Teck Por Lam.  File ID \#10669.
+      \item[Generate maximally perceptually-distinct colors] by Tim Holy.  File ID \#29702.
+      \end{description}
+    \end{itemize}
+
+\item[Usage:]\hfill
+    \begin{itemize}
+    \item The main programme is {\tt learn\_detector.m}.
+    \item The top section of {\tt learn\_detector.m}
+      describes the configuration variables.
+    \item The current directory should contain the data in {\tt
+      song.mat}. The format for this file is specified in {\tt
+      README.md}: a MATLAB file containing aligned song, nonsong
+      (calls, cage noise, etc), and the audio sampling frequency.
+    \item {\tt learn\_detector} also looks in the current directory for
+      a configuration file {\tt params.m}, described in {\tt
+        README.md}.  If the file is empty, the programme will display
+      an image showing the average of the song spectrograms (frequency
+      vs.~time), tell the user how to define syllables of interest,
+      and exit.  If {\tt times\_of\_interest\_ms} is defined, the
+      programme will train the neural network.  Optionally, {\tt
+        params.m} can also override any of the configuration
+      parameters at the top of {\tt learn\_detector.m}.
+    \item Configuration may also be controlled by specifying
+      parameter-value pairs to the function call in the common MATLAB
+      fashion; for example, {\tt
+        learn\_detector('times\_of\_interest\_ms', [150 200])}.
+    \item The software will produce a neural network file, {\tt
+      detector\_bird\_times\_\dots.mat} (the ellipses signify other
+      information encoded in the filename).  It will also produce the
+      audio test file described in Methods.
+    \end{itemize}
+\end{description}
+
+\subsection{Runtime}
+  
+\subsubsection{MATLAB}
+    \begin{trivlist}
+    \item \url{https://github.com/gardner-lab/syllable-detector-matlab}
+    \item DOI: 10.5281/zenodo.437557
+    \end{trivlist}
+    \begin{description}
+    \item[Installation:]\hfill
+      \begin{itemize}
+      \item Clone the Github repository onto your computer.
+      \item Usage requires MATLAB with the Data Acquisition Toolbox and the 
+      Parallel Computing Toolbox.
+      \end{itemize}
+    \item[Connection:]\hfill
+      \begin{itemize}
+      \item Either connect the microphone directly into the microphone jack or through a 
+      preamp into the audio input jack. The current implementation only supports a single 
+      channel of audio.
+      \item To generate TTL signals via the audio output, use the headphone or audio output
+      jack.
+      \item To generate TTL signals via an Arduino, switch to the {\tt arduino} branch, 
+      load the MATLAB Arduino IO sketch onto the Arduino (the sketch is available in the 
+      Github repository, and provides a simple serial protocol for controlling pins). 
+      Connect the Arduino to the computer via USB. The TTL signal will be available on
+      pin 7.
+      \end{itemize}
+    \item[Usage:]\hfill
+      \begin{itemize}
+      \item Switch to the directory of the repository and run {\tt nndetector\_live}. You
+      can optionally specify parameters as string/value pairs. When you run the command,
+      you will be prompted to select an input device, output device and select a ``.mat''
+      file containing the trained detector.
+      \item Note that you may need to tune the input and output buffer based on computer 
+      performance. Try decreasing the size of the buffers until you see warnings about buffer
+      under/overruns, then increase the value slightly. We usually found 2-3ms worked reliably.
+      To specify the buffer sizes, use the {\tt buffer\_size\_input} and 
+      {\tt buffer\_size\_output} parameters.
+      \item Information about the detector is logged to a file called ``detector\_status.log''.
+      \end{itemize}
+    \end{description}
+    
+\subsubsection{Swift}
+    \begin{trivlist}
+    \item \url{https://github.com/gardner-lab/syllable-detector-swift}
+    \item DOI: 10.5281/zenodo.437559
+    \end{trivlist}
+    \begin{description}
+    \item[Installation:]\hfill
+      \begin{trivlist}
+      \item Download the most recent release from the Github repository onto your computer.
+      \end{trivlist}
+    \item[Connection:]\hfill
+      \begin{itemize}
+      \item Either connect the microphone directly into the microphone jack or through a 
+      preamp into the audio input jack. If the input jack supports multiple channels (e.g., 
+      audio input jacks are usually stereo), you can connect multiple audio sources and run 
+      different detectors on each channel simultaneously.
+      \item To generate TTL signals via the audio output, use the headphone jack. The 
+      audio output must have at least the same number of channels as the input.
+      \item To generate TTL signals via an Arduino, load the MATLAB Arduino IO sketch 
+      onto the Arduino (the sketch is available in the Github repository, and provides a 
+      simple serial protocol for controlling pins). Connect the Arduino 
+      to the computer via USB. The TTL signal for the first input will be available on 
+      pin 7, the second input on pin 8, etc.
+      \end{itemize}
+    \item[Usage:]\hfill
+      \begin{itemize}
+      \item Use {\tt convert\_to\_text.m} to convert the Matlab output file to a format 
+      easily readable by Swift. This will generate a text version of the neural network.
+      \item Launch the application downloaded above. It will provide an 
+      menu to select an audio input and either an audio output or an Arduino output (if 
+      detected). Once you select an input and an output, a new window will show all audio 
+      channels associated with the input. For each channel, select the text-encoded version of 
+      the detector created in the previous step. Once configured, press run to begin 
+      monitoring the inputs.
+      \end{itemize}
+    \item[Customisation:]\hfill
+      \begin{itemize}
+      \item You can clone the Github repository and use Xcode to edit the project, if you 
+      are interested in extending or modifying the functionality. To hook into either 
+      the raw input or output, look at the ``Processor.swift'' file. The 
+      {\tt Processor} class acts as a coordinator, receiving incoming audio, passing that
+      to the detector and generating appropriate output TTL signals.
+      \end{itemize}
+    \end{description}
+    
+\subsubsection{LabVIEW}
+    \begin{trivlist}
+    \item \url{https://github.com/gardner-lab/syllable-detector-runtime-labview}
+    \item DOI: 10.5281/zenodo.437558 
+    \end{trivlist}
+    \begin{description}
+    \item[Installation:]\hfill
+      \begin{trivlist}
+      \item Clone the Github repository onto your computer.
+      \end{trivlist}
+    \item[Connection:]\hfill
+      \begin{itemize}
+      \item The microphone should be connected, optionally through a preamplifier, to the data acquisition card, by default on Analog Input 0 (AI0).
+      \item Outputs are on the Digital I/O (DIO) channels.  See the block diagram of {\tt nnfft.vi} for documentation, or just connect to DIO0.
+      \end{itemize}
+    \item[Usage:]\hfill
+      \begin{itemize}
+      \item Use LabVIEW to open {\tt nnfft.vi}.
+        \item A file chooser is provided in the front panel of {\tt nnfft.vi}.  Use it to point to the network file
+      produced by {\tt learn\_detector.m}, and use LabView's ``Run''
+      button to begin detection.
+      \end{itemize}
+    \end{description}
+  
+\end{document}
